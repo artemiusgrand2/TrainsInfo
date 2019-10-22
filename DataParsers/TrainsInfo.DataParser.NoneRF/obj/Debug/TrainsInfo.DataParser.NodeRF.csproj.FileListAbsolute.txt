@@ -1,0 +1,5 @@
+D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneRF\obj\Debug\TrainsInfo.DataParser.NodeRF.csprojResolveAssemblyReference.cache
+D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.NodeRF.dll
+D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.NodeRF.pdb
+D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneRF\obj\Debug\TrainsInfo.DataParser.NodeRF.dll
+D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneRF\obj\Debug\TrainsInfo.DataParser.NodeRF.pdb

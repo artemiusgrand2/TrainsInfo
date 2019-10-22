@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47E80089-D375-490D-9B92-B3B846EC7B5D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TrainsInfo.Common</RootNamespace>
+    <AssemblyName>TrainsInfo.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Output\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TrainsInfo.Configuration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Output\TrainsInfo.Configuration.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\PluginTypeAttribute.cs" />
+    <Compile Include="BusinessObjects\ConsoleLogger.cs" />
+    <Compile Include="BusinessObjects\Constants.cs" />
+    <Compile Include="BusinessObjects\DataParserPluginWrapper.cs" />
+    <Compile Include="BusinessObjects\DataSource.cs" />
+    <Compile Include="BusinessObjects\DataStorage.cs" />
+    <Compile Include="BusinessObjects\DataStreamPluginWrapper.cs" />
+    <Compile Include="BusinessObjects\Logger.cs" />
+    <Compile Include="BusinessObjects\LoggerPluginWrapper.cs" />
+    <Compile Include="BusinessObjects\ModelDataIAS_PYR_GP.cs" />
+    <Compile Include="BusinessObjects\MultilevelLogger.cs" />
+    <Compile Include="BusinessObjects\PluginManager.cs" />
+    <Compile Include="BusinessObjects\RowValue.cs" />
+    <Compile Include="BusinessObjects\ServerContext.cs" />
+    <Compile Include="Enums\LogLevel.cs" />
+    <Compile Include="Enums\TypeInfrastructure.cs" />
+    <Compile Include="Infrastructures\Area.cs" />
+    <Compile Include="Infrastructures\InfrastructureFactory.cs" />
+    <Compile Include="Infrastructures\Joint.cs" />
+    <Compile Include="Infrastructures\Node.cs" />
+    <Compile Include="Interfaces\IDataParser.cs" />
+    <Compile Include="Interfaces\IDataParserFactory.cs" />
+    <Compile Include="Interfaces\IDataStream.cs" />
+    <Compile Include="Interfaces\IDataStreamFactory.cs" />
+    <Compile Include="Interfaces\IInfrastructure.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\ILoggerFactory.cs" />
+    <Compile Include="Interfaces\NewValuesHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,5 @@
+d:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.Delivery.dll
+d:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.Delivery.pdb
+d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.Delivery\obj\Debug\TrainsInfo.DataParser.Delivery.csprojResolveAssemblyReference.cache
+d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.Delivery\obj\Debug\TrainsInfo.DataParser.Delivery.dll
+d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.Delivery\obj\Debug\TrainsInfo.DataParser.Delivery.pdb

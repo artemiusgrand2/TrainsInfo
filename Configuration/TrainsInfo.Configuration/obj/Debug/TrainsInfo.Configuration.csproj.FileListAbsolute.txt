@@ -1,0 +1,8 @@
+D:\Distributiv\TrainsInfo\Output\TrainsInfo.Configuration.dll
+D:\Distributiv\TrainsInfo\Output\TrainsInfo.Configuration.pdb
+D:\Distributiv\TrainsInfo\TrainsInfo.Configuration\TrainsInfo.Configuration\obj\Debug\TrainsInfo.Configuration.csprojResolveAssemblyReference.cache
+D:\Distributiv\TrainsInfo\TrainsInfo.Configuration\TrainsInfo.Configuration\obj\Debug\TrainsInfo.Configuration.dll
+D:\Distributiv\TrainsInfo\TrainsInfo.Configuration\TrainsInfo.Configuration\obj\Debug\TrainsInfo.Configuration.pdb
+d:\Distributiv\TrainsInfo\Configuration\TrainsInfo.Configuration\obj\Debug\TrainsInfo.Configuration.csprojResolveAssemblyReference.cache
+d:\Distributiv\TrainsInfo\Configuration\TrainsInfo.Configuration\obj\Debug\TrainsInfo.Configuration.dll
+d:\Distributiv\TrainsInfo\Configuration\TrainsInfo.Configuration\obj\Debug\TrainsInfo.Configuration.pdb

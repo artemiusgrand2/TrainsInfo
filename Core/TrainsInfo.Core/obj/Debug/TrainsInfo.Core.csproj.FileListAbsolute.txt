@@ -1,0 +1,7 @@
+D:\Distributiv\TrainsInfo\Output\TrainsInfo.Core.exe
+D:\Distributiv\TrainsInfo\Output\TrainsInfo.Core.pdb
+D:\Distributiv\TrainsInfo\TrainsInfo.Core\TrainsInfo.Core\obj\Debug\TrainsInfo.Core.exe
+D:\Distributiv\TrainsInfo\TrainsInfo.Core\TrainsInfo.Core\obj\Debug\TrainsInfo.Core.pdb
+d:\Distributiv\TrainsInfo\Core\TrainsInfo.Core\obj\Debug\TrainsInfo.Core.exe
+d:\Distributiv\TrainsInfo\Core\TrainsInfo.Core\obj\Debug\TrainsInfo.Core.pdb
+D:\Distributiv\TrainsInfo\Core\TrainsInfo.Core\obj\Debug\TrainsInfo.Core.csprojResolveAssemblyReference.cache
