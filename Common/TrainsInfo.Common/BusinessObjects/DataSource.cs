@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using TrainsInfo.Common.Interfaces;
+using TrainsInfo.Common.Infrastructures;
 
 namespace TrainsInfo.Common.BusinessObjects
 {
@@ -25,15 +26,16 @@ namespace TrainsInfo.Common.BusinessObjects
             }
         }
 
-        private IList<IInfrastructure> infrastructures;
+        private IList<InfrastructureBase> infrastructures;
 
-        public IList<IInfrastructure> Infrastructures
+        public IList<InfrastructureBase> Infrastructures
         {
             get
             {
                 return infrastructures;
             }
         }
+
 
         public event NewValueHandler<IList<RowValue>> NewValues;
 
@@ -47,7 +49,7 @@ namespace TrainsInfo.Common.BusinessObjects
             dataStream = stream;
             dataParsers = parsers;
             requestTimeout = (RequestTimeout > 0) ? RequestTimeout : 15;
-            infrastructures = new List<IInfrastructure>();
+            infrastructures = new List<InfrastructureBase>();
         }
 
         public void Start()
@@ -65,7 +67,7 @@ namespace TrainsInfo.Common.BusinessObjects
             parsingThread.Join();
         }
 
-        public void AddInfrastructure(IInfrastructure infrastructure)
+        public void AddInfrastructure(InfrastructureBase infrastructure)
         {
             infrastructures.Add(infrastructure);
         }
@@ -106,5 +108,6 @@ namespace TrainsInfo.Common.BusinessObjects
                 handler(values);
             }
         }
+
     }
 }

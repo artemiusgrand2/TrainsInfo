@@ -4,7 +4,7 @@ using TrainsInfo.Common.Attributes;
 using TrainsInfo.Common.Interfaces;
 using TrainsInfo.Configuration.Records;
 
-namespace TrainsInfo.DataStreams.ARDP
+namespace TrainsInfo.DataStream.ARDP
 {
     [PluginType("ARDP")]
     public class ARDPDataStreamFactory : IDataStreamFactory
@@ -12,6 +12,11 @@ namespace TrainsInfo.DataStreams.ARDP
         public IDataStream CreateClientStream(DataStreamRecord record)
         {
             return new ARDPDataStream(record);
+        }
+
+        public IListener CreateListener(ListenerRecord record)
+        {
+            throw new NotSupportedException("ARDP support listeners");
         }
     }
 }

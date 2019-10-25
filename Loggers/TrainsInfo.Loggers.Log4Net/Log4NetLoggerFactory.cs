@@ -6,7 +6,7 @@ using log4net;
 using log4net.Config;
 
 
-namespace TrainsInfo.Loggers.Log4Net
+namespace TrainsInfo.Logger.Log4Net
 {
     [PluginType("log4net")]
     public class Log4NetLoggerFactory : ILoggerFactory

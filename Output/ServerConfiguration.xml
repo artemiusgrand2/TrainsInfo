@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Logger>
+    <Type>log4net</Type>
+    <Settings>
+      <Setting Key="ConfigFilePath" Value=".\Log4NetConfig.xml"/>
+      <Setting Key="LogLevel" Value="Low"/>
+    </Settings>
+  </Logger>
+  
+  
+  <Listeners>
+ 
+   <Listener>
+      <Type>Http</Type>
+      <CommunicationProtocol>Dsccp</CommunicationProtocol>
+      <Settings>
+        <Setting Key="BindPort" Value="8888"/>
+      </Settings>
+    </Listener>
+
+  </Listeners>
+
+  <DataSources>
+
+    <DataSource>
+      <Name>CountWagonInJointSource</Name>
+      <DataParsers>
+	    <DataParser>JointAllVagon</DataParser>
+	  </DataParsers>
+      <RequestTimeout>1000</RequestTimeout>
+      <DataStream>
+        <Type>File</Type>
+        <ConnectionString>w:\OperNalVag.csv</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	  <DataSource>
+      <Name>JointFactSource</Name>
+      <DataParsers>
+	    <DataParser>AllFactTrains</DataParser>
+	  </DataParsers>
+      <RequestTimeout>1000</RequestTimeout>
+      <DataStream>
+        <Type>File</Type>
+        <ConnectionString>w:\MejGosStiki.csv</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	 <DataSource>
+      <Name>IAS_PYR_GPSource</Name>
+      <DataParsers>
+	    <DataParser>NodeOT</DataParser>
+		<DataParser>NodeRF</DataParser>
+		<DataParser>NodeTR</DataParser>
+		<DataParser>AreaGargo</DataParser>
+		<DataParser>AreaPass</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>IAS_PYR_GP</Type>
+        <ConnectionString>Data Source=10.20.47.53\INFBOARD;Initial Catalog=Iaspurgp;User ID=sa;Password=111111111111111</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+	<!-- разбор таблиц -->
+	
+	  <DataSource>
+      <Name>PassOpzSource</Name>
+      <DataParsers>
+	    <DataParser>PassOpz</DataParser>
+	  </DataParsers>
+      <RequestTimeout>1000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+        <ConnectionString>w:\PassOpz.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+	  <DataSource>
+      <Name>Vostok_ZapadSource</Name>
+      <DataParsers>
+	    <DataParser>Vostok_Zapad</DataParser>
+	  </DataParsers>
+      <RequestTimeout>1000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+        <ConnectionString>w:\Vostok_Zapad.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	  <DataSource>
+      <Name>Zapad_VostokSource</Name>
+      <DataParsers>
+	    <DataParser>Zapad_Vostok</DataParser>
+	  </DataParsers>
+      <RequestTimeout>1000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+        <ConnectionString>w:\Zapad_Vostok.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+
+  </DataSources>
+
+
+  <DataStorage>
+    <ConnectionString>Data Source=10.20.47.53\INFBOARD;Initial Catalog=Tablo;User ID=sa;Password=111111111111111</ConnectionString >
+  </DataStorage>
+
+  <Infrastructures>
+  
+       <!-- Стыки -->
+          
+      <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Стасилос</Name>
+		  <Station1>120518</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		  <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Гудогай-стык</Name>
+		  <Station1>163034</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Бигосово-стык</Name>
+		  <Station1>161698</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Езерище-стык</Name>
+		  <Station1>160816</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Заольша-стык</Name>
+		  <Station1>165627</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Красное</Name>
+		  <Station1>171346</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Сураж</Name>
+		  <Station1>202900</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Закопытье</Name>
+		  <Station1>150528</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Тереховка</Name>
+		  <Station1>150706</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Терюха</Name>
+		  <Station1>150301</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Бережесть</Name>
+		  <Station1>347705</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Горынь</Name>
+		  <Station1>139209</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Заболотье</Name>
+		  <Station1>354200</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Брест-Центр. (эксп.)</Name>
+		  <Station1>130609</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Брузги (эксп.)</Name>
+		  <Station1>134807</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Свислоч</Name>
+		  <Station1>135706</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Брест – Северный (эксп.)</Name>
+		  <Station1>130505</Station1>
+          <DataSources>
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<!-- Узлы -->
+		
+	    <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Витебск</Name>
+		  <Station1>160002</Station1>
+		  <StationCodes>
+		     <StationCode>160002</StationCode>
+			 <StationCode>160303</StationCode>
+			 <StationCode>167105</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		   <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Орша</Name>
+		  <Station1>166403</Station1>
+		  <StationCodes>
+		     <StationCode>166403</StationCode>
+			 <StationCode>166507</StationCode>
+			 <StationCode>166704</StationCode>
+			 <StationCode>166808</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Кричев</Name>
+		  <Station1>158209</Station1>
+		  <StationCodes>
+		     <StationCode>158209</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Гомель</Name>
+		  <Station1>150000</Station1>
+		  <StationCodes>
+		     <StationCode>150000</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Могилев</Name>
+		  <Station1>156505</Station1>
+		  <StationCodes>
+		     <StationCode>156609</StationCode>
+			 <StationCode>156505</StationCode>
+			 <StationCode>156613</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Жлобин</Name>
+		  <Station1>155841</Station1>
+		  <StationCodes>
+		     <StationCode>155004</StationCode>
+			 <StationCode>155038</StationCode>
+			 <StationCode>154270</StationCode>
+			 <StationCode>155822</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Полоцк</Name>
+		  <Station1>161306</Station1>
+		  <StationCodes>
+		     <StationCode>161306</StationCode>
+			 <StationCode>161236</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Гродно</Name>
+		  <Station1>135208</Station1>
+		  <StationCodes>
+		     <StationCode>135208</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Волковыск</Name>
+		  <Station1>136709</Station1>
+		  <StationCodes>
+		     <StationCode>136709</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Брест</Name>
+		  <Station1>130204</Station1>
+		  <StationCodes>
+		     <StationCode>130204</StationCode>
+			 <StationCode>130308</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Лида</Name>
+		  <Station1>137608</Station1>
+		  <StationCodes>
+		     <StationCode>137608</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Барановичи</Name>
+		  <Station1>138507</Station1>
+		  <StationCodes>
+		     <StationCode>138507</StationCode>
+			 <StationCode>138901</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Лунинец</Name>
+		  <Station1>139406</Station1>
+		  <StationCodes>
+		     <StationCode>139406</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Молодечно</Name>
+		  <Station1>162900</Station1>
+		  <StationCodes>
+		     <StationCode>162900</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Минск</Name>
+		  <Station1>140009</Station1>
+		  <StationCodes>
+		     <StationCode>140009</StationCode>
+			 <StationCode>140210</StationCode>
+			 <StationCode>140304</StationCode>
+			 <StationCode>140507</StationCode>
+			 <StationCode>140102</StationCode>
+			 <StationCode>140403</StationCode>
+			 <StationCode>144635</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Слуцк</Name>
+		  <Station1>148602</Station1>
+		  <StationCodes>
+		     <StationCode>148602</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Калий III</Name>
+		  <Station1>148301</Station1>
+		  <StationCodes>
+		     <StationCode>148301</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Барбаров</Name>
+		  <Station1>151408</Station1>
+		  <StationCodes>
+		     <StationCode>151408</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Новополоцк</Name>
+		  <Station1>165504</Station1>
+		  <StationCodes>
+		     <StationCode>165504</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Осиповичи</Name>
+		  <Station1>146407</Station1>
+		  <StationCodes>
+		     <StationCode>146407</StationCode>
+			 <StationCode>146414</StationCode>
+			 <StationCode>146433</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Калинковичи</Name>
+		  <Station1>153808</Station1>
+		  <StationCodes>
+		     <StationCode>153808</StationCode>
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<!-- Участки -->
+		<!--
+		<Infrastructure>
+          <Type>Area</Type>
+          <Name>Участок - Брест-Заболотье</Name>
+		  <Station1>130204</Station1>
+		  <Station2>354200</Station2>
+		  <StationCodes>
+		     <StationCode>130837</StationCode>
+			 <StationCode>130914</StationCode>
+			 <StationCode>131009</StationCode>
+			 <StationCode>132002</StationCode>
+			 <StationCode>132106</StationCode>
+			 <StationCode>132303</StationCode>
+			 <StationCode>132407</StationCode>
+			 <StationCode>132500</StationCode>
+			 <StationCode>132604</StationCode>
+		  </StationCodes>
+		  
+		  <Nodes>
+		   <Node>
+		    <Station>130204</Station>
+			<StationDirection>132407</StationDirection>
+		   </Node>
+		   <Node>
+		    <Station>130204</Station>
+			<StationDirection>354200</StationDirection>
+		   </Node>
+		  </Nodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		-->
+		<Infrastructure>
+          <Type>Area</Type>
+          <Name>Участок - Минск - Орша</Name>
+		  <Station1>140009</Station1>
+		  <Station2>166403</Station2>
+		  <StationCodes>
+		     <StationCode>140210</StationCode>
+			 <StationCode>140304</StationCode>
+			 <StationCode>140403</StationCode>
+			 <StationCode>140704</StationCode>
+			 <StationCode>140808</StationCode>
+			 <StationCode>140901</StationCode>
+			 <StationCode>141105</StationCode>
+			 <StationCode>141209</StationCode>
+			 <StationCode>141302</StationCode>
+			 
+			 <StationCode>141406</StationCode>
+			 <StationCode>141500</StationCode>
+			 <StationCode>141603</StationCode>
+			 <StationCode>141707</StationCode>
+			 <StationCode>141800</StationCode>
+			 <StationCode>141938</StationCode>
+			 <StationCode>142004</StationCode>
+			 <StationCode>142108</StationCode>
+		  </StationCodes>
+		  
+		  <Nodes>
+		   <Node> 
+		   <Station>140009</Station> 
+		   <StationDirection>141406</StationDirection>  
+		   </Node>
+		   
+		   <Node> 
+		   <Station>140403</Station> 
+		   <StationDirection>140009</StationDirection>  
+		   </Node>
+		   
+		    <Node> 
+		   <Station>140403</Station> 
+		   <StationDirection>141406</StationDirection>  
+		   </Node>
+		   
+		   <Node> 
+		   <Station>141406</Station> 
+		   <StationDirection>166507</StationDirection>  
+		   </Node>
+		   
+		   <Node> 
+		   <Station>141406</Station> 
+		   <StationDirection>166403</StationDirection>  
+		   </Node>
+		   
+		    <Node> 
+		   <Station>141406</Station> 
+		   <StationDirection>166704</StationDirection>  
+		   </Node>
+		   
+		  </Nodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+    </Infrastructures>
+</Configuration>

@@ -10,40 +10,26 @@ using TrainsInfo.Common.BusinessObjects;
 using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.FileZip
+namespace TrainsInfo.DataStream.FileZip
 {
     public class FileZipDataStream : IDataStream
     {
         private readonly string filePath;
-        private readonly string fileIn = "Отчет 1.csv";
+
+        public string Info { get; } = string.Empty;
+
+        public bool IsOnceConnect { get; }
 
         public FileZipDataStream(DataStreamRecord record)
         {
-            string[] parts = record.ConnectionString.Split(':');
-            if (parts.Length == 1 || parts.Length == 3)
+            filePath = record.ConnectionString;
+            if (!string.IsNullOrEmpty(record.Login) && !string.IsNullOrEmpty(record.Password))
             {
-                if (parts.Length == 3)
+                using (var webClient = new WebClient())
                 {
-                    using (var webClient = new WebClient())
-                    {
-                        webClient.Credentials = new NetworkCredential(parts[1], parts[2]);
-                    }
+                    webClient.Credentials = new NetworkCredential(record.Login, record.Password);
                 }
-                //
-                filePath = parts[0];
-                //if (!System.IO.File.Exists(parts[0]))
-                //    throw new FileNotFoundException(string.Format("Не найден архив по адресу - {0}", parts[0]));
-                ////
-                //
-                ////
-                //using (var archive = ZipFile.Open(filePath, ZipArchiveMode.Update, Encoding.UTF8))
-                //{
-                //    if(archive.Entries.Where(x => x.FullName == fileIn).FirstOrDefault() == null)
-                //        throw new FileNotFoundException(string.Format("В архив по адресу - {0} не найден файл - {1}", parts[0], fileIn));
-                //}
             }
-            else
-                throw new InvalidDataException(string.Format("Неверная формат строки подключения - {0}", record.ConnectionString));
         }
 
         public bool Read(out object data)
@@ -54,9 +40,9 @@ namespace TrainsInfo.DataStreams.FileZip
                 if (File.Exists(filePath))
                 {
                     data = System.IO.File.ReadAllLines(filePath);
-                    using (var archive = ZipFile.Open(filePath, ZipArchiveMode.Update, Encoding.UTF8))
+                    using (var archive = ZipFile.Open(filePath, ZipArchiveMode.Read, Encoding.UTF8))
                     {
-                        var entry = archive.Entries.Where(x => x.FullName == fileIn).FirstOrDefault();
+                        var entry = archive.Entries.FirstOrDefault();
                         if(entry != null)
                         {
                             var reads = new List<string>();
@@ -85,7 +71,7 @@ namespace TrainsInfo.DataStreams.FileZip
                 else
                 {
                     if (Logger.Log != null)
-                        Logger.Log.LogError("В архив по адресу - {0} не найден файл - {1}", filePath, fileIn);
+                        Logger.Log.LogError("В архив по адресу - {0} не найден файл - отчета", filePath);
                 }
             }
             catch(Exception error)
@@ -95,6 +81,11 @@ namespace TrainsInfo.DataStreams.FileZip
             }
             //
             return false;
+        }
+
+        public int Write(object data)
+        {
+            return 0;
         }
 
         public void Dispose() { }

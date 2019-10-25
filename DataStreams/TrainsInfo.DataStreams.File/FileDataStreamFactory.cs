@@ -4,7 +4,7 @@ using TrainsInfo.Common.Attributes;
 using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.File
+namespace TrainsInfo.DataStream.File
 {
     [PluginType("File")]
     public class FileDataStreamFactory : IDataStreamFactory
@@ -12,6 +12,11 @@ namespace TrainsInfo.DataStreams.File
         public IDataStream CreateClientStream(DataStreamRecord record)
         {
             return new FileDataStream(record);
+        }
+
+        public IListener CreateListener(ListenerRecord record)
+        {
+            throw new NotSupportedException("File support listeners");
         }
     }
 }

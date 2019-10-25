@@ -4,7 +4,7 @@ using System.Text;
 using TrainsInfo.Common.Interfaces;
 using log4net;
 
-namespace TrainsInfo.Loggers.Log4Net
+namespace TrainsInfo.Logger.Log4Net
 {
     public class Log4NetLoggerWrapper : ILogger
     {

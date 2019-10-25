@@ -11,20 +11,25 @@ namespace TrainsInfo.DataParser.AreaGargo
 {
     public class AreaGargoDaraParser : IDataParser
     {
-        private readonly string TRTrain = "TR";
-        private readonly IList<string> codesOperation = new List<string> { "Р0001", "Р0101", "Р0201", "Р0003", "Р0103" };
+        private readonly string NC_GRTrain = "NC_GR";
+        private readonly string C_GRTrain = "C_GR";
 
-        public IList<RowValue> Parse(object data, IList<IInfrastructure> infrastructures)
+        private readonly IList<string> codesOperation = new List<string> { "Р0002", "Р0003" };
+
+        public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
             var table = data as IList<ModelDataIAS_PYR_GP>;
             var result = new List<RowValue>();
             if (table != null)
             {
-                var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode != x.Index3 && x.TrainNumber != "9999").ToList();
-                foreach (var node in infrastructures.Where(x => x.Type == TypeInfrastructure.node).ToList())
+                foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
                 {
-                    var countTrain = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode)).ToList();
-                    result.Add(new RowValue(node.Station, TRTrain, countTrain.ToString()));
+                    var area = areaCommon as Area;
+                    var allTrain = table.Where(x => x.TrainNumber >= 10001 && x.TrainNumber <= 5999
+                    && ((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation) || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation)) && codesOperation.Contains(x.OperationCode))).Select(x=>x.TrainNumber);
+                    //
+                    result.Add(new RowValue(area.Station, area.Station2, NC_GRTrain, allTrain.Where(x => x % 2 != 0).Count().ToString()));
+                    result.Add(new RowValue(area.Station, area.Station2, C_GRTrain, allTrain.Where(x => x % 2 == 0).Count().ToString()));
                 }
             }
             //

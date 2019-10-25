@@ -39,6 +39,10 @@ namespace TrainsInfo.Configuration
         [XmlArrayItem("Infrastructure")]
         public InfrastructureRecord[] Infrastructures { get; set; }
 
+        [XmlArray("Listeners")]
+        [XmlArrayItem("Listener")]
+        public ListenerRecord[] Listeners { get; set; }
+
 
         public static void Initialize(string path)
         {

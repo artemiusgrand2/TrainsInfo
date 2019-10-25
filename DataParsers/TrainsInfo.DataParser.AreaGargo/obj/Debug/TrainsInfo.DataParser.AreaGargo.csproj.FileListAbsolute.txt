@@ -2,4 +2,3 @@ D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.AreaGargo.dll
 D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.AreaGargo.pdb
 D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AreaGargo\obj\Debug\TrainsInfo.DataParser.AreaGargo.dll
 D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AreaGargo\obj\Debug\TrainsInfo.DataParser.AreaGargo.pdb
-d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AreaGargo\obj\Debug\TrainsInfo.DataParser.AreaGargo.csprojResolveAssemblyReference.cache

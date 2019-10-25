@@ -6,7 +6,7 @@ namespace TrainsInfo.Common.BusinessObjects
     {
         public string TrainId { get; set; }
 
-        public string TrainNumber { get; set; }
+        public int TrainNumber { get; set; }
 
         public string StationCode { get; set; }
 

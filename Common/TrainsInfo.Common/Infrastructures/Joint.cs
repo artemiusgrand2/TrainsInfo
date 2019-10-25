@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using TrainsInfo.Common.Enums;
 using TrainsInfo.Common.Interfaces;
+using TrainsInfo.Common.BusinessObjects;
 
 namespace TrainsInfo.Common.Infrastructures
 {
-     public class Joint : IInfrastructure
+    public class Joint : InfrastructureBase
     {
-        public int Station { get; }
-
-        public TypeInfrastructure Type { get; protected set; } 
-
         public Joint(int station)
         {
             Station = station;

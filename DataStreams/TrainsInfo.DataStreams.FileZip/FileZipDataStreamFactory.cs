@@ -4,7 +4,7 @@ using TrainsInfo.Common.Attributes;
 using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.FileZip
+namespace TrainsInfo.DataStream.FileZip
 {
     [PluginType("FileZip")]
     public class FileZipDataStreamFactory : IDataStreamFactory
@@ -12,6 +12,11 @@ namespace TrainsInfo.DataStreams.FileZip
         public IDataStream CreateClientStream(DataStreamRecord record)
         {
             return new FileZipDataStream(record);
+        }
+
+        public IListener CreateListener(ListenerRecord record)
+        {
+            throw new NotSupportedException("FileZip support listeners");
         }
     }
 }

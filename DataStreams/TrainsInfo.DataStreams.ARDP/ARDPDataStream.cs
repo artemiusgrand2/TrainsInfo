@@ -5,10 +5,11 @@ using TrainsInfo.Common.Attributes;
 using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.ARDP
+namespace TrainsInfo.DataStream.ARDP
 {
     public class ARDPDataStream : IDataStream
     {
+        public bool IsOnceConnect { get; }
 
         public ARDPDataStream(DataStreamRecord record)
         {
@@ -21,7 +22,14 @@ namespace TrainsInfo.DataStreams.ARDP
             return false;
         }
 
+        public int Write(object data)
+        {
+            return 0;
+        }
+
         public void Dispose() { }
+
+        public string Info { get; } = string.Empty;
     }
 
 }

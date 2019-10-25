@@ -44,12 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\PluginTypeAttribute.cs" />
+    <Compile Include="BusinessObjects\CommunicationControllerPluginWrapper.cs" />
     <Compile Include="BusinessObjects\ConsoleLogger.cs" />
     <Compile Include="BusinessObjects\Constants.cs" />
     <Compile Include="BusinessObjects\DataParserPluginWrapper.cs" />
     <Compile Include="BusinessObjects\DataSource.cs" />
     <Compile Include="BusinessObjects\DataStorage.cs" />
     <Compile Include="BusinessObjects\DataStreamPluginWrapper.cs" />
+    <Compile Include="BusinessObjects\ListenerController.cs" />
     <Compile Include="BusinessObjects\Logger.cs" />
     <Compile Include="BusinessObjects\LoggerPluginWrapper.cs" />
     <Compile Include="BusinessObjects\ModelDataIAS_PYR_GP.cs" />
@@ -57,19 +59,26 @@
     <Compile Include="BusinessObjects\PluginManager.cs" />
     <Compile Include="BusinessObjects\RowValue.cs" />
     <Compile Include="BusinessObjects\ServerContext.cs" />
+    <Compile Include="Enums\CategotyTable.cs" />
     <Compile Include="Enums\LogLevel.cs" />
     <Compile Include="Enums\TypeInfrastructure.cs" />
+    <Compile Include="Enums\ViewTable.cs" />
     <Compile Include="Infrastructures\Area.cs" />
+    <Compile Include="Infrastructures\InfrastructureBase.cs" />
     <Compile Include="Infrastructures\InfrastructureFactory.cs" />
     <Compile Include="Infrastructures\Joint.cs" />
     <Compile Include="Infrastructures\Node.cs" />
+    <Compile Include="Infrastructures\Table.cs" />
+    <Compile Include="Interfaces\ICommunicationController.cs" />
+    <Compile Include="Interfaces\ICommunicationControllerFactory.cs" />
     <Compile Include="Interfaces\IDataParser.cs" />
     <Compile Include="Interfaces\IDataParserFactory.cs" />
     <Compile Include="Interfaces\IDataStream.cs" />
     <Compile Include="Interfaces\IDataStreamFactory.cs" />
-    <Compile Include="Interfaces\IInfrastructure.cs" />
+    <Compile Include="Interfaces\IListener.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\ILoggerFactory.cs" />
+    <Compile Include="Interfaces\IServer.cs" />
     <Compile Include="Interfaces\NewValuesHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

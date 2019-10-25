@@ -22,7 +22,7 @@ namespace TrainsInfo.Core
         static void Main(string[] args)
         {
             Console.WriteLine("Initializing...");
-            //Console.ReadLine();
+          //  Console.ReadLine();
             var m_runAsConsole = false;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
@@ -130,13 +130,15 @@ namespace TrainsInfo.Core
             {
                 FillDataSources(errors);
                 ServerContextWrapper.Instance.DataStorage = new DataStorage(ServerConfiguration.Instance.DataStorage.ConnectionString);
-                PrintErrors(errors);
                 FillStations(errors);
                 AssignTablesToStorages();
+                FillListeners();
                 //
                 ServerContextWrapper.Instance.DataStorage.Start();
                 foreach (DataSource dataSource in ServerContextWrapper.Instance.DataSources.Values)
                     dataSource.Start();
+                foreach (ListenerController controller in ServerContextWrapper.Instance.Listeners)
+                    controller.Start();
                 //
                 Console.WriteLine("Data Server [{0}] is started", Assembly.GetCallingAssembly().GetName().Version);
                 Logger.Log.LogInfo("Data Server [{0}] is started", Assembly.GetCallingAssembly().GetName().Version);
@@ -144,6 +146,10 @@ namespace TrainsInfo.Core
             catch (Exception e)
             {
                 errors.Add(string.Format("{0}", e));
+            }
+            finally
+            {
+                PrintErrors(errors);
             }
         }
 
@@ -157,6 +163,8 @@ namespace TrainsInfo.Core
                 //
                 foreach (DataSource dataSource in ServerContextWrapper.Instance.DataSources.Values)
                     dataSource.Stop();
+                foreach (ListenerController controller in ServerContextWrapper.Instance.Listeners)
+                    controller.Stop();
                 Console.WriteLine("Data Server [{0}] is end", Assembly.GetCallingAssembly().GetName().Version);
                 Logger.Log.LogInfo("Data Server [{0}] is end", Assembly.GetCallingAssembly().GetName().Version);
                 Console.WriteLine("Нажмите клавишу для выхода...");
@@ -221,13 +229,18 @@ namespace TrainsInfo.Core
         {
             foreach (var dataSource in ServerContextWrapper.Instance.DataSources)
             {
-                if(ServerContextWrapper.Instance.DataStorage != null)
+                dataSource.Value.NewValues += (newValues) =>
                 {
-                    dataSource.Value.NewValues += (newValues) =>
-                        {
-                            ServerContextWrapper.Instance.DataStorage.ProcessValueChanged(newValues);
-                        };
-                }
+                    ServerContextWrapper.Instance.CompareData(newValues);
+                };
+            }
+            //
+            if (ServerContextWrapper.Instance.DataStorage != null)
+            {
+                ServerContextWrapper.Instance.NewValues += (newValues) =>
+                {
+                    ServerContextWrapper.Instance.DataStorage.ProcessValueChanged(newValues);
+                };
             }
         }
 
@@ -261,6 +274,18 @@ namespace TrainsInfo.Core
                             errors.Add(string.Format("Источник 'dataSource' с именем - {0} не описан, инфраструктура с именем - {1}", dataSource, infrastructurRecord.Name));
                     }
                 }
+            }
+        }
+
+        private static void FillListeners()
+        {
+            foreach (ListenerRecord listenerRecord in ServerConfiguration.Instance.Listeners)
+            {
+                IListener listener = DataStreamPluginWrapper.Instance[listenerRecord.Type].CreateListener(listenerRecord);
+                ICommunicationControllerFactory clientControllerFactory =
+                    CommunicationControllerPluginWrapper.Instance[listenerRecord.CommunicationProtocol];
+                ListenerController controller = new ListenerController(listenerRecord, listener, clientControllerFactory, ServerContextWrapper.Instance);
+                ServerContextWrapper.Instance.Listeners.Add(controller);
             }
         }
 

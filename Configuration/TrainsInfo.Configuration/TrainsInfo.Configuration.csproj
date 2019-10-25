@@ -42,8 +42,10 @@
     <Compile Include="Records\DataSourceRecord.cs" />
     <Compile Include="Records\DataStorageRecord.cs" />
     <Compile Include="Records\DataStreamRecord.cs" />
+    <Compile Include="Records\ListenerRecord.cs" />
     <Compile Include="Records\LoggerRecord.cs" />
     <Compile Include="Records\InfrastructureRecord.cs" />
+    <Compile Include="Records\NodeRecord.cs" />
     <Compile Include="Records\SettingableRecord.cs" />
     <Compile Include="Records\SettingRecord.cs" />
     <Compile Include="ServerConfiguration.cs" />

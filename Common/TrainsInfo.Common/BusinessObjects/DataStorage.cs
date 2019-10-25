@@ -95,11 +95,13 @@ namespace TrainsInfo.Common.BusinessObjects
                         command.Parameters.Add(nameParam3);
                         var nameParam4 = new SqlParameter("@Value", info.Value);
                         command.Parameters.Add(nameParam4);
+                        var nameParam5 = new SqlParameter("@TimeUpdate", DateTime.Now);
+                        command.Parameters.Add(nameParam5);
                         //проверяем есть ли запись в базе данных
-                        command.CommandText = "UPDATE TabloValue SET Value = @Value Where Station1 = @Station1 and Station2 = @Station2 and Name = @Name";
+                        command.CommandText = "UPDATE TabloValue SET Value = @Value, TimeUpdate = @TimeUpdate  Where Station1 = @Station1 and Station2 = @Station2 and Name = @Name";
                         if (command.ExecuteNonQuery() == 0)
                         {
-                            command.CommandText = "INSERT INTO TabloValue (Station1, Station2, Name, Value) VALUES (@Station1, @Station2, @Name, @Value)";
+                            command.CommandText = "INSERT INTO TabloValue (Station1, Station2, Name, Value, TimeUpdate) VALUES (@Station1, @Station2, @Name, @Value, @TimeUpdate)";
                             command.ExecuteNonQuery();
                         }
                     }

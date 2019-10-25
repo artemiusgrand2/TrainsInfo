@@ -12,19 +12,19 @@ namespace TrainsInfo.DataParser.NodeOT
     public class NodeOTDataParser : IDataParser
     {
         private readonly string OTTrain = "OT";
-        private readonly IList<string> codesOperation = new List<string> { "Р0005" };
+        private readonly IList<string> codesOperation = new List<string> { "P0005" };
 
-        public IList<RowValue> Parse(object data, IList<IInfrastructure> infrastructures)
+        public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
             var table = data as IList<ModelDataIAS_PYR_GP>;
             var result = new List<RowValue>();
             if (table != null)
             {
-                var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode == x.Index1 && x.TrainNumber != "9999").ToList();
+                var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode == x.Index1 && x.TrainNumber != 9999).ToList();
                 foreach (var node in infrastructures.Where(x => x.Type == TypeInfrastructure.node).ToList())
                 {
-                    var countTrain = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode)).ToList();
-                    result.Add(new RowValue(node.Station, OTTrain, countTrain.ToString()));
+                    var countTrain = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode)).Count();
+                    result.Add(new RowValue(node.Station, OTTrain, countTrain.ToString("D2")));
                 }
             }
             //

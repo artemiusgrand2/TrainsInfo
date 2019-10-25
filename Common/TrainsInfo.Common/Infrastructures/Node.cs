@@ -7,7 +7,7 @@ namespace TrainsInfo.Common.Infrastructures
 {
     public class Node : Joint
     {
-        public IList<string> ListStations { get;  }
+        public IList<string> ListStations { get; } = new List<string>();
 
         public Node(int station, IList<string> listStations):base(station)
         {

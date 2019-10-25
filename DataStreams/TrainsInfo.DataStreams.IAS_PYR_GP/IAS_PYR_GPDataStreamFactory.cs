@@ -4,7 +4,7 @@ using TrainsInfo.Common.Attributes;
 using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.IAS_PYR_GP
+namespace TrainsInfo.DataStream.IAS_PYR_GP
 {
     [PluginType("IAS_PYR_GP")]
     public class IAS_PYR_GPDataStreamFactory : IDataStreamFactory
@@ -12,6 +12,11 @@ namespace TrainsInfo.DataStreams.IAS_PYR_GP
         public IDataStream CreateClientStream(DataStreamRecord record)
         {
             return new IAS_PYR_GPDataStream(record);
+        }
+
+        public IListener CreateListener(ListenerRecord record)
+        {
+            throw new NotSupportedException("IAS_PYR_GP support listeners");
         }
     }
 }

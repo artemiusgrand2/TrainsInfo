@@ -5,5 +5,6 @@ namespace TrainsInfo.Common.Interfaces
     public interface IDataStreamFactory
     {
         IDataStream CreateClientStream(DataStreamRecord record);
+        IListener CreateListener(ListenerRecord record);
     }
 }

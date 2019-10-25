@@ -9,8 +9,13 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public string Name { get;  }
 
-        public string Value { get;  }
+        public string Value { get; internal set; }
 
+        public RowValue(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
 
         public RowValue(int station1, int station2, string name, string value)
         {

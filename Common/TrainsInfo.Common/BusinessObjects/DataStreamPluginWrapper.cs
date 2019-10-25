@@ -19,7 +19,7 @@ namespace TrainsInfo.Common.BusinessObjects
         static DataStreamPluginWrapper()
         {
             instance = new DataStreamPluginWrapper();
-            instance.manager.Load(AppDomain.CurrentDomain.BaseDirectory, "TrainsInfo.DataStreams.*.dll");
+            instance.manager.Load(AppDomain.CurrentDomain.BaseDirectory, "TrainsInfo.DataStream.*.dll");
         }
 
         private readonly PluginManager<IDataStreamFactory> manager;

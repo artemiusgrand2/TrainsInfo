@@ -7,30 +7,26 @@ using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.BusinessObjects;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.File
+namespace TrainsInfo.DataStream.File
 {
     public class FileDataStream : IDataStream
     {
         private readonly string filePath;
-      
+
+        public string Info { get; } = string.Empty;
+
+        public bool IsOnceConnect { get; }
 
         public FileDataStream(DataStreamRecord record)
         {
-            string[] parts = record.ConnectionString.Split(':');
-            if (parts.Length == 1 || parts.Length == 3)
+            filePath = record.ConnectionString;
+            if(!string.IsNullOrEmpty(record.Login) && !string.IsNullOrEmpty(record.Password))
             {
-                if (parts.Length == 3)
+                using (var webClient = new WebClient())
                 {
-                    using (var webClient = new WebClient())
-                    {
-                        webClient.Credentials = new NetworkCredential(parts[1], parts[2]);
-                    }
+                    webClient.Credentials = new NetworkCredential(record.Login, record.Password);
                 }
-                //
-                filePath = parts[0];
             }
-            else
-                throw new InvalidDataException(string.Format("Неверная формат строки подключения - {0}", record.ConnectionString));
         }
 
         public bool Read(out object data)
@@ -58,7 +54,14 @@ namespace TrainsInfo.DataStreams.File
             return false;
         }
 
+        public int Write(object data)
+        {
+            return 0;
+        }
+
         public void Dispose() { }
+
+
     }
 
 }

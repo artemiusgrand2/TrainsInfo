@@ -7,11 +7,15 @@ using TrainsInfo.Configuration.Records;
 using TrainsInfo.Common.BusinessObjects;
 using TrainsInfo.Common.Interfaces;
 
-namespace TrainsInfo.DataStreams.IAS_PYR_GP
+namespace TrainsInfo.DataStream.IAS_PYR_GP
 {
     public class IAS_PYR_GPDataStream : IDataStream
     {
         private readonly string connectionString;
+
+        public string Info { get; } = string.Empty;
+
+        public bool IsOnceConnect { get; }
 
         public IAS_PYR_GPDataStream(DataStreamRecord record)
         {
@@ -46,22 +50,27 @@ namespace TrainsInfo.DataStreams.IAS_PYR_GP
                             {
                                 try
                                 {
-                                    common.Add(new ModelDataIAS_PYR_GP()
+                                    int trainNumber;
+                                    if(int.TryParse(reader.IsDBNull(1) ? string.Empty : reader.GetString(1), out trainNumber))
                                     {
-                                        TrainId = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
-                                        TrainNumber = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),
-                                        StationCode = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
-                                        OperationCode = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
-                                        OperationTime = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
-                                        Index1 = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                                        Index2 = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
-                                        Index3 = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
-                                        DirectionFromStation = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                                        DirectionToStation = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
-                                    });
+                                        common.Add(new ModelDataIAS_PYR_GP()
+                                        {
+                                            TrainId = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
+                                            TrainNumber =  trainNumber,
+                                            StationCode = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
+                                            OperationCode = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
+                                            OperationTime = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
+                                            Index1 = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
+                                            Index2 = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                                            Index3 = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                                            DirectionFromStation = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                                            DirectionToStation = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                                        });
+                                    }
                                 }
                                 catch { }
                             }
+                            data = common;
                         }
                     }
                 }
@@ -72,6 +81,11 @@ namespace TrainsInfo.DataStreams.IAS_PYR_GP
             }
             //
             return true;
+        }
+
+        public int Write(object data)
+        {
+            return 0;
         }
 
         public void Dispose() { }

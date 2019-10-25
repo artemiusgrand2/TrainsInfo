@@ -7,19 +7,19 @@ namespace TrainsInfo.Common.Infrastructures
     public class InfrastructureFactory
     {
 
-        public static IInfrastructure Create(InfrastructureRecord record)
+        public static InfrastructureBase Create(InfrastructureRecord record)
         {
             if (record.Type == "Node")
             {
-                return new Node(record.StationCode1, record.StationCodes);
+                return new Node(record.Station1, record.StationCodes);
             }
             else if (record.Type == "Area")
             {
-                return new Area(record.StationCode1, record.StationCode2, record.StationCodes);
+                return new Area(record.Station1, record.Station2, record.StationCodes, record.Nodes);
             }
             else if (record.Type == "Joint")
             {
-                return new Joint(record.StationCode1);
+                return new Joint(record.Station1);
             }
             //
             return null;

@@ -12,18 +12,22 @@ namespace TrainsInfo.Configuration.Records
         [XmlElement("Name")]
         public string Name { get; set; }
 
-        [XmlElement("StationCode1")]
-        public int StationCode1 { get; set; }
+        [XmlElement("Station1")]
+        public int Station1 { get; set; }
 
-        [XmlElement("StationCode2")]
-        public int StationCode2 { get; set; }
+        [XmlElement("Station2")]
+        public int Station2 { get; set; }
 
         [XmlArray("DataSources")]
         [XmlArrayItem("DataSource")]
         public string[] DataSources { get; set; }
 
-        [XmlArray("StationCode")]
+        [XmlArray("StationCodes")]
         [XmlArrayItem("StationCode")]
         public string[] StationCodes { get; set; }
+
+        [XmlArray("Nodes")]
+        [XmlArrayItem("Node")]
+        public NodeRecord [] Nodes { get; set; }
     }
 }

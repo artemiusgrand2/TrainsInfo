@@ -5,6 +5,7 @@ namespace TrainsInfo.Common.Enums
     {
         joint =0,
         node,
-        area
+        area,
+        table
     }
 }

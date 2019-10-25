@@ -14,10 +14,10 @@ namespace TrainsInfo.Configuration.Records
         public DataStreamRecord DataStream { get; set; }
 
         /// <summary>
-        /// интервал обновления в минутах
+        /// интервал обновления в миллисекундах
         /// </summary>
         [XmlElement("RequestTimeout")]
-        public uint RequestTimeout { get; set; } = 10;
+        public uint RequestTimeout { get; set; } = 10000;
 
         [XmlArray("DataParsers")]
         [XmlArrayItem("DataParser")]
