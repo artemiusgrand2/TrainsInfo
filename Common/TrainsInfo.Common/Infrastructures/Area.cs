@@ -12,19 +12,27 @@ namespace TrainsInfo.Common.Infrastructures
 
         public IDictionary<string, string> Nodes { get; } = new Dictionary<string, string>();
 
-        public Area(int station1, int station2, IList<string> listStations, IList<NodeRecord> nodes) : base(station1, listStations)
+        public IList<string> Areas { get; } = new List<string>();
+
+        public Area(int station1, int station2, IList<string> listStations, IList<NodeRecord> nodes, IList<string> areas) : base(station1, listStations)
         {
             Station2 = station2;
             Type = TypeInfrastructure.area;
+            if (areas != null)
+                Areas = areas;
             //
-            foreach (var node in nodes)
+            if(nodes != null)
             {
-                if (!Nodes.ContainsKey(node.Station))
-                    Nodes.Add(node.Station, node.StationDirection);
-                //
-                if (!Nodes.ContainsKey(node.StationDirection))
-                    Nodes.Add(node.StationDirection, node.Station);
+                foreach (var node in nodes)
+                {
+                    if (!Nodes.ContainsKey(node.Station))
+                        Nodes.Add(node.Station, node.StationDirection);
+                    //
+                    if (!Nodes.ContainsKey(node.StationDirection))
+                        Nodes.Add(node.StationDirection, node.Station);
+                }
             }
+
         }
     }
 }

@@ -38,7 +38,7 @@ namespace TrainsInfo.DataStream.Http
 
         public IDataStream Accept()
         {
-            return new HttpDataStream(listener.GetContext());
+            return new HttpInDataStream(listener.GetContext());
         }
 
         public void Dispose()

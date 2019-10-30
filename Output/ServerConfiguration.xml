@@ -3,8 +3,8 @@
   <Logger>
     <Type>log4net</Type>
     <Settings>
-      <Setting Key="ConfigFilePath" Value=".\Log4NetConfig.xml"/>
-      <Setting Key="LogLevel" Value="Low"/>
+      <Setting Key="ConfigFilePath" Value="d:\Distributiv\TrainsInfo\Output\Log4NetConfig.xml"/>
+      <Setting Key="LogLevel" Value="High"/>
     </Settings>
   </Logger>
   
@@ -31,7 +31,9 @@
       <RequestTimeout>1000</RequestTimeout>
       <DataStream>
         <Type>File</Type>
-        <ConnectionString>w:\OperNalVag.csv</ConnectionString>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\OperNalVag.csv</ConnectionString>
       </DataStream>
     </DataSource>
 	
@@ -43,7 +45,9 @@
       <RequestTimeout>1000</RequestTimeout>
       <DataStream>
         <Type>File</Type>
-        <ConnectionString>w:\MejGosStiki.csv</ConnectionString>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\MejGosStiki.csv</ConnectionString>
       </DataStream>
     </DataSource>
 	
@@ -64,6 +68,19 @@
     </DataSource>
 	
 	
+	<DataSource>
+      <Name>AGDPSource</Name>
+      <DataParsers>
+	    <DataParser>AreaSub</DataParser>
+	  </DataParsers>
+      <RequestTimeout>60000</RequestTimeout>
+      <DataStream>
+        <Type>Http</Type>
+        <ConnectionString>http://10.1.34.251/AGDPNew/Service/CurrentPositionTrains?categoryTrain=3</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
 	<!-- разбор таблиц -->
 	
 	  <DataSource>
@@ -74,7 +91,9 @@
       <RequestTimeout>1000</RequestTimeout>
       <DataStream>
         <Type>FileZip</Type>
-        <ConnectionString>w:\PassOpz.zip</ConnectionString>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\PassOpz.zip</ConnectionString>
       </DataStream>
     </DataSource>
 	
@@ -87,9 +106,12 @@
       <RequestTimeout>1000</RequestTimeout>
       <DataStream>
         <Type>FileZip</Type>
-        <ConnectionString>w:\Vostok_Zapad.zip</ConnectionString>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Vostok_Zapad.zip</ConnectionString>
       </DataStream>
     </DataSource>
+	
 	
 	  <DataSource>
       <Name>Zapad_VostokSource</Name>
@@ -99,7 +121,24 @@
       <RequestTimeout>1000</RequestTimeout>
       <DataStream>
         <Type>FileZip</Type>
-        <ConnectionString>w:\Zapad_Vostok.zip</ConnectionString>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Zapad_Vostok.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+    <DataSource>
+      <Name>BroshPoezdSource</Name>
+      <DataParsers>
+	    <DataParser>BroshPoezd</DataParser>
+	  </DataParsers>
+      <RequestTimeout>1000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\BroshPoezd.zip</ConnectionString>
       </DataStream>
     </DataSource>
 
@@ -561,101 +600,1992 @@
         </Infrastructure>
 		
 		<!-- Участки -->
-		<!--
-		<Infrastructure>
+		
+			
+	<Infrastructure>
           <Type>Area</Type>
-          <Name>Участок - Брест-Заболотье</Name>
-		  <Station1>130204</Station1>
-		  <Station2>354200</Station2>
+          <Name>Участок - Молодечно-Минск</Name>
+		  <Station1>162900</Station1>
+		  <Station2>140009</Station2>
 		  <StationCodes>
-		     <StationCode>130837</StationCode>
-			 <StationCode>130914</StationCode>
-			 <StationCode>131009</StationCode>
-			 <StationCode>132002</StationCode>
-			 <StationCode>132106</StationCode>
-			 <StationCode>132303</StationCode>
-			 <StationCode>132407</StationCode>
-			 <StationCode>132500</StationCode>
-			 <StationCode>132604</StationCode>
-		  </StationCodes>
+        <StationCode>142305</StationCode>
+        <StationCode>142409</StationCode>
+        <StationCode>143401</StationCode>
+        <StationCode>143505</StationCode>
+        <StationCode>143609</StationCode>
+        <StationCode>143628</StationCode>
+        <StationCode>143632</StationCode>
+        <StationCode>143651</StationCode>
+        <StationCode>143702</StationCode>
+        <StationCode>143717</StationCode>
+      </StationCodes>
+		  
+      <Areas>
+        <Area>14</Area>   
+	   </Areas>  
 		  
 		  <Nodes>
-		   <Node>
-		    <Station>130204</Station>
-			<StationDirection>132407</StationDirection>
-		   </Node>
-		   <Node>
-		    <Station>130204</Station>
-			<StationDirection>354200</StationDirection>
-		   </Node>
+        <Node>
+          <Station>140009</Station>
+          <StationDirection>162900</StationDirection>
+        </Node>
+        <Node>
+          <Station>162900</Station>
+          <StationDirection>144635</StationDirection>
+        </Node>   
 		  </Nodes>
           <DataSources>
             <DataSource>IAS_PYR_GPSource</DataSource>
+			<DataSource>AGDPSource</DataSource>
           </DataSources>
         </Infrastructure>
-		-->
-		<Infrastructure>
-          <Type>Area</Type>
-          <Name>Участок - Минск - Орша</Name>
-		  <Station1>140009</Station1>
-		  <Station2>166403</Station2>
-		  <StationCodes>
-		     <StationCode>140210</StationCode>
-			 <StationCode>140304</StationCode>
-			 <StationCode>140403</StationCode>
-			 <StationCode>140704</StationCode>
-			 <StationCode>140808</StationCode>
-			 <StationCode>140901</StationCode>
-			 <StationCode>141105</StationCode>
-			 <StationCode>141209</StationCode>
-			 <StationCode>141302</StationCode>
-			 
-			 <StationCode>141406</StationCode>
-			 <StationCode>141500</StationCode>
-			 <StationCode>141603</StationCode>
-			 <StationCode>141707</StationCode>
-			 <StationCode>141800</StationCode>
-			 <StationCode>141938</StationCode>
-			 <StationCode>142004</StationCode>
-			 <StationCode>142108</StationCode>
-		  </StationCodes>
-		  
-		  <Nodes>
-		   <Node> 
-		   <Station>140009</Station> 
-		   <StationDirection>141406</StationDirection>  
-		   </Node>
-		   
-		   <Node> 
-		   <Station>140403</Station> 
-		   <StationDirection>140009</StationDirection>  
-		   </Node>
-		   
-		    <Node> 
-		   <Station>140403</Station> 
-		   <StationDirection>141406</StationDirection>  
-		   </Node>
-		   
-		   <Node> 
-		   <Station>141406</Station> 
-		   <StationDirection>166507</StationDirection>  
-		   </Node>
-		   
-		   <Node> 
-		   <Station>141406</Station> 
-		   <StationDirection>166403</StationDirection>  
-		   </Node>
-		   
-		    <Node> 
-		   <Station>141406</Station> 
-		   <StationDirection>166704</StationDirection>  
-		   </Node>
-		   
-		  </Nodes>
-          <DataSources>
-            <DataSource>IAS_PYR_GPSource</DataSource>
-          </DataSources>
-        </Infrastructure>
+
+    <Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Минск-Осиповичи</Name>
+  <Station1>140009</Station1>
+  <Station2>146407</Station2>
+  <StationCodes>
+    <StationCode>140507</StationCode>
+    <StationCode>144809</StationCode>
+    <StationCode>144832</StationCode>
+    <StationCode>145002</StationCode>
+    <StationCode>145303</StationCode>
+    <StationCode>145407</StationCode>
+    <StationCode>145454</StationCode>
+    <StationCode>146096</StationCode>
+    <StationCode>146109</StationCode>
+    <StationCode>146221</StationCode>
+    <StationCode>146306</StationCode>
+  </StationCodes>
+
+        <Areas>
+        <Area>15</Area>   
+	   </Areas>
+  
+  <Nodes>
+    <Node> <Station>140009</Station> <StationDirection>146096</StationDirection> </Node>
+<Node> <Station>144635</Station> <StationDirection>146096</StationDirection> </Node>
+<Node> <Station>146096</Station> <StationDirection>146407</StationDirection> </Node>
+<Node> <Station>146096</Station> <StationDirection>146306</StationDirection> </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+<Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Барановичи-Минск</Name>
+  <Station1>138507</Station1>
+  <Station2>140009</Station2>
+  <StationCodes>
+    <StationCode>138550</StationCode>
+    <StationCode>138600</StationCode>
+    <StationCode>138704</StationCode>
+    <StationCode>138738</StationCode>
+    <StationCode>144014</StationCode>
+    <StationCode>144404</StationCode>
+    <StationCode>144508</StationCode>
+    <StationCode>144601</StationCode>
+  </StationCodes>
+ 
+ <Areas>
+        <Area>33</Area>   
+	   </Areas>  
+	   
+  <Nodes>
+    <Node>
+      <Station>140009</Station>
+      <StationDirection>144014</StationDirection>
+    </Node>
+    <Node>
+      <Station>144014</Station>
+      <StationDirection>144635</StationDirection>
+    </Node>
+    <Node>
+      <Station>138507</Station>
+      <StationDirection>144014</StationDirection>
+    </Node>
+    <Node>
+      <Station>138901</Station>
+      <StationDirection>144014</StationDirection>
+    </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+<Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Минск-Орша</Name>
+  <Station1>140009</Station1>
+  <Station2>166403</Station2>
+  <StationCodes>
+    <StationCode>140704</StationCode>
+    <StationCode>140808</StationCode>
+    <StationCode>140901</StationCode>
+    <StationCode>141001</StationCode>
+    <StationCode>141105</StationCode>
+    <StationCode>141209</StationCode>
+    <StationCode>141302</StationCode>
+    <StationCode>141406</StationCode>
+    <StationCode>141500</StationCode>
+    <StationCode>141603</StationCode>
+    <StationCode>141707</StationCode>
+    <StationCode>141800</StationCode>
+    <StationCode>141938</StationCode>
+    <StationCode>142004</StationCode>
+    <StationCode>142108</StationCode>
+    <StationCode>145106</StationCode>
+    <StationCode>145201</StationCode>
+
+  </StationCodes>
+
+<Areas>
+        <Area>6</Area>   
+	   </Areas>  
+	   
+  <Nodes>
+    <Node>
+      <Station>140009</Station>
+      <StationDirection>141406</StationDirection>
+    </Node>
+    <Node>
+      <Station>140403</Station>
+      <StationDirection>140009</StationDirection>
+    </Node>
+    <Node>
+      <Station>140403</Station>
+      <StationDirection>141406</StationDirection>
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>140009</StationDirection>
+    </Node>
+    <Node>
+      <Station>140009</Station>
+      <StationDirection>140403</StationDirection>
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>140403</StationDirection>
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>166403</StationDirection>
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>166507</StationDirection>
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>166704</StationDirection>
+    </Node>
+    <Node>
+      <Station>166403</Station>
+      <StationDirection>141406</StationDirection>
+    </Node>
+    <Node>
+      <Station>166507</Station>
+      <StationDirection>141406</StationDirection>
+    </Node>
+    <Node>
+      <Station>166704</Station>
+      <StationDirection>141406</StationDirection>
+    </Node>
+    <Node>
+      <Station>144635</Station>
+      <StationDirection>141406</StationDirection>
+    </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+<Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Брузги-Гродно</Name>
+  <Station1>134807</Station1>
+  <Station2>135208</Station2>
+  <StationCodes>
+    <StationCode>134703</StationCode>
+    <StationCode>134972</StationCode>
+  </StationCodes>
+
+<Areas>
+        <Area>21</Area>   
+	   </Areas>  
+	   
+  <Nodes>
+    <Node>
+      <Station>134807</Station>
+      <StationDirection>135208</StationDirection>
+    </Node>
+    <Node>
+      <Station>134972</Station>
+      <StationDirection>135208</StationDirection>
+    </Node>
+    <Node>
+      <Station>134807</Station>
+      <StationDirection>134807</StationDirection>
+    </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Свислочь-Волковыск</Name>
+    <Station1>135706</Station1>
+    <Station2>136709</Station2>
+    <StationCodes>
+      <StationCode>136200</StationCode>
+      <StationCode>136249</StationCode>
+      <StationCode>136605</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>18</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>136200</Station>
+        <StationDirection>136709</StationDirection>
+      </Node>
+      <Node>
+        <Station>135602</Station>
+        <StationDirection>136709</StationDirection>
+      </Node>
+      <Node>
+        <Station>135706</Station>
+        <StationDirection>135706</StationDirection>
+      </Node>
+      <Node>
+        <Station>135602</Station>
+        <StationDirection>135706</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-сев-Брест</Name>
+    <Station1>130505</Station1>
+    <Station2>130204</Station2>
+    <StationCodes>
+      <StationCode>130505</StationCode>
+      <StationCode>130204</StationCode>
+    </StationCodes>
+ 
+	   <Areas>
+        <Area>86</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>130100</Station>
+        <StationDirection>130204</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-центр-Брест</Name>
+    <Station1>130609</Station1>
+    <Station2>130204</Station2>
+    <StationCodes>
+      <StationCode>130609</StationCode>
+      <StationCode>130204</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>84</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>130007</Station>
+        <StationDirection>130204</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Заболотье</Name>
+    <Station1>130204</Station1>
+    <Station2>354200</Station2>
+    <StationCodes>
+      <StationCode>130308</StationCode>
+      <StationCode>130837</StationCode>
+      <StationCode>130914</StationCode>
+      <StationCode>131009</StationCode>
+      <StationCode>132002</StationCode>
+      <StationCode>132106</StationCode>
+      <StationCode>132303</StationCode>
+      <StationCode>132407</StationCode>
+      <StationCode>132500</StationCode>
+      <StationCode>132604</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>84</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>354003</Station>
+        <StationDirection>354200</StationDirection>
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>132407</StationDirection>
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>354200</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Лунинец</Name>
+    <Station1>130204</Station1>
+    <Station2>139406</Station2>
+    <StationCodes>
+      <StationCode>132708</StationCode>
+      <StationCode>132801</StationCode>
+      <StationCode>132905</StationCode>
+      <StationCode>133005</StationCode>
+      <StationCode>133109</StationCode>
+      <StationCode>133113</StationCode>
+      <StationCode>133202</StationCode>
+      <StationCode>133325</StationCode>
+      <StationCode>133400</StationCode>
+      <StationCode>133433</StationCode>
+      <StationCode>139707</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>80</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>139707</StationDirection>
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>139707</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Барановичи</Name>
+    <Station1>130204</Station1>
+    <Station2>138507</Station2>
+    <StationCodes>
+      <StationCode>131207</StationCode>
+      <StationCode>131245</StationCode>
+      <StationCode>131300</StationCode>
+      <StationCode>133607</StationCode>
+      <StationCode>133700</StationCode>
+      <StationCode>133804</StationCode>
+      <StationCode>134008</StationCode>
+      <StationCode>134101</StationCode>
+      <StationCode>134205</StationCode>
+      <StationCode>134309</StationCode>
+      <StationCode>134328</StationCode>
+      <StationCode>134402</StationCode>
+      <StationCode>134506</StationCode>
+    </StationCodes>
+	
+<Areas>
+        <Area>81</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>134328</Station>
+        <StationDirection>138507</StationDirection>
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>134328</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+  
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Волковыск-Барановичи</Name>
+    <Station1>136709</Station1>
+    <Station2>138507</Station2>
+    <StationCodes>
+      <StationCode>136802</StationCode>
+      <StationCode>136906</StationCode>
+      <StationCode>137006</StationCode>
+      <StationCode>137101</StationCode>
+    </StationCodes>
+	
+<Areas>
+        <Area>19</Area>   
+	   </Areas>  
+    <Nodes>
+	
+      <Node>
+        <Station>136709</Station>
+        <StationDirection>138507</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гродно-Мосты</Name>
+    <Station1>135208</Station1>
+    <Station2>136709</Station2>
+    <StationCodes>
+      <StationCode>135301</StationCode>
+      <StationCode>135320</StationCode>
+      <StationCode>135335</StationCode>
+      <StationCode>135405</StationCode>
+      <StationCode>135424</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>38</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>135208</Station>
+        <StationDirection>137203</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Мосты-Лида</Name>
+    <Station1>135208</Station1>
+    <Station2>137608</Station2>
+    <StationCodes>
+      <StationCode>137400</StationCode>
+      <StationCode>137504</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>38</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>137203</Station>
+        <StationDirection>137608</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Стасилос-Лида</Name>
+    <Station1>120518</Station1>
+    <Station2>137608</Station2>
+    <StationCodes>
+      <StationCode>137701</StationCode>
+      <StationCode>137805</StationCode>
+      <StationCode>137909</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>39</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>120518</Station>
+        <StationDirection>137608</StationDirection>
+      </Node>
+
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лида-Барановичи</Name>
+    <Station1>137608</Station1>
+    <Station2>138507</Station2>
+    <StationCodes>
+      <StationCode>137612</StationCode>
+      <StationCode>138121</StationCode>
+      <StationCode>138206</StationCode>
+      <StationCode>138225</StationCode>
+      <StationCode>138314</StationCode>
+      <StationCode>138403</StationCode>
+      <StationCode>138422</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>37</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>138507</StationDirection>
+      </Node>
+      <Node>
+        <Station>138901</Station>
+        <StationDirection>137608</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Барановичи-Лунинец</Name>
+    <Station1>138507</Station1>
+    <Station2>139406</Station2>
+    <StationCodes>
+      <StationCode>139502</StationCode>
+      <StationCode>139514</StationCode>
+      <StationCode>139603</StationCode>
+      <StationCode>139800</StationCode>
+      <StationCode>139904</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>28</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>138507</Station>
+        <StationDirection>139406</StationDirection>
+      </Node>
+      <Node>
+        <Station>138901</Station>
+        <StationDirection>139406</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Барановичи-Слуцк</Name>
+    <Station1>138507</Station1>
+    <Station2>148602</Station2>
+    <StationCodes>
+      <StationCode>138916</StationCode>
+      <StationCode>139001</StationCode>
+      <StationCode>139105</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>35</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>138507</Station>
+        <StationDirection>148706</StationDirection>
+      </Node>
+      <Node>
+        <Station>138901</Station>
+        <StationDirection>148706</StationDirection>
+      </Node>
+      <Node>
+        <Station>148602</Station>
+        <StationDirection>148706</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лунинец-Горынь</Name>
+    <Station1>139406</Station1>
+    <Station2>139213</Station2>
+    <StationCodes>
+      <StationCode>139302</StationCode>
+      <StationCode>139711</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>30</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>139209</Station>
+        <StationDirection>355504</StationDirection>
+      </Node>
+      <Node>
+        <Station>139209</Station>
+        <StationDirection>139406</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лунинец-Калинковичи</Name>
+    <Station1>139406</Station1>
+    <Station2>153808</Station2>
+    <StationCodes>
+      <StationCode>151925</StationCode>
+      <StationCode>151944</StationCode>
+      <StationCode>152006</StationCode>
+      <StationCode>152106</StationCode>
+      <StationCode>152171</StationCode>
+      <StationCode>153301</StationCode>
+      <StationCode>153314</StationCode>
+      <StationCode>153329</StationCode>
+      <StationCode>153507</StationCode>
+      <StationCode>153600</StationCode>
+      <StationCode>153615</StationCode>
+      <StationCode>153719</StationCode>
+      <StationCode>153723</StationCode>
+      <StationCode>153742</StationCode>
+      <StationCode>153761</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>52</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>152171</StationDirection>
+      </Node>
+      <Node>
+        <Station>152006</Station>
+        <StationDirection>139406</StationDirection>
+      </Node>
+      <Node>
+        <Station>152006</Station>
+        <StationDirection>152171</StationDirection>
+      </Node>
+      <Node>
+        <Station>152171</Station>
+        <StationDirection>139406</StationDirection>
+      </Node>
+      <Node>
+        <Station>152171</Station>
+        <StationDirection>153808</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лида-Молодечно</Name>
+    <Station1>137608</Station1>
+    <Station2>162900</Station2>
+    <StationCodes>
+      <StationCode>138009</StationCode>
+      <StationCode>162309</StationCode>
+      <StationCode>162402</StationCode>
+      <StationCode>162440</StationCode>
+      <StationCode>162506</StationCode>
+      <StationCode>162607</StationCode>
+      <StationCode>162703</StationCode>
+      <StationCode>162807</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>40</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>162440</Station>
+        <StationDirection>162900</StationDirection>
+      </Node>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>162440</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гудогай-Молодечно</Name>
+    <Station1>163034</Station1>
+    <Station2>162900</Station2>
+    <StationCodes>
+      <StationCode>163104</StationCode>
+      <StationCode>163208</StationCode>
+      <StationCode>163301</StationCode>
+      <StationCode>163405</StationCode>
+      <StationCode>163509</StationCode>
+      <StationCode>164200</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>2</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>163034</Station>
+        <StationDirection>120306</StationDirection>
+      </Node>
+      <Node>
+        <Station>162900</Station>
+        <StationDirection>163034</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Слуцк-Калий 3</Name>
+    <Station1>148602</Station1>
+    <Station2>148301</Station2>
+    <StationCodes>
+      <StationCode>148208</StationCode>
+      <StationCode>148227</StationCode>
+      <StationCode>148509</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>71</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>148301</Station>
+        <StationDirection>148602</StationDirection>
+      </Node>
+      <Node>
+        <Station>148208</Station>
+        <StationDirection>148301</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Слуцк-Осиповичи</Name>
+    <Station1>148602</Station1>
+    <Station2>146407</Station2>
+    <StationCodes>
+      <StationCode>148617</StationCode>
+      <StationCode>148621</StationCode>
+      <StationCode>149003</StationCode>
+      <StationCode>149022</StationCode>
+      <StationCode>149107</StationCode>
+      <StationCode>149126</StationCode>
+      <StationCode>149222</StationCode>
+      <StationCode>149234</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>70</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>148602</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Молодечно-Полоцк</Name>
+    <Station1>162900</Station1>
+    <Station2>161306</Station2>
+    <StationCodes>
+      <StationCode>163602</StationCode>
+      <StationCode>163617</StationCode>
+      <StationCode>163706</StationCode>
+      <StationCode>163802</StationCode>
+      <StationCode>163890</StationCode>
+      <StationCode>163903</StationCode>
+      <StationCode>164003</StationCode>
+      <StationCode>164304</StationCode>
+      <StationCode>164408</StationCode>
+      <StationCode>164516</StationCode>
+      <StationCode>164605</StationCode>
+      <StationCode>164709</StationCode>
+      <StationCode>164802</StationCode>
+      <StationCode>164906</StationCode>
+      <StationCode>165006</StationCode>
+      <StationCode>165103</StationCode>
+      <StationCode>165114</StationCode>
+      <StationCode>165133</StationCode>
+      <StationCode>165148</StationCode>
+      <StationCode>165203</StationCode>
+      <StationCode>165307</StationCode>
+      <StationCode>165311</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>57</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>162900</Station>
+        <StationDirection>163890</StationDirection>
+      </Node>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>164003</StationDirection>
+      </Node>
+      <Node>
+        <Station>164003</Station>
+        <StationDirection>165504</StationDirection>
+      </Node>
+      <Node>
+        <Station>163890</Station>
+        <StationDirection>164003</StationDirection>
+      </Node>
+      <Node>
+        <Station>164003</Station>
+        <StationDirection>164408</StationDirection>
+      </Node>
+      <Node>
+        <Station>164408</Station>
+        <StationDirection>164605</StationDirection>
+      </Node>
+      <Node>
+        <Station>129512</Station>
+        <StationDirection>164408</StationDirection>
+      </Node>
+      <Node>
+        <Station>129512</Station>
+        <StationDirection>164516</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Бигосово-Полоцк</Name>
+    <Station1>161698</Station1>
+    <Station2>161306</Station2>
+    <StationCodes>
+      <StationCode>161804</StationCode>
+      <StationCode>161819</StationCode>
+      <StationCode>161908</StationCode>
+      <StationCode>162012</StationCode>
+      <StationCode>162116</StationCode>
+      <StationCode>162211</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>79</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>161698</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Новополоцк-Полоцк</Name>
+    <Station1>165504</Station1>
+    <Station2>161306</Station2>
+    <StationCodes>
+      <StationCode>165504</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>57</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>165504</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Новополоцк-Полоцк</Name>
+    <Station1>165504</Station1>
+    <Station2>161306</Station2>
+    <StationCodes>
+      <StationCode>165504</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>57</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>165504</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Бережесть-Калинковичи</Name>
+    <Station1>347705</Station1>
+    <Station2>153808</Station2>
+    <StationCodes>
+      <StationCode>151130</StationCode>
+      <StationCode>151145</StationCode>
+      <StationCode>151200</StationCode>
+      <StationCode>151304</StationCode>
+      <StationCode>151338</StationCode>
+      <StationCode>151408</StationCode>
+      <StationCode>151605</StationCode>
+      <StationCode>151709</StationCode>
+      <StationCode>151802</StationCode>
+      <StationCode>153901</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>46</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>346308</Station>
+        <StationDirection>346806</StationDirection>
+      </Node>
+      <Node>
+        <Station>346806</Station>
+        <StationDirection>347705</StationDirection>
+      </Node>
+      <Node>
+        <Station>346806</Station>
+        <StationDirection>346308</StationDirection>
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>346806</StationDirection>
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>346308</StationDirection>
+      </Node>
+      <Node>
+        <Station>151408</Station>
+        <StationDirection>153808</StationDirection>
+      </Node>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>347705</StationDirection>
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>151408</StationDirection>
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>153808</StationDirection>
+      </Node>
+      <Node>
+        <Station>151408</Station>
+        <StationDirection>347705</StationDirection>
+      </Node>
+      <Node>
+        <Station>151338</Station>
+        <StationDirection>151408</StationDirection>
+      </Node>
+      <Node>
+        <Station>151338</Station>
+        <StationDirection>153808</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Осиповичи-Могилев</Name>
+    <Station1>146407</Station1>
+    <Station2>156505</Station2>
+    <StationCodes>
+      <StationCode>146414</StationCode>
+      <StationCode>157003</StationCode>
+      <StationCode>157103</StationCode>
+      <StationCode>157207</StationCode>
+      <StationCode>157300</StationCode>
+      <StationCode>157423</StationCode>
+      <StationCode>157508</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>65</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>156505</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Осиповичи-Жлобин</Name>
+    <Station1>146407</Station1>
+    <Station2>155841</Station2>
+    <StationCodes>
+      <StationCode>146433</StationCode>
+      <StationCode>146715</StationCode>
+      <StationCode>146927</StationCode>
+      <StationCode>147008</StationCode>
+      <StationCode>147205</StationCode>
+      <StationCode>147402</StationCode>
+      <StationCode>147602</StationCode>
+      <StationCode>147703</StationCode>
+      <StationCode>147722</StationCode>
+      <StationCode>147807</StationCode>
+      <StationCode>147845</StationCode>
+      <StationCode>148000</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>63</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>148000</Station>
+        <StationDirection>155004</StationDirection>
+      </Node>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>148000</StationDirection>
+      </Node>
+      <Node>
+        <Station>147008</Station>
+        <StationDirection>146407</StationDirection>
+      </Node>
+      <Node>
+        <Station>147008</Station>
+        <StationDirection>148000</StationDirection>
+      </Node>
+      <Node>
+        <Station>148000</Station>
+        <StationDirection>146407</StationDirection>
+      </Node>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>147008</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Калинковичи-Жлобин</Name>
+    <Station1>153808</Station1>
+    <Station2>155841</Station2>
+    <StationCodes>
+      <StationCode>154016</StationCode>
+      <StationCode>154105</StationCode>
+      <StationCode>154124</StationCode>
+      <StationCode>154143</StationCode>
+      <StationCode>154162</StationCode>
+      <StationCode>154209</StationCode>
+      <StationCode>154228</StationCode>
+      <StationCode>154232</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>51</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>155004</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Калинковичи-Гомель</Name>
+    <Station1>153808</Station1>
+    <Station2>150000</Station2>
+    <StationCodes>
+      <StationCode>150138</StationCode>
+      <StationCode>153850</StationCode>
+      <StationCode>153884</StationCode>
+      <StationCode>154406</StationCode>
+      <StationCode>154425</StationCode>
+      <StationCode>154430</StationCode>
+      <StationCode>154459</StationCode>
+      <StationCode>154507</StationCode>
+      <StationCode>154711</StationCode>
+      <StationCode>154800</StationCode>
+      <StationCode>154815</StationCode>
+      <StationCode>154834</StationCode>
+      <StationCode>154872</StationCode>
+      <StationCode>154904</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>41</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>153808</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Жлобин-Гомель</Name>
+    <Station1>155841</Station1>
+    <Station2>150000</Station2>
+    <StationCodes>
+      <StationCode>155112</StationCode>
+      <StationCode>155201</StationCode>
+      <StationCode>155305</StationCode>
+      <StationCode>155409</StationCode>
+      <StationCode>155502</StationCode>
+      <StationCode>155714</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>47</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>155004</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Жлобин-Могилев</Name>
+    <Station1>155841</Station1>
+    <Station2>156505</Station2>
+    <StationCodes>
+      <StationCode>155803</StationCode>
+      <StationCode>155818</StationCode>
+      <StationCode>155907</StationCode>
+      <StationCode>155911</StationCode>
+      <StationCode>155930</StationCode>
+      <StationCode>156011</StationCode>
+      <StationCode>156030</StationCode>
+      <StationCode>156100</StationCode>
+      <StationCode>156134</StationCode>
+      <StationCode>156242</StationCode>
+      <StationCode>156308</StationCode>
+      <StationCode>156401</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>62</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>155004</Station>
+        <StationDirection>155907</StationDirection>
+      </Node>
+      <Node>
+        <Station>155907</Station>
+        <StationDirection>156505</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Могилев</Name>
+    <Station1>166403</Station1>
+    <Station2>156505</Station2>
+    <StationCodes>
+      <StationCode>156543</StationCode>
+      <StationCode>156702</StationCode>
+      <StationCode>156806</StationCode>
+      <StationCode>156908</StationCode>
+      <StationCode>156914</StationCode>
+      <StationCode>166600</StationCode>
+      <StationCode>166628</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>61</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>166628</StationDirection>
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>166628</StationDirection>
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>166403</StationDirection>
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>166507</StationDirection>
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>166704</StationDirection>
+      </Node>
+      <Node>
+        <Station>156505</Station>
+        <StationDirection>166628</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Полоцк-Витебск</Name>
+    <Station1>161306</Station1>
+    <Station2>160002</Station2>
+    <StationCodes>
+      <StationCode>160021</StationCode>
+      <StationCode>160040</StationCode>
+      <StationCode>160055</StationCode>
+      <StationCode>160712</StationCode>
+      <StationCode>160731</StationCode>
+      <StationCode>160905</StationCode>
+      <StationCode>160910</StationCode>
+      <StationCode>161109</StationCode>
+      <StationCode>161113</StationCode>
+      <StationCode>161128</StationCode>
+      <StationCode>161202</StationCode>
+      <StationCode>161221</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>78</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>161306</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Езерище-Витебск</Name>
+    <Station1>160816</Station1>
+    <Station2>160002</Station2>
+    <StationCodes>
+      <StationCode>160303</StationCode>
+      <StationCode>160322</StationCode>
+      <StationCode>160337</StationCode>
+      <StationCode>160407</StationCode>
+      <StationCode>160604</StationCode>
+      <StationCode>160708</StationCode>
+      <StationCode>166210</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>54</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>067104</Station>
+        <StationDirection>160816</StationDirection>
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>160816</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Витебск</Name>
+    <Station1>166403</Station1>
+    <Station2>160002</Station2>
+    <StationCodes>
+      <StationCode>166723</StationCode>
+      <StationCode>166742</StationCode>
+      <StationCode>166761</StationCode>
+      <StationCode>167001</StationCode>
+      <StationCode>167054</StationCode>
+      <StationCode>167105</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>55</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>166742</StationDirection>
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>166742</StationDirection>
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>166742</StationDirection>
+      </Node>
+      <Node>
+        <Station>166742</Station>
+        <StationDirection>166507</StationDirection>
+      </Node>
+      <Node>
+        <Station>166742</Station>
+        <StationDirection>166403</StationDirection>
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>166742</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Красное</Name>
+    <Station1>166403</Station1>
+    <Station2>171346</Station2>
+    <StationCodes>
+      <StationCode>166418</StationCode>
+      <StationCode>166422</StationCode>
+      <StationCode>168907</StationCode>
+      <StationCode>169007</StationCode>
+      <StationCode>169100</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>16</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>170004</StationDirection>
+      </Node>
+      <Node>
+        <Station>170004</Station>
+        <StationDirection>166403</StationDirection>
+      </Node>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>171346</StationDirection>
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>171346</StationDirection>
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>171346</StationDirection>
+      </Node>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>166403</StationDirection>
+      </Node>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>166507</StationDirection>
+      </Node>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>166704</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Кричев</Name>
+    <Station1>166403</Station1>
+    <Station2>158209</Station2>
+    <StationCodes>
+      <StationCode>158303</StationCode>
+      <StationCode>158407</StationCode>
+      <StationCode>158500</StationCode>
+      <StationCode>158604</StationCode>
+      <StationCode>158708</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>66</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>158209</Station>
+        <StationDirection>166719</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Могилев-Кричев</Name>
+    <Station1>156505</Station1>
+    <Station2>158209</Station2>
+    <StationCodes>
+      <StationCode>157705</StationCode>
+      <StationCode>157809</StationCode>
+      <StationCode>157885</StationCode>
+      <StationCode>158002</StationCode>
+      <StationCode>158106</StationCode>
+      <StationCode>158110</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>69</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>156505</Station>
+        <StationDirection>158209</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Терюха</Name>
+    <Station1>150000</Station1>
+    <Station2>150301</Station2>
+    <StationCodes>
+      <StationCode>150208</StationCode>
+      <StationCode>150265</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>17</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150301</Station>
+        <StationDirection>325000</StationDirection>
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150301</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Тереховка</Name>
+    <Station1>150000</Station1>
+    <Station2>150706</Station2>
+    <StationCodes>
+      <StationCode>150208</StationCode>
+      <StationCode>150265</StationCode>
+    </StationCodes>
+<Areas>
+        <Area>49_2</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150706</Station>
+        <StationDirection>326906</StationDirection>
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150706</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Тереховка</Name>
+    <Station1>150000</Station1>
+    <Station2>150706</Station2>
+    <StationCodes>
+      <StationCode>150674</StationCode>
+      <StationCode>150778</StationCode>
+      <StationCode>150903</StationCode>
+      <StationCode>155771</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>49_2</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150706</Station>
+        <StationDirection>326906</StationDirection>
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150706</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Закопытье</Name>
+    <Station1>150000</Station1>
+    <Station2>150528</Station2>
+    <StationCodes>
+      <StationCode>150212</StationCode>
+      <StationCode>150227</StationCode>
+      <StationCode>150509</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>44</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150528</Station>
+        <StationDirection>202008</StationDirection>
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150528</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Кричев-Сураж</Name>
+    <Station1>158209</Station1>
+    <Station2>202900</Station2>
+    <StationCodes>
+      <StationCode>158820</StationCode>
+      <StationCode>158905</StationCode>
+      <StationCode>159005</StationCode>
+      <StationCode>159109</StationCode>
+      <StationCode>159113</StationCode>
+      <StationCode>159202</StationCode>
+      <StationCode>159306</StationCode>
+      <StationCode>159404</StationCode>
+      <StationCode>159503</StationCode>
+    </StationCodes>
+
+
+
+     <Areas>
+      <Area>68</Area>
+    
+    </Areas>
+
+    <Nodes>
+      <Node>
+        <Station>202008</Station>
+        <StationDirection>202900</StationDirection>
+      </Node>
+      <Node>
+        <Station>158905</Station>
+        <StationDirection>177408</StationDirection>
+      </Node>
+      <Node>
+        <Station>158209</Station>
+        <StationDirection>158905</StationDirection>
+      </Node>
+      <Node>
+        <Station>158209</Station>
+        <StationDirection>202900</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Витебск-Заольша</Name>
+    <Station1>160002</Station1>
+    <Station2>165627</Station2>
+    <StationCodes>
+      <StationCode>165701</StationCode>
+      <StationCode>165735</StationCode>
+      <StationCode>165754</StationCode>
+      <StationCode>165909</StationCode>
+      <StationCode>166009</StationCode>
+      <StationCode>166102</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>77</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>165627</Station>
+        <StationDirection>170004</StationDirection>
+      </Node>
+      <Node>
+        <Station>170108</Station>
+        <StationDirection>165627</StationDirection>
+      </Node>
+      <Node>
+        <Station>165627</Station>
+        <StationDirection>171628</StationDirection>
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>165909</StationDirection>
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>165627</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Высоко-Литовск</Name>
+    <Station1>130204</Station1>
+    <Station2>131705</Station2>
+    <StationCodes>
+      <StationCode>130401</StationCode>
+      <StationCode>131705</StationCode>
+      <StationCode>131809</StationCode>
+      <StationCode>132204</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>86</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>131705</StationDirection>
+      </Node>
+      <Node>
+        <Station>130100</Station>
+        <StationDirection>131705</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Полоцк-Алеща</Name>
+    <Station1>161306</Station1>
+    <Station2>161202</Station2>
+    <StationCodes>
+      <StationCode>161255</StationCode>
+      <StationCode>161518</StationCode>
+      <StationCode>161607</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>60</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>161607</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Центральная-Лепель</Name>
+    <Station1>166403</Station1>
+    <Station2>168108</Station2>
+    <StationCodes>
+      <StationCode>168108</StationCode>
+      <StationCode>168201</StationCode>
+      <StationCode>168305</StationCode>
+      <StationCode>168409</StationCode>
+      <StationCode>168606</StationCode>
+      <StationCode>168633</StationCode>
+      <StationCode>168700</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>10</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>168108</StationDirection>
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>168108</StationDirection>
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>168108</StationDirection>
+      </Node>
+      <Node>
+        <Station>168108</Station>
+        <StationDirection>166403</StationDirection>
+      </Node>
+      <Node>
+        <Station>168108</Station>
+        <StationDirection>166507</StationDirection>
+      </Node>
+      <Node>
+        <Station>168108</Station>
+        <StationDirection>166704</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Волковыск-Мосты</Name>
+    <Station1>136709</Station1>
+    <Station2>137203</Station2>
+    <StationCodes>
+      <StationCode>137307</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>26</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>136709</Station>
+        <StationDirection>137203</StationDirection>
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+	
 		
     </Infrastructures>
 </Configuration>

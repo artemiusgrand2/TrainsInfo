@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainsInfo.DataParser.Vosto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainsInfo.DataParser.Zapad_Vostok", "TrainsInfo.DataParser.Zapad_Vostok\TrainsInfo.DataParser.Zapad_Vostok.csproj", "{4EE89586-2ECB-4FDA-85B5-66FC1D51C7D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainsInfo.DataParser.AreaSub", "TrainsInfo.DataParser.AreaSub\TrainsInfo.DataParser.AreaSub.csproj", "{F918EED2-D046-462A-A083-E5AE32B3BDF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainsInfo.DataParser.BroshPoezd", "TrainsInfo.DataParser.BroshPoezd\TrainsInfo.DataParser.BroshPoezd.csproj", "{17E86BEB-D13F-4376-864C-C80905D4F5B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{4EE89586-2ECB-4FDA-85B5-66FC1D51C7D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EE89586-2ECB-4FDA-85B5-66FC1D51C7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EE89586-2ECB-4FDA-85B5-66FC1D51C7D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F918EED2-D046-462A-A083-E5AE32B3BDF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F918EED2-D046-462A-A083-E5AE32B3BDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F918EED2-D046-462A-A083-E5AE32B3BDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F918EED2-D046-462A-A083-E5AE32B3BDF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E86BEB-D13F-4376-864C-C80905D4F5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E86BEB-D13F-4376-864C-C80905D4F5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E86BEB-D13F-4376-864C-C80905D4F5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E86BEB-D13F-4376-864C-C80905D4F5B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

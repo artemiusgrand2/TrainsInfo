@@ -47,9 +47,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpDataStream.cs" />
+    <Compile Include="HttpInDataStream.cs" />
     <Compile Include="HttpDataStreamFactory.cs" />
     <Compile Include="HttpDataStreamListener.cs" />
+    <Compile Include="HttpOutDataStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

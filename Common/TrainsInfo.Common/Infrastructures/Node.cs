@@ -11,7 +11,8 @@ namespace TrainsInfo.Common.Infrastructures
 
         public Node(int station, IList<string> listStations):base(station)
         {
-            ListStations = listStations;
+            if (listStations != null)
+                ListStations = listStations;
             Type = TypeInfrastructure.node;
         }
     }

@@ -121,8 +121,6 @@ namespace TrainsInfo.DataStream.Communication.Controller.Dsccp
                     {
                         if (DateTime.Now - lastCommunicatedTime > echoMessageTimeout)
                         {
-                            Logger.Log.ObligatoryInfo("Sending Dsccp Echo");
-                            serverClient.Write(echoMessageData);
                             lastCommunicatedTime = DateTime.Now;
                             isStop = true;
                             if (OnError != null)

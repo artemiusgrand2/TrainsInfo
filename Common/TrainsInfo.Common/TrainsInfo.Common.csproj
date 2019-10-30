@@ -57,6 +57,7 @@
     <Compile Include="BusinessObjects\ModelDataIAS_PYR_GP.cs" />
     <Compile Include="BusinessObjects\MultilevelLogger.cs" />
     <Compile Include="BusinessObjects\PluginManager.cs" />
+    <Compile Include="BusinessObjects\RemoteConnection.cs" />
     <Compile Include="BusinessObjects\RowValue.cs" />
     <Compile Include="BusinessObjects\ServerContext.cs" />
     <Compile Include="Enums\CategotyTable.cs" />

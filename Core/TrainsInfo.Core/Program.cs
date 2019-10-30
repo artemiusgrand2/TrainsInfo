@@ -22,7 +22,7 @@ namespace TrainsInfo.Core
         static void Main(string[] args)
         {
             Console.WriteLine("Initializing...");
-          //  Console.ReadLine();
+            //Console.ReadLine();
             var m_runAsConsole = false;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;

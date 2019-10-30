@@ -23,8 +23,8 @@ namespace TrainsInfo.DataParser.NodeTR
                 var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode != x.Index3 && x.TrainNumber != 9999).ToList();
                 foreach (var node in infrastructures.Where(x => x.Type == TypeInfrastructure.node).ToList())
                 {
-                    var countTrain = tableWithFilter.Where(x =>  (node as Node).ListStations.Contains(x.StationCode)).Count();
-                    result.Add(new RowValue(node.Station, TRTrain, countTrain.ToString("D2")));
+                    var countTrain = tableWithFilter.Where(x =>  (node as Node).ListStations.Contains(x.StationCode)).Count().ToString();
+                    result.Add(new RowValue(node.Station, TRTrain, (countTrain.Length < 2) ? countTrain.Insert(0, " ") : countTrain));
                 }
             }
             //

@@ -23,13 +23,7 @@ namespace TrainsInfo.DataStream.FileZip
         public FileZipDataStream(DataStreamRecord record)
         {
             filePath = record.ConnectionString;
-            if (!string.IsNullOrEmpty(record.Login) && !string.IsNullOrEmpty(record.Password))
-            {
-                using (var webClient = new WebClient())
-                {
-                    webClient.Credentials = new NetworkCredential(record.Login, record.Password);
-                }
-            }
+            RemoteConnection.Connect(record);
         }
 
         public bool Read(out object data)

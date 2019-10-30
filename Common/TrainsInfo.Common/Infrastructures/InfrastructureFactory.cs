@@ -15,7 +15,7 @@ namespace TrainsInfo.Common.Infrastructures
             }
             else if (record.Type == "Area")
             {
-                return new Area(record.Station1, record.Station2, record.StationCodes, record.Nodes);
+                return new Area(record.Station1, record.Station2, record.StationCodes, record.Nodes, record.Areas);
             }
             else if (record.Type == "Joint")
             {

@@ -22,6 +22,10 @@ namespace TrainsInfo.Configuration.Records
         [XmlArrayItem("DataSource")]
         public string[] DataSources { get; set; }
 
+        [XmlArray("Areas")]
+        [XmlArrayItem("Area")]
+        public string[] Areas { get; set; }
+
         [XmlArray("StationCodes")]
         [XmlArrayItem("StationCode")]
         public string[] StationCodes { get; set; }

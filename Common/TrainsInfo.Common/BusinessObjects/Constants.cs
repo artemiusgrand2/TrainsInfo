@@ -5,13 +5,12 @@ namespace TrainsInfo.Common.BusinessObjects
     public class Constants
     {
         public static Encoding TextEncoding { get; } = Encoding.UTF8;// Encoding.GetEncoding(1251);
-
-
         // Обозначения таблиц левой части табло
         public const string KeyTablePassOpz = "PassOpz";
         public const string KeyTableVostok_Zapad = "Vostok_Zapad";
         public const string KeyTableZapad_Vostok = "Zapad_Vostok";
         public const string KeyTableBroshPoezd = "BroshPoezd";
+
 
         // Обозначения таблиц правой части табло
         public const string KeyTableGruzRabota = "GruzRabota";

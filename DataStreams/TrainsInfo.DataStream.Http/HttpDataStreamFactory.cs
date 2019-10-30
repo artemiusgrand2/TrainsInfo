@@ -11,7 +11,7 @@ namespace TrainsInfo.DataStream.Http
     {
         public IDataStream CreateClientStream(DataStreamRecord record)
         {
-            return null;
+            return new HttpOutDataStream(record);
         }
 
         public IListener CreateListener(ListenerRecord record)

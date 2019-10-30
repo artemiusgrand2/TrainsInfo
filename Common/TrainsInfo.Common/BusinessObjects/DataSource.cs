@@ -64,7 +64,7 @@ namespace TrainsInfo.Common.BusinessObjects
         public void Stop()
         {
             isStop = true;
-            parsingThread.Join();
+            parsingThread.Join(2000);
         }
 
         public void AddInfrastructure(InfrastructureBase infrastructure)

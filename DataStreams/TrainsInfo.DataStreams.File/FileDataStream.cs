@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Net;
+using System.Text;
 using System.Collections.Generic;
 using TrainsInfo.Common.Attributes;
 using TrainsInfo.Configuration.Records;
@@ -20,13 +20,7 @@ namespace TrainsInfo.DataStream.File
         public FileDataStream(DataStreamRecord record)
         {
             filePath = record.ConnectionString;
-            if(!string.IsNullOrEmpty(record.Login) && !string.IsNullOrEmpty(record.Password))
-            {
-                using (var webClient = new WebClient())
-                {
-                    webClient.Credentials = new NetworkCredential(record.Login, record.Password);
-                }
-            }
+            RemoteConnection.Connect(record);
         }
 
         public bool Read(out object data)
