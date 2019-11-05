@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TrainsInfo.DataStream.Communication.Protocol.Dsccp.Enums;
 using TrainsInfo.Common.Enums;
+using TrainsInfo.Common.BusinessObjects;
 
 namespace TrainsInfo.DataStream.Communication.Protocol.Dsccp.Answers
 {
@@ -12,7 +13,7 @@ namespace TrainsInfo.DataStream.Communication.Protocol.Dsccp.Answers
             get { return AnswerType.TypeTable; }
         }
 
-        public IDictionary<string, string> Tables { get;  set; }
+        public IDictionary<string, BaseValue> Tables { get;  set; }
 
     }
 }

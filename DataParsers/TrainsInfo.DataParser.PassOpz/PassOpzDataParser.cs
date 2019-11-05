@@ -17,19 +17,19 @@ namespace TrainsInfo.DataParser.PassOpz
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var table = (string[])data;
+            var table = (BaseValue)data;
             var result = new List<RowValue>();
             if (table != null)
             {
                 var parserValue = new StringBuilder();
-                foreach (var record in table)
+                foreach (var record in table.Value.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
                 {
                     var rowMatch = Regex.Match(record, rowPattern);
                     if (rowMatch.Success)
                         parserValue.AppendLine(record.Replace("'", ""));
                 }
                 //
-                result.Add(new RowValue(Constants.KeyTablePassOpz, parserValue.ToString()));
+                result.Add(new RowValue(Constants.KeyTablePassOpz, parserValue.ToString(), table.LastUpdate));
             }
             //
             return result;

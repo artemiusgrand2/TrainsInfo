@@ -33,13 +33,12 @@ namespace TrainsInfo.DataStream.FileZip
             {
                 if (File.Exists(filePath))
                 {
-                    data = System.IO.File.ReadAllLines(filePath);
                     using (var archive = ZipFile.Open(filePath, ZipArchiveMode.Read, Encoding.UTF8))
                     {
                         var entry = archive.Entries.FirstOrDefault();
                         if(entry != null)
                         {
-                            var reads = new List<string>();
+                            var reads = new StringBuilder();
                             using (var reader = new StreamReader(entry.Open(), Constants.TextEncoding))
                             {
                                 string input;
@@ -47,12 +46,12 @@ namespace TrainsInfo.DataStream.FileZip
                                 {
                                     while ((input = reader.ReadLine()) != null)
                                     {
-                                        reads.Add(input);
+                                        reads.AppendLine(input);
                                     }
                                 }
                             }
                             //
-                            data = reads.ToArray();
+                            data = new BaseValue(reads.ToString(), System.IO.File.GetLastWriteTime(filePath));
                             return true;
                         }
                         else

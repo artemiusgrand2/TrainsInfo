@@ -10,7 +10,7 @@ namespace TrainsInfo.DataStream.Http
 {
     public class HttpOutDataStream : IDataStream
     {
-        private readonly WebRequest request;
+        private string url;
 
         public string Info
         {
@@ -25,27 +25,28 @@ namespace TrainsInfo.DataStream.Http
         internal HttpOutDataStream(DataStreamRecord httpRecord)
         {
             if (Uri.IsWellFormedUriString(httpRecord.ConnectionString, UriKind.Absolute))
-                request = WebRequest.Create(httpRecord.ConnectionString);
+                url = httpRecord.ConnectionString;
             else
                 throw new InvalidDataException("incorrect url");
-            //
-            request.Timeout = 20000;
         }
 
         public bool Read(out object data)
         {
             var result = new StringBuilder();
+            var request = WebRequest.Create(url);
+            request.Timeout = 30000;
             lock (request)
             {
-                WebResponse response = request.GetResponse();
-
-                using (Stream stream = response.GetResponseStream())
+                using (var response = request.GetResponse())
                 {
-                    using (StreamReader reader = new StreamReader(stream))
+                    using (var stream = response.GetResponseStream())
                     {
-                        string line = "";
-                        while ((line = reader.ReadLine()) != null)
-                            result.Append(line);
+                        using (var reader = new StreamReader(stream))
+                        {
+                            string line = "";
+                            while ((line = reader.ReadLine()) != null)
+                                result.Append(line);
+                        }
                     }
                 }
             }

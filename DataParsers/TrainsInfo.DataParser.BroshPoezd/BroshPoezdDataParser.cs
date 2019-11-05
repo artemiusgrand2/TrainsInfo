@@ -17,19 +17,19 @@ namespace TrainsInfo.DataParser.BroshPoezd
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var table = (string[])data;
+            var table = (BaseValue)data;
             var result = new List<RowValue>();
             if (table != null)
             {
                 var parserValue = new StringBuilder();
-                foreach (var record in table)
+                foreach (var record in table.Value.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
                 {
                     var rowMatch = Regex.Match(record, rowPattern);
                     if (rowMatch.Success)
                         parserValue.AppendLine(record.Replace("'", ""));
                 }
                 //
-                result.Add(new RowValue(Constants.KeyTableBroshPoezd, parserValue.ToString()));
+                result.Add(new RowValue(Constants.KeyTableBroshPoezd, parserValue.ToString(), table.LastUpdate));
             }
             //
             return result;

@@ -30,7 +30,7 @@ namespace TrainsInfo.DataStream.File
             {
                 if (System.IO.File.Exists(filePath))
                 {
-                    data = System.IO.File.ReadAllLines(filePath, Constants.TextEncoding);
+                    data = new BaseValue(System.IO.File.ReadAllText(filePath, Constants.TextEncoding), System.IO.File.GetLastWriteTime(filePath)) ;
                     return true;
                 }
                 else

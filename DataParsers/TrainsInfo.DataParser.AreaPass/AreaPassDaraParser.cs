@@ -28,8 +28,8 @@ namespace TrainsInfo.DataParser.AreaPass
                     var allTrain = table.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
                     && ((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation) || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation)) && codesOperation.Contains(x.OperationCode))).Select(x => x.TrainNumber);
                     //
-                    result.Add(new RowValue(area.Station, area.Station2, NC_PSTrain, allTrain.Where(x => x % 2 != 0).Count().ToString()));
-                    result.Add(new RowValue(area.Station, area.Station2, C_PSTrain, allTrain.Where(x => x % 2 == 0).Count().ToString()));
+                    result.Add(new RowValue(area.Station, area.Station2, NC_PSTrain, allTrain.Where(x => x % 2 != 0).Count().ToString(), DateTime.Now));
+                    result.Add(new RowValue(area.Station, area.Station2, C_PSTrain, allTrain.Where(x => x % 2 == 0).Count().ToString(), DateTime.Now));
                 }
             }
             //

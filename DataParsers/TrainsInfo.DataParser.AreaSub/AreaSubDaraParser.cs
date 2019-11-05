@@ -33,8 +33,8 @@ namespace TrainsInfo.DataParser.AreaSub
                         }
                         var allTrain = parserModel.Where(x => area.Areas.Contains(x.AreaNumber)).Select(x => x.TrainNumber);
                         //
-                        result.Add(new RowValue(area.Station, area.Station2, NC_PRTrain, allTrain.Where(x => x % 2 != 0).Count().ToString()));
-                        result.Add(new RowValue(area.Station, area.Station2, C_PRTrain, allTrain.Where(x => x % 2 == 0).Count().ToString()));
+                        result.Add(new RowValue(area.Station, area.Station2, NC_PRTrain, allTrain.Where(x => x % 2 != 0).Count().ToString(), DateTime.Now));
+                        result.Add(new RowValue(area.Station, area.Station2, C_PRTrain, allTrain.Where(x => x % 2 == 0).Count().ToString(), DateTime.Now));
                     }
                 }
             }

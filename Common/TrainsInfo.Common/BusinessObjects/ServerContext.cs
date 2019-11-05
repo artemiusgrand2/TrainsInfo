@@ -36,14 +36,14 @@ namespace TrainsInfo.Common.BusinessObjects
             Listeners = new List<ListenerController>();
         }
 
-        public IDictionary<string, string> GetTables(CategotyTable categoty)
+        public IDictionary<string, BaseValue> GetTables(CategotyTable categoty)
         {
             IList<string> keys;
             if(dictionaryCategotyTable.TryGetValue(categoty, out keys))
             {
-               return  Values.Where(x => keys.Contains(x.Name)).ToDictionary(x => x.Name, x => x.Value);
+               return  Values.Where(x => keys.Contains(x.Name)).ToDictionary(x => x.Name, x => new BaseValue(x.Value, x.LastUpdate));
             }
-            return new Dictionary<string, string>();
+            return new Dictionary<string, BaseValue>();
         }
 
         public void CompareData(IList<RowValue> data)
@@ -61,6 +61,9 @@ namespace TrainsInfo.Common.BusinessObjects
                             newValues.Add(newValue);
                             find.Value = newValue.Value;
                         }
+                        //
+                        if (newValue.LastUpdate != find.LastUpdate)
+                            find.LastUpdate = newValue.LastUpdate;
                     }
                     else
                     {

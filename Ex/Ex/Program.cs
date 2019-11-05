@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Ex
 {
@@ -12,81 +15,91 @@ namespace Ex
 
         static void Main(string[] args)
         {
-            WebRequest request = WebRequest.Create("http://localhost/AGDPNew/Service/CurrentPositionTrains?categoryTrain=3");
-
-            WebResponse response = request.GetResponse();
-
-            using (Stream stream = response.GetResponseStream())
+            string rowPattern = @".*;.*;\s*'([0-9]+)'\s*;\s*'([0-9]+)'\s*;\s*'([0-9]+)'\s*;\s*'([0-9]+)'\s*;\s*'([0-9]+)'\s*;\s*'([0-9]+)'\s*;\s*'\w+'\s*$";
+            var rowMatch = Regex.Match("'';'Ф';' 48';' 12';' 3';' 3';' 2';'0';'68'", rowPattern);
+            if (rowMatch.Success)
             {
-                using (StreamReader reader = new StreamReader(stream))
+                foreach(var d  in rowMatch.Groups)
                 {
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        Console.WriteLine(line);
-                    }
+                    d.ToString();
                 }
             }
-            Console.ReadLine();
-            ////WebClient request = new WebClient();
-            //var f = new List<string>();
-            //var f1 = f;
-            //f1.Add("1");
-            //f1.Clear();
-            ////request.Credentials = new NetworkCredential("10.200.2.110\\ktc", "Ctk1234");
-            ////var f = args[0].ToArray();
-            //// Directory.GetDirectories(@"\\10.200.2.110\ktc");
-            Console.WriteLine(DateTime.Now.ToShortDateString());
-            //var req = FileWebRequest.Create(new Uri(@"\\10.200.2.110\ktc\MejGosStiki.csv"));
 
-            //req.Credentials = new NetworkCredential(@"<Domain>\<User>", "<Password>");
-            //req.PreAuthenticate = true;
+        //WebRequest request = WebRequest.Create("http://localhost/AGDPNew/Service/CurrentPositionTrains?categoryTrain=3");
 
-            //WebResponse d = req.GetResponse();
-            //FileStream fs = File.Create("test.txt");
+                //    WebResponse response = request.GetResponse();
 
-            //// here you can check that the cast was successful if you want. 
-            //fs = d.GetResponseStream() as FileStream;
-            //fs.Close();
+                //    using (Stream stream = response.GetResponseStream())
+                //    {
+                //        using (StreamReader reader = new StreamReader(stream))
+                //        {
+                //            string line = "";
+                //            while ((line = reader.ReadLine()) != null)
+                //            {
+                //                Console.WriteLine(line);
+                //            }
+                //        }
+                //    }
+                //    Console.ReadLine();
+                //    ////WebClient request = new WebClient();
+                //    //var f = new List<string>();
+                //    //var f1 = f;
+                //    //f1.Add("1");
+                //    //f1.Clear();
+                //    ////request.Credentials = new NetworkCredential("10.200.2.110\\ktc", "Ctk1234");
+                //    ////var f = args[0].ToArray();
+                //    //// Directory.GetDirectories(@"\\10.200.2.110\ktc");
+                //    Console.WriteLine(DateTime.Now.ToShortDateString());
+                //var req = FileWebRequest.Create(new Uri(@"\\10.200.2.110\ktc\MejGosStiki.csv"));
 
-            //NetworkCredential theNetworkCredential = new NetworkCredential("10.200.2.110\\ktc", "Ctk1234");
-            //CredentialCache theNetCache = new CredentialCache();
-            //theNetCache.Add(new Uri(@"\\10.200.2.110"), "Basic", theNetworkCredential);
-            //string[] theFolders = Directory.GetDirectories(@"\\10.200.2.110\ktc");
+                //req.Credentials = new NetworkCredential(@"<Domain>\<User>", "<Password>");
+                //req.PreAuthenticate = true;
 
-            ////if (File.Exists(local))
-            ////{
-            ////    File.Delete(local);
+                //WebResponse d = req.GetResponse();
+                //FileStream fs = File.Create("test.txt");
 
-            ////    File.Copy(remote, local, true);
-            ////}
+                //// here you can check that the cast was successful if you want. 
+                //fs = d.GetResponseStream() as FileStream;
+                //fs.Close();
 
-            //HttpListener listener = new HttpListener();
-            //// установка адресов прослушки
-            //listener.Prefixes.Add("http://*:8888/");
-            //listener.Prefixes.Add("http://localhost:8888/");
-            //listener.Start();
-            //Console.WriteLine("Ожидание подключений...");
-            //// метод GetContext блокирует текущий поток, ожидая получение запроса 
-            //HttpListenerContext context = listener.GetContext();
+                //NetworkCredential theNetworkCredential = new NetworkCredential("10.200.2.110\\ktc", "Ctk1234");
+                //CredentialCache theNetCache = new CredentialCache();
+                //theNetCache.Add(new Uri(@"\\10.200.2.110"), "Basic", theNetworkCredential);
+                //string[] theFolders = Directory.GetDirectories(@"\\10.200.2.110\ktc");
 
-            //HttpListenerRequest request = context.Request;
-           
-            //// получаем объект ответа
-            //HttpListenerResponse response = context.Response;
-            //// создаем ответ в виде кода html
-            //string responseStr = "<html><head><meta charset='utf8'></head><body>Привет мир!</body></html>";
-            //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseStr);
-            //// получаем поток ответа и пишем в него ответ
-            //response.ContentLength64 = buffer.Length;
-            //Stream output = response.OutputStream;
-            //output.Write(buffer, 0, buffer.Length);
-            //// закрываем поток
-            //output.Close();
-            //// останавливаем прослушивание подключений
-            //listener.Stop();
-            //Console.WriteLine("Обработка подключений завершена");
-            //Console.Read();
+                ////if (File.Exists(local))
+                ////{
+                ////    File.Delete(local);
+
+                ////    File.Copy(remote, local, true);
+                ////}
+
+                //HttpListener listener = new HttpListener();
+                //// установка адресов прослушки
+                //listener.Prefixes.Add("http://*:8888/");
+                //listener.Prefixes.Add("http://localhost:8888/");
+                //listener.Start();
+                //Console.WriteLine("Ожидание подключений...");
+                //// метод GetContext блокирует текущий поток, ожидая получение запроса 
+                //HttpListenerContext context = listener.GetContext();
+
+                //HttpListenerRequest request = context.Request;
+
+                //// получаем объект ответа
+                //HttpListenerResponse response = context.Response;
+                //// создаем ответ в виде кода html
+                //string responseStr = "<html><head><meta charset='utf8'></head><body>Привет мир!</body></html>";
+                //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseStr);
+                //// получаем поток ответа и пишем в него ответ
+                //response.ContentLength64 = buffer.Length;
+                //Stream output = response.OutputStream;
+                //output.Write(buffer, 0, buffer.Length);
+                //// закрываем поток
+                //output.Close();
+                //// останавливаем прослушивание подключений
+                //listener.Stop();
+                //Console.WriteLine("Обработка подключений завершена");
+                //Console.Read();
         }
     }
 

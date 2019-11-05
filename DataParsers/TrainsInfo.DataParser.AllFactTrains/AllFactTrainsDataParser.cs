@@ -24,19 +24,18 @@ namespace TrainsInfo.DataParser.AllFactTrains
 
         private readonly string PlanDeliveryTrains = "PP_TR";
         private readonly string PlanDeliveryVagons = "PP_VG";
-        private readonly string PlanReceptionTrains = "PS_TR";
-        private readonly string PlanReceptionVagons = "PS_VG";
+
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var table = (string[])data;
+            var table = (BaseValue)data;
             var result = new List<RowValue>();
             if (table != null)
             {
                 if (infrastructures != null && infrastructures.Count > 0)
                 {
                     var Joints = infrastructures.Where(x => x.Type == TypeInfrastructure.joint).ToList();
-                    foreach (var record in table)
+                    foreach (var record in table.Value.Split(new string[] { Environment.NewLine},  StringSplitOptions.None))
                     {
                         var rowMatch = Regex.Match(record, rowInPattern);
                         if (rowMatch.Success)
@@ -47,44 +46,44 @@ namespace TrainsInfo.DataParser.AllFactTrains
                     //
                     Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == FactDeliveryTrains).FirstOrDefault() == null).ToList().ForEach(x =>
                     {
-                        result.Add(new RowValue(x.Station, FactDeliveryTrains, "0"));
+                        result.Add(new RowValue(x.Station, FactDeliveryTrains, "0", DateTime.Now));
                     });
                     //
                     Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == FactDeliveryVagons).FirstOrDefault() == null).ToList().ForEach(x =>
                     {
-                        result.Add(new RowValue(x.Station, FactDeliveryVagons, "0"));
+                        result.Add(new RowValue(x.Station, FactDeliveryVagons, "0", DateTime.Now));
                     });
                     //
                     Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == FactReceptionTrains).FirstOrDefault() == null).ToList().ForEach(x =>
                     {
-                        result.Add(new RowValue(x.Station, FactReceptionTrains, "0"));
+                        result.Add(new RowValue(x.Station, FactReceptionTrains, "0", DateTime.Now));
                     });
                     //
                     Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == FactReceptionVagons).FirstOrDefault() == null).ToList().ForEach(x =>
                     {
-                        result.Add(new RowValue(x.Station, FactReceptionVagons, "0"));
+                        result.Add(new RowValue(x.Station, FactReceptionVagons, "0", DateTime.Now));
                     });
                     //
                     //
                     Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanDeliveryTrains).FirstOrDefault() == null).ToList().ForEach(x =>
                     {
-                        result.Add(new RowValue(x.Station, PlanDeliveryTrains, "0"));
+                        result.Add(new RowValue(x.Station, PlanDeliveryTrains, "0", DateTime.Now));
                     });
                     //
                     Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanDeliveryVagons).FirstOrDefault() == null).ToList().ForEach(x =>
                     {
-                        result.Add(new RowValue(x.Station, PlanDeliveryVagons, "0"));
+                        result.Add(new RowValue(x.Station, PlanDeliveryVagons, "0", DateTime.Now));
                     });
                     //
-                    Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionTrains).FirstOrDefault() == null).ToList().ForEach(x =>
-                    {
-                        result.Add(new RowValue(x.Station, PlanReceptionTrains, "0"));
-                    });
-                    //
-                    Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionVagons).FirstOrDefault() == null).ToList().ForEach(x =>
-                    {
-                        result.Add(new RowValue(x.Station, PlanReceptionVagons, "0"));
-                    });
+                    //Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionTrains).FirstOrDefault() == null).ToList().ForEach(x =>
+                    //{
+                    //    result.Add(new RowValue(x.Station, PlanReceptionTrains, "0"));
+                    //});
+                    ////
+                    //Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionVagons).FirstOrDefault() == null).ToList().ForEach(x =>
+                    //{
+                    //    result.Add(new RowValue(x.Station, PlanReceptionVagons, "0"));
+                    //});
                 }
             }
             //
@@ -100,19 +99,19 @@ namespace TrainsInfo.DataParser.AllFactTrains
             {
                 if (isInOperation)
                 {
-                    result.Add(new RowValue(station1,  FactDeliveryTrains , rowMatch.Groups[2].Value));
-                    result.Add(new RowValue(station1,  FactDeliveryVagons , rowMatch.Groups[3].Value));
+                    result.Add(new RowValue(station1,  FactDeliveryTrains , rowMatch.Groups[2].Value, DateTime.Now));
+                    result.Add(new RowValue(station1,  FactDeliveryVagons , rowMatch.Groups[3].Value, DateTime.Now));
                     //
-                    result.Add(new RowValue(station1, PlanDeliveryTrains, rowMatch.Groups[4].Value));
-                    result.Add(new RowValue(station1, PlanDeliveryVagons, rowMatch.Groups[5].Value));
+                    result.Add(new RowValue(station1, PlanDeliveryTrains, rowMatch.Groups[4].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, PlanDeliveryVagons, rowMatch.Groups[5].Value, DateTime.Now));
                 }
                 else
                 {
-                    result.Add(new RowValue(station1, FactReceptionTrains, rowMatch.Groups[2].Value));
-                    result.Add(new RowValue(station1, FactReceptionVagons, rowMatch.Groups[3].Value));
+                    result.Add(new RowValue(station1, FactReceptionTrains, rowMatch.Groups[2].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, FactReceptionVagons, rowMatch.Groups[3].Value, DateTime.Now));
                     //
-                    result.Add(new RowValue(station1, PlanReceptionTrains, rowMatch.Groups[4].Value));
-                    result.Add(new RowValue(station1, PlanReceptionVagons, rowMatch.Groups[5].Value));
+                    //result.Add(new RowValue(station1, PlanReceptionTrains, rowMatch.Groups[4].Value));
+                    //result.Add(new RowValue(station1, PlanReceptionVagons, rowMatch.Groups[5].Value));
                 }
             }
             //

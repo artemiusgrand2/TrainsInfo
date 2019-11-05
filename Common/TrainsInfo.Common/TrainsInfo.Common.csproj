@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\PluginTypeAttribute.cs" />
+    <Compile Include="BusinessObjects\BaseValue.cs" />
     <Compile Include="BusinessObjects\CommunicationControllerPluginWrapper.cs" />
     <Compile Include="BusinessObjects\ConsoleLogger.cs" />
     <Compile Include="BusinessObjects\Constants.cs" />

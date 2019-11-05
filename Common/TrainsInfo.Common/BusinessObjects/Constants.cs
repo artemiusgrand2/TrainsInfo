@@ -12,6 +12,7 @@ namespace TrainsInfo.Common.BusinessObjects
         public const string KeyTableBroshPoezd = "BroshPoezd";
 
 
+
         // Обозначения таблиц правой части табло
         public const string KeyTableGruzRabota = "GruzRabota";
         public const string KeyTableLok_nod = "Lok_nod";
@@ -19,7 +20,7 @@ namespace TrainsInfo.Common.BusinessObjects
         public const string KeyTableLok_styk = "Lok_styk";
         public const string KeyTablePeredacha = "Peredacha";
         public const string KeyTableRazvoz = "Razvoz";
-        public const string KeyTableREG_TAB = "REG_TAB.";
+        public const string KeyTableREG_TAB = "REG_TAB";
 
         public const string KeyLeftTables = "L";
         public const string KeyRightTables = "R";

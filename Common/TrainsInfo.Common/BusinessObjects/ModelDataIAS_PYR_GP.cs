@@ -23,5 +23,13 @@ namespace TrainsInfo.Common.BusinessObjects
         public string DirectionFromStation { get; set; }
 
         public string DirectionToStation { get; set; }
+
+        public string OperationTimeSTR
+        {
+            get
+            {
+                return string.Format("{0} {1}", OperationTime.ToShortDateString(), OperationTime.ToShortTimeString());
+            }
+        }
     }
 }
