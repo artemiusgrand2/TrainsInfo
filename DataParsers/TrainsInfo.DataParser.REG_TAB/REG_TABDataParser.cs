@@ -13,7 +13,7 @@ namespace TrainsInfo.DataParser.REG_TAB
 {
     public class REG_TABDataParser : IDataParser
     {
-        private readonly string rowPattern = @"\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*$";
+        private readonly string rowPattern = @"\s*'.*'\s*;\s*'.*'\s*;\s*'.*'\s*$";
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
