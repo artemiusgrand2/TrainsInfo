@@ -21,6 +21,7 @@ namespace TrainsInfo.Common.BusinessObjects
         public const string KeyTablePeredacha = "Peredacha";
         public const string KeyTableRazvoz = "Razvoz";
         public const string KeyTableREG_TAB = "REG_TAB";
+        public const string KeyTableREG_TAB_PLAN = "REG_TAB_PLAN";
 
         public const string KeyLeftTables = "L";
         public const string KeyRightTables = "R";

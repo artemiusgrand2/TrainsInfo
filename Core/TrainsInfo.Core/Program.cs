@@ -300,7 +300,7 @@ namespace TrainsInfo.Core
                 var parsers = new List<IDataParser>();
                 foreach(var parserReccord in dataSourceRecord.DataParsers)
                     parsers.Add(DataParserPluginWrapper.Instance[parserReccord].Create());
-                var dataSource = new DataSource(stream, parsers, dataSourceRecord.RequestTimeout);
+                var dataSource = new DataSource(stream, parsers, dataSourceRecord.RequestTimeout, dataSourceRecord.Name);
                 if (!ServerContextWrapper.Instance.DataSources.ContainsKey(dataSourceRecord.Name))
                     ServerContextWrapper.Instance.DataSources.Add(dataSourceRecord.Name, dataSource);
                 else

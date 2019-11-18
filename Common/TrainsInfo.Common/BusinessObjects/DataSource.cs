@@ -17,6 +17,7 @@ namespace TrainsInfo.Common.BusinessObjects
         private readonly Thread parsingThread;
         private readonly uint requestTimeout = 0;
         private bool isStop;
+        private readonly string nameSource;
 
         public IDataStream DataStream
         {
@@ -39,7 +40,7 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public event NewValueHandler<IList<RowValue>> NewValues;
 
-        public DataSource(IDataStream stream, IList<IDataParser> parsers,  uint RequestTimeout)
+        public DataSource(IDataStream stream, IList<IDataParser> parsers,  uint RequestTimeout, string nameSource)
         {
             parsingThread = new Thread(Parse)
             {
@@ -49,6 +50,7 @@ namespace TrainsInfo.Common.BusinessObjects
             dataStream = stream;
             dataParsers = parsers;
             requestTimeout = (RequestTimeout > 0) ? RequestTimeout : 15;
+            this.nameSource = nameSource;
             infrastructures = new List<InfrastructureBase>();
         }
 
@@ -81,6 +83,15 @@ namespace TrainsInfo.Common.BusinessObjects
                     object data;
                     if(dataStream.Read(out data))
                     {
+                        if (nameSource.ToUpper().IndexOf("IAS_PYR_GP") != -1)
+                        {
+                            Logger.Log.LogInfo("------------------------------------------------------------------------------------------------", null);
+                            Logger.Log.LogInfo("", null);
+                            Logger.Log.LogInfo("Новая итерация получения данных с источника - {0}", nameSource);
+                            Logger.Log.LogInfo("", null);
+                            Logger.Log.LogInfo("------------------------------------------------------------------------------------------------", null);
+                        }
+
                         var parserValues = new List<RowValue>();
                         foreach (var parser in dataParsers)
                             parserValues.AddRange(parser.Parse(data, infrastructures));

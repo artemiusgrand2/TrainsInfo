@@ -21,7 +21,8 @@ namespace TrainsInfo.Common.BusinessObjects
         {
             {CategotyTable.left, new List<string> {Constants.KeyTablePassOpz, Constants.KeyTableVostok_Zapad, Constants.KeyTableZapad_Vostok, Constants.KeyTableBroshPoezd } },
 
-            {CategotyTable.right, new List<string> {Constants.KeyTableGruzRabota, Constants.KeyTableLok_nod, Constants.KeyTableLok_ojto2, Constants.KeyTableLok_styk, Constants.KeyTablePeredacha, Constants.KeyTableRazvoz, Constants.KeyTableREG_TAB } }
+            {CategotyTable.right, new List<string> {Constants.KeyTableGruzRabota, Constants.KeyTableLok_nod, Constants.KeyTableLok_ojto2, Constants.KeyTableLok_styk,
+                                                    Constants.KeyTablePeredacha, Constants.KeyTableRazvoz, Constants.KeyTableREG_TAB,  Constants.KeyTableREG_TAB_PLAN} }
         };
 
 

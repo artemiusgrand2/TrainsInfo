@@ -99,16 +99,16 @@ namespace TrainsInfo.DataParser.AllFactTrains
             {
                 if (isInOperation)
                 {
-                    result.Add(new RowValue(station1,  FactDeliveryTrains , rowMatch.Groups[2].Value, DateTime.Now));
-                    result.Add(new RowValue(station1,  FactDeliveryVagons , rowMatch.Groups[3].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, FactReceptionTrains, rowMatch.Groups[2].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, FactReceptionVagons, rowMatch.Groups[3].Value, DateTime.Now));
                     //
                     result.Add(new RowValue(station1, PlanDeliveryTrains, rowMatch.Groups[4].Value, DateTime.Now));
                     result.Add(new RowValue(station1, PlanDeliveryVagons, rowMatch.Groups[5].Value, DateTime.Now));
                 }
                 else
                 {
-                    result.Add(new RowValue(station1, FactReceptionTrains, rowMatch.Groups[2].Value, DateTime.Now));
-                    result.Add(new RowValue(station1, FactReceptionVagons, rowMatch.Groups[3].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, FactDeliveryTrains, rowMatch.Groups[2].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, FactDeliveryVagons, rowMatch.Groups[3].Value, DateTime.Now));
                     //
                     //result.Add(new RowValue(station1, PlanReceptionTrains, rowMatch.Groups[4].Value));
                     //result.Add(new RowValue(station1, PlanReceptionVagons, rowMatch.Groups[5].Value));

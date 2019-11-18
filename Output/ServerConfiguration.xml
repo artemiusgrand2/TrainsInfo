@@ -251,6 +251,20 @@
         <ConnectionString>\\10.200.2.110\ktc\REG_TAB.zip</ConnectionString>
       </DataStream>
     </DataSource>
+	
+	<DataSource>
+      <Name>REG_TABPlanSource</Name>
+      <DataParsers>
+	    <DataParser>REG_TAB_PLAN</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileExel</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\РегулПор.xls</ConnectionString>
+      </DataStream>
+    </DataSource>
 
   </DataSources>
 

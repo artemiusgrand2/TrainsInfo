@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 using TrainsInfo.Common.Enums;
 using TrainsInfo.Common.BusinessObjects;
 using TrainsInfo.Common.Interfaces;
@@ -25,11 +26,29 @@ namespace TrainsInfo.DataParser.AreaPass
                 foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
                 {
                     var area = areaCommon as Area;
-                    var allTrain = table.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
-                    && ((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation) || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation)) && codesOperation.Contains(x.OperationCode))).Select(x => x.TrainNumber);
+                    var events = table.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
+                    && ((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation) || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation)) && codesOperation.Contains(x.OperationCode)));
                     //
-                    result.Add(new RowValue(area.Station, area.Station2, NC_PSTrain, allTrain.Where(x => x % 2 != 0).Count().ToString(), DateTime.Now));
-                    result.Add(new RowValue(area.Station, area.Station2, C_PSTrain, allTrain.Where(x => x % 2 == 0).Count().ToString(), DateTime.Now));
+                    Logger.Log.LogInfo("Участок {0}-{1} пассажирские поезда (четные):", area.Station, area.Station2);
+                    var index = 1;
+
+                    foreach (var newEvent in events.Where(x=>x.TrainNumber % 2 == 0))
+                    {
+                        Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
+                        index++;
+                    }
+
+                    Logger.Log.LogInfo("Участок {0}-{1} пассажирские поезда (нечетные):", area.Station, area.Station2);
+                    index = 1;
+                    //
+                    foreach (var newEvent in events.Where(x => x.TrainNumber % 2 != 0))
+                    {
+                        Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
+                        index++;
+                    }
+                    //
+                    result.Add(new RowValue(area.Station, area.Station2, NC_PSTrain, events.Select(x=>x.TrainNumber).Where(x => x % 2 != 0).Count().ToString(), DateTime.Now));
+                    result.Add(new RowValue(area.Station, area.Station2, C_PSTrain, events.Select(x => x.TrainNumber).Where(x => x % 2 == 0).Count().ToString(), DateTime.Now));
                 }
             }
             //

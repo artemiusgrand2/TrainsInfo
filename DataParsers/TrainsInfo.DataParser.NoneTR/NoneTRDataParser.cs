@@ -25,14 +25,14 @@ namespace TrainsInfo.DataParser.NodeTR
                 foreach (var node in infrastructures.Where(x => x.Type == TypeInfrastructure.node).ToList())
                 {
                     var events = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode) && !(node as Node).ListStations.Contains(x.Index3));
-                    //Logger.Log.LogInfo("Узел {0} транзит:", node.Station);
-                    //var index = 1;
+                    Logger.Log.LogInfo("Узел {0} транзит:", node.Station);
+                    var index = 1;
 
-                    //foreach(var newEvent in events)
-                    //{
-                    //    Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
-                    //    index++;
-                    //}
+                    foreach (var newEvent in events)
+                    {
+                        Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
+                        index++;
+                    }
                     //
                     var countTrain = events.Count().ToString();
                     result.Add(new RowValue(node.Station, TRTrain, (countTrain.Length < 2) ? countTrain.Insert(0, " ") : countTrain, DateTime.Now));
