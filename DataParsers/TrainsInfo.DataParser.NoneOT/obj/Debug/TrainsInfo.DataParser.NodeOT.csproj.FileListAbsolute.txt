@@ -2,4 +2,3 @@ D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.NodeOT.dll
 D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.NodeOT.pdb
 D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneOT\obj\Debug\TrainsInfo.DataParser.NodeOT.dll
 D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneOT\obj\Debug\TrainsInfo.DataParser.NodeOT.pdb
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneOT\obj\Debug\TrainsInfo.DataParser.NodeOT.csprojResolveAssemblyReference.cache

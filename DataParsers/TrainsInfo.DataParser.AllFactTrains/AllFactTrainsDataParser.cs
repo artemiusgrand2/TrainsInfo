@@ -25,6 +25,9 @@ namespace TrainsInfo.DataParser.AllFactTrains
         private readonly string PlanDeliveryTrains = "PP_TR";
         private readonly string PlanDeliveryVagons = "PP_VG";
 
+        private readonly string PlanReceptionTrains = "PS_TR";
+        private readonly string PlanReceptionVagons = "PS_VG";
+
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
@@ -75,15 +78,15 @@ namespace TrainsInfo.DataParser.AllFactTrains
                         result.Add(new RowValue(x.Station, PlanDeliveryVagons, "0", DateTime.Now));
                     });
                     //
-                    //Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionTrains).FirstOrDefault() == null).ToList().ForEach(x =>
-                    //{
-                    //    result.Add(new RowValue(x.Station, PlanReceptionTrains, "0"));
-                    //});
-                    ////
-                    //Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionVagons).FirstOrDefault() == null).ToList().ForEach(x =>
-                    //{
-                    //    result.Add(new RowValue(x.Station, PlanReceptionVagons, "0"));
-                    //});
+                    Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionTrains).FirstOrDefault() == null).ToList().ForEach(x =>
+                    {
+                        result.Add(new RowValue(x.Station, PlanReceptionTrains, "0", DateTime.Now));
+                    });
+                    //
+                    Joints.Where(x => result.Where(y => y.Station1 == x.Station && y.Name == PlanReceptionVagons).FirstOrDefault() == null).ToList().ForEach(x =>
+                    {
+                        result.Add(new RowValue(x.Station, PlanReceptionVagons, "0", DateTime.Now));
+                    });
                 }
             }
             //
@@ -110,8 +113,8 @@ namespace TrainsInfo.DataParser.AllFactTrains
                     result.Add(new RowValue(station1, FactDeliveryTrains, rowMatch.Groups[2].Value, DateTime.Now));
                     result.Add(new RowValue(station1, FactDeliveryVagons, rowMatch.Groups[3].Value, DateTime.Now));
                     //
-                    //result.Add(new RowValue(station1, PlanReceptionTrains, rowMatch.Groups[4].Value));
-                    //result.Add(new RowValue(station1, PlanReceptionVagons, rowMatch.Groups[5].Value));
+                    result.Add(new RowValue(station1, PlanReceptionTrains, rowMatch.Groups[4].Value, DateTime.Now));
+                    result.Add(new RowValue(station1, PlanReceptionVagons, rowMatch.Groups[5].Value, DateTime.Now));
                 }
             }
             //

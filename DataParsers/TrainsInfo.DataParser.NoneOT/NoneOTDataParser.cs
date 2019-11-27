@@ -27,7 +27,7 @@ namespace TrainsInfo.DataParser.NodeOT
                     var events = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode));
                     Logger.Log.LogInfo("Узел {0} отправление:", node.Station);
                     var index = 1;
-
+                    //
                     foreach (var newEvent in events)
                     {
                         Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
