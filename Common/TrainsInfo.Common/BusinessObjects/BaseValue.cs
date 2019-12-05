@@ -8,6 +8,14 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public DateTime LastUpdate { get; internal set; }
 
+        public string LastUpdateShow
+        {
+            get
+            {
+                return $"{LastUpdate.ToShortDateString()} {LastUpdate.ToShortTimeString()}";
+            }
+        }
+
         public string Delta
         {
             get
