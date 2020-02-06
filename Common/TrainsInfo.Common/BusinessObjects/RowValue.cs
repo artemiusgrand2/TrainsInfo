@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TrainsInfo.Common.BusinessObjects
 {
@@ -10,10 +11,17 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public string Name { get;  }
 
+        public IList<ModelTrainPassOpz> TrainsPassOpz { get; internal set; } = new List<ModelTrainPassOpz>();
+
 
         public RowValue(string name, string value, DateTime lastUpdate):base(value, lastUpdate)
         {
             Name = name;
+        }
+        public RowValue(string name, string value, DateTime lastUpdate, IList<ModelTrainPassOpz> trainsPassOpz) : base(value, lastUpdate)
+        {
+            Name = name;
+            TrainsPassOpz = trainsPassOpz;
         }
 
         public RowValue(int station1, int station2, string name, string value, DateTime lastUpdate) :base(value, lastUpdate)
@@ -29,5 +37,6 @@ namespace TrainsInfo.Common.BusinessObjects
             Station2 = 0;
             Name = name;
         }
+
     }
 }

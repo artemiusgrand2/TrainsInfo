@@ -75,6 +75,7 @@ namespace TrainsInfo.Common.BusinessObjects
             }
         }
 
+
         private void UpdateInfo(RowValue info)
         {
             using (var connection = new SqlConnection(connectionString))
@@ -104,12 +105,41 @@ namespace TrainsInfo.Common.BusinessObjects
                             command.CommandText = "INSERT INTO TabloValue (Station1, Station2, Name, Value, TimeUpdate) VALUES (@Station1, @Station2, @Name, @Value, @TimeUpdate)";
                             command.ExecuteNonQuery();
                         }
+                        //
+                        if (info.TrainsPassOpz.Count > 0)
+                            AddToArchivePassOpz(info, command);
                     }
                     //
                     tr.Commit();
                 }
                 connection.Close();
             }
+        }
+
+        private void AddToArchivePassOpz(RowValue info, SqlCommand command)
+        {
+            command.Parameters.Clear();
+            command.CommandText = "INSERT INTO ArchivePassOp (TimeUpdate, Value) VALUES ";
+            command.AddInsertParametrs(info);
+            //Добавление параметров
+            var countInsert = command.ExecuteNonQuery();
+        }
+    }
+
+    public static class Extensions
+    {
+        public static void AddInsertParametrs(this SqlCommand cmd, RowValue info)
+        {
+            var names = string.Join(", ", info.TrainsPassOpz.Select((value, i) =>
+            {
+                var paramName1 = $"@TimeUpdate{i}";
+                var parmaName2 = $"@Value{i}";
+                cmd.Parameters.AddWithValue(paramName1, info.LastUpdate);
+                cmd.Parameters.AddWithValue(parmaName2, value.FullInfo);
+                return $"({paramName1}, {parmaName2})";
+            }));
+            //
+            cmd.CommandText = cmd.CommandText + names;
         }
     }
 }

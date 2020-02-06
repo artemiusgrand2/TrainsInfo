@@ -56,6 +56,7 @@
     <Compile Include="BusinessObjects\Logger.cs" />
     <Compile Include="BusinessObjects\LoggerPluginWrapper.cs" />
     <Compile Include="BusinessObjects\ModelDataIAS_PYR_GP.cs" />
+    <Compile Include="BusinessObjects\ModelTrainPassOpz.cs" />
     <Compile Include="BusinessObjects\MultilevelLogger.cs" />
     <Compile Include="BusinessObjects\PluginManager.cs" />
     <Compile Include="BusinessObjects\RemoteConnection.cs" />

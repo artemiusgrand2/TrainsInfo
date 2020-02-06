@@ -2,3 +2,4 @@ d:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.AllFactTrains.dll
 d:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.AllFactTrains.pdb
 d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AllFactTrains\obj\Debug\TrainsInfo.DataParser.AllFactTrains.dll
 d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AllFactTrains\obj\Debug\TrainsInfo.DataParser.AllFactTrains.pdb
+d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AllFactTrains\obj\Debug\TrainsInfo.DataParser.AllFactTrains.csprojResolveAssemblyReference.cache

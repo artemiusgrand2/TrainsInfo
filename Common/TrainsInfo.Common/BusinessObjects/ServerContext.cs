@@ -59,6 +59,7 @@ namespace TrainsInfo.Common.BusinessObjects
                     {
                         if (newValue.Value != find.Value)
                         {
+                            ComparePassOp(find, newValue);
                             newValues.Add(newValue);
                             find.Value = newValue.Value;
                         }
@@ -78,6 +79,29 @@ namespace TrainsInfo.Common.BusinessObjects
             }
         }
 
+        private void ComparePassOp(RowValue oldValue, RowValue newValue)
+        {
+           
+            if(oldValue.Name == Constants.KeyTablePassOpz)
+            {
+                var updateTrains = new List<ModelTrainPassOpz>();
+                foreach (var trainPassPrz in newValue.TrainsPassOpz)
+                {
+                   var findTrains = oldValue.TrainsPassOpz.Where(x => x.TrainNumber == trainPassPrz.TrainNumber).ToList();
+                    if (findTrains.Count > 0)
+                    {
+                        if (findTrains.Where(x => x.Lateness != trainPassPrz.Lateness || x.StationOperation != trainPassPrz.StationOperation || x.TimeOperation != trainPassPrz.TimeOperation).ToList().Count != 0)
+                            updateTrains.Add(trainPassPrz);
+                    }
+                    else
+                        updateTrains.Add(trainPassPrz);
+                }
+                //
+                oldValue.TrainsPassOpz = newValue.TrainsPassOpz;
+                newValue.TrainsPassOpz = updateTrains;
+            }
+        }
+
         private void OnNewValues(IList<RowValue> values)
         {
             NewValueHandler<IList<RowValue>> handler = NewValues;
@@ -86,5 +110,6 @@ namespace TrainsInfo.Common.BusinessObjects
                 handler(values);
             }
         }
+
     }
 }

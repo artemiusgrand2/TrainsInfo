@@ -244,7 +244,6 @@ namespace TrainsInfo.Core
             }
         }
 
-
         private static void PrintErrors(IList<string> errors)
         {
             if (errors.Count > 0)

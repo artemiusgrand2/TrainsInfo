@@ -15,7 +15,8 @@ namespace TrainsInfo.DataParser.AreaPass
         private readonly string NC_PSTrain = "NC_PS";
         private readonly string C_PSTrain = "C_PS";
 
-        private readonly IList<string> codesOperation = new List<string> {  "C0002", "C0003" };
+        private readonly IList<string> codesOperationNode = new List<string> {  "C0001", "C0003", "C1020" };
+        private readonly IList<string> codesOperationArea = new List<string> { "C0002", "C0042", "C1010", "C0003", "C0043", "C0033" };
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
@@ -27,7 +28,8 @@ namespace TrainsInfo.DataParser.AreaPass
                 {
                     var area = areaCommon as Area;
                     var events = table.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
-                    && ((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation) || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation)) && codesOperation.Contains(x.OperationCode)));
+                    && (((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation)) && codesOperationArea.Contains(x.OperationCode))
+                    || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation && codesOperationNode.Contains(x.OperationCode))));
                     //
                     Logger.Log.LogInfo("Участок {0}-{1} пассажирские поезда (четные):", area.Station, area.Station2);
                     var index = 1;

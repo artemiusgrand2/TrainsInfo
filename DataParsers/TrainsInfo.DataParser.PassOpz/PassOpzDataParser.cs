@@ -22,14 +22,26 @@ namespace TrainsInfo.DataParser.PassOpz
             if (table != null)
             {
                 var parserValue = new StringBuilder();
+                var index = 0;
+                var trainsPassOpz = new List<ModelTrainPassOpz>();
                 foreach (var record in table.Value.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
                 {
                     var rowMatch = Regex.Match(record, rowPattern);
                     if (rowMatch.Success)
-                        parserValue.AppendLine(record.Replace("'", ""));
+                    {
+                        var formatRecord = record.Replace("'", "");
+                        parserValue.AppendLine(formatRecord);
+                        if (index != 0)
+                        {
+                            var cells = formatRecord.Split(new char[] { ';' });
+                            trainsPassOpz.Add(new ModelTrainPassOpz(cells[0], cells[2], cells[4], cells[5], formatRecord));
+                        }
+                        //
+                        index++;
+                    }
                 }
                 //
-                result.Add(new RowValue(Constants.KeyTablePassOpz, parserValue.ToString(), table.LastUpdate));
+                result.Add(new RowValue(Constants.KeyTablePassOpz, parserValue.ToString(), table.LastUpdate, trainsPassOpz));
             }
             //
             return result;

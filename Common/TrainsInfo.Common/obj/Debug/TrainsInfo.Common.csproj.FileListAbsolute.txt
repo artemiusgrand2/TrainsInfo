@@ -4,4 +4,4 @@ D:\Distributiv\TrainsInfo\TrainsInfo.Common\TrainsInfo.Common\obj\Debug\TrainsIn
 D:\Distributiv\TrainsInfo\TrainsInfo.Common\TrainsInfo.Common\obj\Debug\TrainsInfo.Common.pdb
 d:\Distributiv\TrainsInfo\Common\TrainsInfo.Common\obj\Debug\TrainsInfo.Common.dll
 d:\Distributiv\TrainsInfo\Common\TrainsInfo.Common\obj\Debug\TrainsInfo.Common.pdb
-d:\Distributiv\TrainsInfo\Common\TrainsInfo.Common\obj\Debug\TrainsInfo.Common.csprojResolveAssemblyReference.cache
+D:\Distributiv\TrainsInfo\Common\TrainsInfo.Common\obj\Debug\TrainsInfo.Common.csprojResolveAssemblyReference.cache
