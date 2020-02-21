@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using TrainsInfo.Common.Enums;
 using TrainsInfo.Configuration.Records;
@@ -10,7 +11,7 @@ namespace TrainsInfo.Common.Infrastructures
     {
         public int Station2 { get; }
 
-        public IDictionary<string, string> Nodes { get; } = new Dictionary<string, string>();
+        public IList<KeyValuePair<string, string>> Nodes { get; } = new List<KeyValuePair<string, string>>();
 
         public IList<string> Areas { get; } = new List<string>();
 
@@ -25,11 +26,11 @@ namespace TrainsInfo.Common.Infrastructures
             {
                 foreach (var node in nodes)
                 {
-                    if (!Nodes.ContainsKey(node.Station))
-                        Nodes.Add(node.Station, node.StationDirection);
+                    if(Nodes.Where(x=>x.Key == node.Station && x.Value == node.StationDirection).Count() == 0)
+                        Nodes.Add(new KeyValuePair<string, string>(node.Station, node.StationDirection));
                     //
-                    if (!Nodes.ContainsKey(node.StationDirection))
-                        Nodes.Add(node.StationDirection, node.Station);
+                    if (Nodes.Where(x => x.Key == node.StationDirection && x.Value == node.Station).Count() == 0)
+                        Nodes.Add(new KeyValuePair<string, string>(node.StationDirection, node.Station));
                 }
             }
 

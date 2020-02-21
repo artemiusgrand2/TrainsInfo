@@ -12,10 +12,10 @@ namespace TrainsInfo.Common.BusinessObjects
         private readonly ILogger loggerImplementation;
         private readonly LogLevel logLevel;
         private readonly bool isInfoEnabled;
+        private readonly bool isInfoOthersTrains;
         private readonly bool isWarnEnabled;
         private readonly bool isErrorEnabled;
         private readonly bool isDebugEnabled;
-        private readonly bool isClientEnabled = true;
 
         private MultilevelLogger(ILogger loggerImpl, LogLevel level)
         {
@@ -23,17 +23,17 @@ namespace TrainsInfo.Common.BusinessObjects
             logLevel = level;
             if (((int)logLevel) > 1)
             {
-                isInfoEnabled = isWarnEnabled = isErrorEnabled = isDebugEnabled = true;
+                isInfoOthersTrains = isInfoEnabled = isWarnEnabled = isErrorEnabled = isDebugEnabled = true;
             }
             else if (((int)logLevel) > 0)
             {
-                isInfoEnabled = isErrorEnabled = isWarnEnabled = true;
+                isInfoOthersTrains = isInfoEnabled = isErrorEnabled = isWarnEnabled = true;
                 isDebugEnabled = false;
             }
             else
             {
                 isErrorEnabled = true;
-                isWarnEnabled = isInfoEnabled = isDebugEnabled = false;
+                isInfoOthersTrains = isWarnEnabled = isInfoEnabled = isDebugEnabled = false;
             }
         }
 
@@ -65,11 +65,20 @@ namespace TrainsInfo.Common.BusinessObjects
                 loggerImplementation.LogError(format, args);
             }
         }
+
         public void LogDebug(string format, params object[] args)
         {
             if (isDebugEnabled)
             {
                 loggerImplementation.LogDebug(format, args);
+            }
+        }
+
+        public void OthersTrainsInfo(string format, params object[] args)
+        {
+            if (isInfoOthersTrains)
+            {
+                loggerImplementation.OthersTrainsInfo(format, args);
             }
         }
 

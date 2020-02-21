@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Web.Script.Serialization;
 using TrainsInfo.Common.Interfaces;
 using TrainsInfo.Common.Infrastructures;
 
@@ -87,7 +88,7 @@ namespace TrainsInfo.Common.BusinessObjects
                         {
                             Logger.Log.LogInfo("------------------------------------------------------------------------------------------------", null);
                             Logger.Log.LogInfo("", null);
-                            Logger.Log.LogInfo("Новая итерация получения данных с источника - {0}", nameSource);
+                            Logger.Log.LogInfo("Новая иттерация получения данных с источника - {0}", nameSource);
                             Logger.Log.LogInfo("", null);
                             Logger.Log.LogInfo("------------------------------------------------------------------------------------------------", null);
                         }
@@ -95,6 +96,8 @@ namespace TrainsInfo.Common.BusinessObjects
                         var parserValues = new List<RowValue>();
                         foreach (var parser in dataParsers)
                             parserValues.AddRange(parser.Parse(data, infrastructures));
+                        //
+                        WriteNotApplyTrain(data);
                         //
                         if (parserValues.Count > 0)
                             OnNewValues(parserValues);
@@ -107,6 +110,28 @@ namespace TrainsInfo.Common.BusinessObjects
                 finally
                 {
                     Thread.Sleep((int)requestTimeout);
+                }
+            }
+        }
+
+        private void WriteNotApplyTrain(object data)
+        {
+            var table = data as IList<ModelDataIAS_PYR_GP>;
+            if (table != null)
+            {
+                var notApplyTrains = table.Where(x => !x.IsApply);
+                Logger.Log.OthersTrainsInfo("------------------------------------------------------------------------------------------------", null);
+                Logger.Log.OthersTrainsInfo("", null);
+                Logger.Log.OthersTrainsInfo("Новая иттерация получения данных с источника - {0}, перечень неспользуемых поездов (всего - {1}, неспользуемых - {2})", nameSource, table.Count, notApplyTrains.Count());
+                Logger.Log.OthersTrainsInfo("", null);
+                Logger.Log.OthersTrainsInfo("------------------------------------------------------------------------------------------------", null);
+
+                var index = 1;
+               
+                foreach (var trainEvent in notApplyTrains)
+                {
+                    Logger.Log.OthersTrainsInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(trainEvent));
+                    index++;
                 }
             }
         }

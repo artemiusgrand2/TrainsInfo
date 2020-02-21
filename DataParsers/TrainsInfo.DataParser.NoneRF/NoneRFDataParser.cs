@@ -13,7 +13,7 @@ namespace TrainsInfo.DataParser.NodeRF
     public class NodeRFDataParser : IDataParser
     {
         private readonly string RFTrain = "RF";
-        private readonly IList<string> codesOperation = new List<string> { "P0001", "P0011", "P0201" };
+        private readonly IList<string> codesOperation = new List<string> { "P0001", "P0011", "P0201", "P0101" };
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
@@ -31,6 +31,7 @@ namespace TrainsInfo.DataParser.NodeRF
                     foreach (var newEvent in events)
                     {
                         Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
+                        newEvent.IsApply = true;
                         index++;
                     }
                     var countTrain = events.Count().ToString();

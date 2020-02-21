@@ -24,6 +24,8 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public string DirectionToStation { get; set; }
 
+        public bool IsApply { get; set; }
+
         public string OperationTimeSTR
         {
             get

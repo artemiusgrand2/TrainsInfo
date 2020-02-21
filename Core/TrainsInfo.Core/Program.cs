@@ -22,7 +22,7 @@ namespace TrainsInfo.Core
         static void Main(string[] args)
         {
             Console.WriteLine("Initializing...");
-            //Console.ReadLine();
+          //  Console.ReadLine();
             var m_runAsConsole = false;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             System.Diagnostics.Process.GetCurrentProcess().PriorityClass = System.Diagnostics.ProcessPriorityClass.High;
@@ -134,6 +134,8 @@ namespace TrainsInfo.Core
                 AssignTablesToStorages();
                 FillListeners();
                 //
+                if (errors.Count > 0)
+                    return;
                 ServerContextWrapper.Instance.DataStorage.Start();
                 foreach (DataSource dataSource in ServerContextWrapper.Instance.DataSources.Values)
                     dataSource.Start();
@@ -167,8 +169,6 @@ namespace TrainsInfo.Core
                     controller.Stop();
                 Console.WriteLine("Data Server [{0}] is end", Assembly.GetCallingAssembly().GetName().Version);
                 Logger.Log.LogInfo("Data Server [{0}] is end", Assembly.GetCallingAssembly().GetName().Version);
-                Console.WriteLine("Нажмите клавишу для выхода...");
-                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -252,6 +252,7 @@ namespace TrainsInfo.Core
                 {
                     Logger.Log.LogError("{0}", str);
                 }
+                //
                 InfoToExit();
             }
         }

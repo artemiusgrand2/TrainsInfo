@@ -36,6 +36,8 @@ namespace TrainsInfo.Common.BusinessObjects
                               string.Format(format, args));
         }
 
+        public void OthersTrainsInfo(string format, params object[] args) { }
+
         public void ClientsInfo(string data)
         {
         }

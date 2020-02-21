@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using TrainsInfo.Common.Attributes;
@@ -51,7 +52,8 @@ namespace TrainsInfo.DataStream.IAS_PYR_GP
                                 try
                                 {
                                     int trainNumber;
-                                    if(int.TryParse(reader.IsDBNull(1) ? string.Empty : reader.GetString(1), out trainNumber))
+                                    if(int.TryParse(reader.IsDBNull(1) ? string.Empty : reader.GetString(1), out trainNumber)&& 
+                                        ((trainNumber >=1001 && trainNumber <= 3500) || (trainNumber >= 9201 && trainNumber <= 9799) || (trainNumber >= 1 && trainNumber <= 999) || (trainNumber >= 6000 && trainNumber <= 7628) || trainNumber == 9999))
                                     {
                                         common.Add(new ModelDataIAS_PYR_GP()
                                         {
@@ -70,7 +72,19 @@ namespace TrainsInfo.DataStream.IAS_PYR_GP
                                 }
                                 catch { }
                             }
-                            data = common;
+                            data = common.Where(x=> 
+                            {
+                                int buffferIndex;
+                                int.TryParse(x.Index1, out buffferIndex);
+                                if (buffferIndex <= 9)
+                                    return false;
+                                int.TryParse(x.Index3, out buffferIndex);
+                                if (buffferIndex <= 9)
+                                    return false;
+                                //
+                                return true;
+                            }
+                            ).ToList();
                         }
                     }
                 }

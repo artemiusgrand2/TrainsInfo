@@ -27,9 +27,13 @@ namespace TrainsInfo.DataParser.AreaPass
                 foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
                 {
                     var area = areaCommon as Area;
+                    if(area.Station == 166403 && area.Station2 == 171346)
+                    {
+
+                    }
                     var events = table.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
                     && (((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation)) && codesOperationArea.Contains(x.OperationCode))
-                    || (area.Nodes.ContainsKey(x.StationCode) && area.Nodes[x.StationCode] == x.DirectionToStation && codesOperationNode.Contains(x.OperationCode))));
+                    || (area.Nodes.Where(y => y.Key == x.StationCode && y.Value == x.DirectionToStation).Count() != 0 && codesOperationNode.Contains(x.OperationCode))));
                     //
                     Logger.Log.LogInfo("Участок {0}-{1} пассажирские поезда (четные):", area.Station, area.Station2);
                     var index = 1;
@@ -37,6 +41,7 @@ namespace TrainsInfo.DataParser.AreaPass
                     foreach (var newEvent in events.Where(x=>x.TrainNumber % 2 == 0))
                     {
                         Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
+                        newEvent.IsApply = true;
                         index++;
                     }
 
@@ -45,6 +50,7 @@ namespace TrainsInfo.DataParser.AreaPass
                     //
                     foreach (var newEvent in events.Where(x => x.TrainNumber % 2 != 0))
                     {
+                        newEvent.IsApply = true;
                         Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
                         index++;
                     }

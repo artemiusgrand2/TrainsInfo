@@ -9,5 +9,7 @@ namespace TrainsInfo.Common.Interfaces
         void LogWarn(string format, params object[] args);
         void LogError(string format, params object[] args);
         void LogDebug(string format, params object[] args);
+        //второй файл лога
+        void OthersTrainsInfo(string format, params object[] args);
     }
 }

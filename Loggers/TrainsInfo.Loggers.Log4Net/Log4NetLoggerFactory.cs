@@ -23,8 +23,10 @@ namespace TrainsInfo.Logger.Log4Net
                 throw new System.Exception(string.Format("Файла конфигуратора лога по адресу - {0} не существует", path));
             //
             XmlConfigurator.Configure(new FileInfo(path));
-            ILog log = LogManager.GetLogger("RollingFileLogger");
-            var result = new Log4NetLoggerWrapper(log);
+            var commonLog = LogManager.GetLogger("CommonLog");
+            var othersTrains = LogManager.GetLogger("OthersTrains");
+            var result = new Log4NetLoggerWrapper(commonLog, othersTrains);
+
             //
             if (record.TryGetSetting(ClientsPathKey, out pathClientInfo))
             {

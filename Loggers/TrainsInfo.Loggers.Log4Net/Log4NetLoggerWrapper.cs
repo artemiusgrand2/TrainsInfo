@@ -8,7 +8,9 @@ namespace TrainsInfo.Logger.Log4Net
 {
     public class Log4NetLoggerWrapper : ILogger
     {
-        private readonly ILog logger;
+        private readonly ILog commonLog;
+
+        private readonly ILog othersTrains;
 
         public string PathClientInfo
         {
@@ -16,35 +18,42 @@ namespace TrainsInfo.Logger.Log4Net
             internal set;
         }
 
-        internal Log4NetLoggerWrapper(ILog log)
+        internal Log4NetLoggerWrapper(ILog commonLog, ILog othersTrains)
         {
-            logger = log;
+            this.commonLog = commonLog;
+            this.othersTrains = othersTrains;
         }
 
         public void ObligatoryInfo(string format, params object[] args)
         {
-            logger.InfoFormat(format, args);
+            commonLog.InfoFormat(format, args);
         }
 
         public void LogInfo(string format, params object[] args)
         {
-            logger.InfoFormat(format, args);
+            commonLog.InfoFormat(format, args);
         }
 
         public void LogWarn(string format, params object[] args)
         {
-            logger.WarnFormat(format, args);
+            commonLog.WarnFormat(format, args);
         }
 
         public void LogError(string format, params object[] args)
         {
-            logger.ErrorFormat(format, args);
+            commonLog.ErrorFormat(format, args);
         }
 
         public void LogDebug(string format, params object[] args)
         {
-            logger.DebugFormat(format, args);
+            commonLog.DebugFormat(format, args);
         }
+
+        public void OthersTrainsInfo(string format, params object[] args)
+        {
+            othersTrains.InfoFormat(format, args);
+        }
+
 
     }
 }

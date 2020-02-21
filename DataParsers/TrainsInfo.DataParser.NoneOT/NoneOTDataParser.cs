@@ -13,7 +13,7 @@ namespace TrainsInfo.DataParser.NodeOT
     public class NodeOTDataParser : IDataParser
     {
         private readonly string OTTrain = "OT";
-        private readonly IList<string> codesOperation = new List<string> { "P0005" };
+        private readonly IList<string> codesOperation = new List<string> { "P0005", "P0009" };
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
@@ -21,7 +21,7 @@ namespace TrainsInfo.DataParser.NodeOT
             var result = new List<RowValue>();
             if (table != null)
             {
-                var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode == x.Index1 && x.TrainNumber != 9999).ToList();
+                var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode == x.Index1 /*&& x.TrainNumber != 9999*/).ToList();
                 foreach (var node in infrastructures.Where(x => x.Type == TypeInfrastructure.node).ToList())
                 {
                     var events = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode));
@@ -31,6 +31,7 @@ namespace TrainsInfo.DataParser.NodeOT
                     foreach (var newEvent in events)
                     {
                         Logger.Log.LogInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(newEvent));
+                        newEvent.IsApply = true;
                         index++;
                     }
                     var countTrain = events.Count().ToString();
