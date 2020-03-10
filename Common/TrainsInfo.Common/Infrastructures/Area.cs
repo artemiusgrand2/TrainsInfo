@@ -28,9 +28,9 @@ namespace TrainsInfo.Common.Infrastructures
                 {
                     if(Nodes.Where(x=>x.Key == node.Station && x.Value == node.StationDirection).Count() == 0)
                         Nodes.Add(new KeyValuePair<string, string>(node.Station, node.StationDirection));
-                    //
-                    if (Nodes.Where(x => x.Key == node.StationDirection && x.Value == node.Station).Count() == 0)
-                        Nodes.Add(new KeyValuePair<string, string>(node.StationDirection, node.Station));
+                    ////
+                    //if (Nodes.Where(x => x.Key == node.StationDirection && x.Value == node.Station).Count() == 0)
+                    //    Nodes.Add(new KeyValuePair<string, string>(node.StationDirection, node.Station));
                 }
             }
 

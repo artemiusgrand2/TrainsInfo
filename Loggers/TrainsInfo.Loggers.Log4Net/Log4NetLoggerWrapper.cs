@@ -12,16 +12,19 @@ namespace TrainsInfo.Logger.Log4Net
 
         private readonly ILog othersTrains;
 
+        private readonly ILog areaSubTrains;
+
         public string PathClientInfo
         {
             get;
             internal set;
         }
 
-        internal Log4NetLoggerWrapper(ILog commonLog, ILog othersTrains)
+        internal Log4NetLoggerWrapper(ILog commonLog, ILog othersTrains, ILog areaSubTrains)
         {
             this.commonLog = commonLog;
             this.othersTrains = othersTrains;
+            this.areaSubTrains = areaSubTrains;
         }
 
         public void ObligatoryInfo(string format, params object[] args)
@@ -52,6 +55,11 @@ namespace TrainsInfo.Logger.Log4Net
         public void OthersTrainsInfo(string format, params object[] args)
         {
             othersTrains.InfoFormat(format, args);
+        }
+
+        public void AreaSubTrainsInfo(string format, params object[] args)
+        {
+            areaSubTrains.InfoFormat(format, args);
         }
 
 

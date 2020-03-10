@@ -11,5 +11,7 @@ namespace TrainsInfo.Common.Interfaces
         void LogDebug(string format, params object[] args);
         //второй файл лога
         void OthersTrainsInfo(string format, params object[] args);
+        //третий файл лога
+        void AreaSubTrainsInfo(string format, params object[] args);
     }
 }

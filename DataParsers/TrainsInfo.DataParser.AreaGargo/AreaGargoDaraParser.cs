@@ -15,7 +15,7 @@ namespace TrainsInfo.DataParser.AreaGargo
         private readonly string NC_GRTrain = "NC_GR";
         private readonly string C_GRTrain = "C_GR";
 
-        private readonly IList<string> codesOperation1 = new List<string> { "P0002", "P0003", "P0102", "P0042", "P0033", "P0043", "P0031", "P0103" };
+        private readonly IList<string> codesOperation1 = new List<string> { "P0002", "P0003", "P0102", "P0042", "P0033", "P0043", "P0031", "P0103", "P1010", "P0013", "P0011" };
 
         private readonly IList<string> codesOperation2 = new List<string> { "P0001" };
 
@@ -23,14 +23,15 @@ namespace TrainsInfo.DataParser.AreaGargo
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var table = data as IList<ModelDataIAS_PYR_GP>;
+            var table = data as IList<ModelBase>;
             var result = new List<RowValue>();
             if (table != null)
             {
+                var tableIAS_PYR_GP = table.Select(x => x as ModelDataIAS_PYR_GP).ToList();
                 foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
                 {
                     var area = areaCommon as Area;
-                    var events = table.Where(x => 
+                    var events = tableIAS_PYR_GP.Where(x => 
                     (((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation) || (area.Nodes.Where(y=>y.Key == x.StationCode && y.Value == x.DirectionToStation).Count() != 0)) && 
                     (codesOperation1.Contains(x.OperationCode) || (x.TrainNumber != 9999 && codesOperation3.Contains(x.OperationCode))))
                     || (area.ListStations.Contains(x.StationCode)  && codesOperation2.Contains(x.OperationCode))));

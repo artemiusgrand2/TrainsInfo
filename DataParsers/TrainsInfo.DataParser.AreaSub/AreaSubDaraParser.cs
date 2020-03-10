@@ -17,36 +17,45 @@ namespace TrainsInfo.DataParser.AreaSub
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var input = data as string;
+            var table = data as IList<ModelBase>;// data as string;
             var result = new List<RowValue>();
-            if (input != null)
+            if (table != null)
             {
-                var parserModel =  (new JavaScriptSerializer()).Deserialize<IList<ModelAGDP>>(input);
-                if(parserModel != null)
-                {
-                    foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
+               var  tableAGDP = table.Select(x => x as ModelAGDP).ToList();
+                // var parserModel =  (new JavaScriptSerializer()).Deserialize<IList<ModelAGDP>>(input);
+                // if(parserModel != null)
+                //  {
+                foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
                     {
                         var area = areaCommon as Area;
-                        if(area.Areas.Count > 0 && area.Areas.Contains("33"))
+                        var allSubTrain = tableAGDP.Where(x => area.Areas.Contains(x.AreaNumber));
+                        Logger.Log.AreaSubTrainsInfo("Участок {0}-{1} пригородные поезда (четные):", area.Station, area.Station2);
+                        var index = 1;
+                        foreach (var train in allSubTrain.Where(x => x.TrainNumber % 2 == 0))
                         {
-
+                            train.IsApply = true;
+                            Logger.Log.AreaSubTrainsInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(train));
+                            index++;
                         }
-                        var allTrain = parserModel.Where(x => area.Areas.Contains(x.AreaNumber)).Select(x => x.TrainNumber);
                         //
-                        result.Add(new RowValue(area.Station, area.Station2, NC_PRTrain, allTrain.Where(x => x % 2 != 0).Count().ToString(), DateTime.Now));
-                        result.Add(new RowValue(area.Station, area.Station2, C_PRTrain, allTrain.Where(x => x % 2 == 0).Count().ToString(), DateTime.Now));
+                        index = 1;
+                        Logger.Log.AreaSubTrainsInfo("Участок {0}-{1} пригородные поезда (нечетные):", area.Station, area.Station2);
+                        foreach (var train in allSubTrain.Where(x => x.TrainNumber % 2 != 0))
+                        {
+                            train.IsApply = true;
+                            Logger.Log.AreaSubTrainsInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(train));
+                            index++;
+                        }
+                        //
+                        result.Add(new RowValue(area.Station, area.Station2, NC_PRTrain, allSubTrain.Where(x => x.TrainNumber % 2 != 0).Count().ToString(), DateTime.Now));
+                        result.Add(new RowValue(area.Station, area.Station2, C_PRTrain, allSubTrain.Where(x => x.TrainNumber % 2 == 0).Count().ToString(), DateTime.Now));
                     }
-                }
+              //  }
             }
             //
             return result;
         }
     }
 
-    public class ModelAGDP
-    {
-        public int TrainNumber { get; set; }
-        public string AreaNumber { get; set; }
-    }
 
 }

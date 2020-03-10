@@ -25,7 +25,8 @@ namespace TrainsInfo.Logger.Log4Net
             XmlConfigurator.Configure(new FileInfo(path));
             var commonLog = LogManager.GetLogger("CommonLog");
             var othersTrains = LogManager.GetLogger("OthersTrains");
-            var result = new Log4NetLoggerWrapper(commonLog, othersTrains);
+            var areaSubTrains = LogManager.GetLogger("AreaSubTrains");
+            var result = new Log4NetLoggerWrapper(commonLog, othersTrains, areaSubTrains);
 
             //
             if (record.TryGetSetting(ClientsPathKey, out pathClientInfo))

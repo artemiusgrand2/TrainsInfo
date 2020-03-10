@@ -11,10 +11,9 @@ namespace TrainsInfo.Common.BusinessObjects
     public  class DataSource
     {
         private IList<DataSource> dataStreamHeirdom = new List<DataSource>();
-
+        delegate void WriteLog(string format, params object[] args);
         private readonly IDataStream dataStream;
         private readonly IList<IDataParser> dataParsers;
-
         private readonly Thread parsingThread;
         private readonly uint requestTimeout = 0;
         private bool isStop;
@@ -84,20 +83,33 @@ namespace TrainsInfo.Common.BusinessObjects
                     object data;
                     if(dataStream.Read(out data))
                     {
-                        if (nameSource.ToUpper().IndexOf("IAS_PYR_GP") != -1)
+                        WriteLog writeLog = null;
+                        //для поездов, полученных из IAS_PYR_GP, AGDP
+                        if (nameSource.ToUpper().IndexOf("IAS_PYR_GP") != -1 || nameSource.ToUpper().IndexOf("AGDPSOURCE") != -1)
                         {
-                            Logger.Log.LogInfo("------------------------------------------------------------------------------------------------", null);
-                            Logger.Log.LogInfo("", null);
-                            Logger.Log.LogInfo("Новая иттерация получения данных с источника - {0}", nameSource);
-                            Logger.Log.LogInfo("", null);
-                            Logger.Log.LogInfo("------------------------------------------------------------------------------------------------", null);
+                            if (nameSource.ToUpper().IndexOf("IAS_PYR_GP") != -1)
+                                writeLog = Logger.Log.LogInfo;
+                            else
+                            {
+                                data = ((new JavaScriptSerializer()).Deserialize<IList<ModelAGDP>>(data as string)).Select(x=>x as ModelBase).ToList();
+                                writeLog = Logger.Log.AreaSubTrainsInfo;
+                            }
+                            //
+                            writeLog("------------------------------------------------------------------------------------------------", null);
+                            writeLog("", null);
+                            writeLog("Новая иттерация получения данных с источника - {0}", nameSource);
+                            writeLog("", null);
+                            writeLog("------------------------------------------------------------------------------------------------", null);
+                            //
+                            if (writeLog == Logger.Log.LogInfo)
+                                writeLog = Logger.Log.OthersTrainsInfo;
                         }
-
+                        //
                         var parserValues = new List<RowValue>();
                         foreach (var parser in dataParsers)
                             parserValues.AddRange(parser.Parse(data, infrastructures));
                         //
-                        WriteNotApplyTrain(data);
+                        WriteNotApplyTrain(data,  writeLog);
                         //
                         if (parserValues.Count > 0)
                             OnNewValues(parserValues);
@@ -114,23 +126,22 @@ namespace TrainsInfo.Common.BusinessObjects
             }
         }
 
-        private void WriteNotApplyTrain(object data)
+        private void WriteNotApplyTrain(object data, WriteLog writeLog)
         {
-            var table = data as IList<ModelDataIAS_PYR_GP>;
+            var table = data as IList<ModelBase>;
             if (table != null)
             {
                 var notApplyTrains = table.Where(x => !x.IsApply);
-                Logger.Log.OthersTrainsInfo("------------------------------------------------------------------------------------------------", null);
-                Logger.Log.OthersTrainsInfo("", null);
-                Logger.Log.OthersTrainsInfo("Новая иттерация получения данных с источника - {0}, перечень неспользуемых поездов (всего - {1}, неспользуемых - {2})", nameSource, table.Count, notApplyTrains.Count());
-                Logger.Log.OthersTrainsInfo("", null);
-                Logger.Log.OthersTrainsInfo("------------------------------------------------------------------------------------------------", null);
-
+                writeLog("------------------------------------------------------------------------------------------------", null);
+                writeLog("", null);
+                writeLog("Новая иттерация получения данных с источника - {0}, перечень неспользуемых поездов (всего - {1}, неспользуемых - {2})", nameSource, table.Count, notApplyTrains.Count());
+                writeLog("", null);
+                writeLog("------------------------------------------------------------------------------------------------", null);
+                //
                 var index = 1;
-               
                 foreach (var trainEvent in notApplyTrains)
                 {
-                    Logger.Log.OthersTrainsInfo("{0}. {1}", index, new JavaScriptSerializer().Serialize(trainEvent));
+                    writeLog("{0}. {1}", index, new JavaScriptSerializer().Serialize(trainEvent));
                     index++;
                 }
             }

@@ -46,19 +46,19 @@ namespace TrainsInfo.DataStream.IAS_PYR_GP
                     {
                         if (reader.HasRows)
                         {
-                            var common = new List<ModelDataIAS_PYR_GP>();
+                            var common = new List<ModelBase>();
                             while (reader.Read())
                             {
                                 try
                                 {
                                     int trainNumber;
-                                    if(int.TryParse(reader.IsDBNull(1) ? string.Empty : reader.GetString(1), out trainNumber)&& 
-                                        ((trainNumber >=1001 && trainNumber <= 3500) || (trainNumber >= 9201 && trainNumber <= 9799) || (trainNumber >= 1 && trainNumber <= 999) || (trainNumber >= 6000 && trainNumber <= 7628) || trainNumber == 9999))
+                                    if (int.TryParse(reader.IsDBNull(1) ? string.Empty : reader.GetString(1), out trainNumber) &&
+                                        ((trainNumber >= 1001 && trainNumber <= 3500) || (trainNumber >= 9201 && trainNumber <= 9799) || (trainNumber >= 1 && trainNumber <= 999) || (trainNumber >= 6000 && trainNumber <= 7628) || trainNumber == 9999))
                                     {
-                                        common.Add(new ModelDataIAS_PYR_GP()
+                                        var newValue = new ModelDataIAS_PYR_GP()
                                         {
                                             TrainId = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
-                                            TrainNumber =  trainNumber,
+                                            TrainNumber = trainNumber,
                                             StationCode = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
                                             OperationCode = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
                                             OperationTime = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
@@ -67,24 +67,17 @@ namespace TrainsInfo.DataStream.IAS_PYR_GP
                                             Index3 = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
                                             DirectionFromStation = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
                                             DirectionToStation = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
-                                        });
+                                        };
+                                        int buffferIndex1, buffferIndex3;
+                                        int.TryParse(newValue.Index1, out buffferIndex1);
+                                        int.TryParse(newValue.Index3, out buffferIndex3);
+                                        if (!(buffferIndex1 <= 9 || buffferIndex3 <= 9))
+                                            common.Add(newValue);
                                     }
                                 }
                                 catch { }
                             }
-                            data = common.Where(x=> 
-                            {
-                                int buffferIndex;
-                                int.TryParse(x.Index1, out buffferIndex);
-                                if (buffferIndex <= 9)
-                                    return false;
-                                int.TryParse(x.Index3, out buffferIndex);
-                                if (buffferIndex <= 9)
-                                    return false;
-                                //
-                                return true;
-                            }
-                            ).ToList();
+                            data = common;
                         }
                     }
                 }

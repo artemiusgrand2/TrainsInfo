@@ -38,6 +38,8 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public void OthersTrainsInfo(string format, params object[] args) { }
 
+        public void AreaSubTrainsInfo(string format, params object[] args) { }
+
         public void ClientsInfo(string data)
         {
         }

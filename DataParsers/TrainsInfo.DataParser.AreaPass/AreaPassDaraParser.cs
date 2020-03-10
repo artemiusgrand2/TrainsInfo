@@ -15,15 +15,16 @@ namespace TrainsInfo.DataParser.AreaPass
         private readonly string NC_PSTrain = "NC_PS";
         private readonly string C_PSTrain = "C_PS";
 
-        private readonly IList<string> codesOperationNode = new List<string> {  "C0001", "C0003", "C1020" };
+        private readonly IList<string> codesOperationNode = new List<string> {  "C0001", "C0003", "C1020", "C1010", "C0102", "C0013", "C0011" };
         private readonly IList<string> codesOperationArea = new List<string> { "C0002", "C0042", "C1010", "C0003", "C0043", "C0033" };
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var table = data as IList<ModelDataIAS_PYR_GP>;
+            var table = data as IList<ModelBase>;
             var result = new List<RowValue>();
             if (table != null)
             {
+                var tableIAS_PYR_GP = table.Select(x => x as ModelDataIAS_PYR_GP).ToList();
                 foreach (var areaCommon in infrastructures.Where(x => x.Type == TypeInfrastructure.area).ToList())
                 {
                     var area = areaCommon as Area;
@@ -31,7 +32,7 @@ namespace TrainsInfo.DataParser.AreaPass
                     {
 
                     }
-                    var events = table.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
+                    var events = tableIAS_PYR_GP.Where(x => x.TrainNumber >= 1 && x.TrainNumber <= 1000
                     && (((area.ListStations.Contains(x.StationCode) || area.ListStations.Contains(x.DirectionToStation)) && codesOperationArea.Contains(x.OperationCode))
                     || (area.Nodes.Where(y => y.Key == x.StationCode && y.Value == x.DirectionToStation).Count() != 0 && codesOperationNode.Contains(x.OperationCode))));
                     //

@@ -24,13 +24,32 @@
     </layout>
   </appender>
 
-	<root>
-      <level value="ALL" />
-      <appender-ref ref="CommonLog" />
-    </root>
+     <appender name="AreaSubTrains" type="log4net.Appender.RollingFileAppender">
+    <file value=".\areaSubTrains.txt" />
+    <appendToFile value="true" />
+	<rollingStyle value="Size" />
+    <maxSizeRollBackups value="10" />
+    <maximumFileSize value="10MB" />
+	<layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%date [%thread] %level - %message%newline" />
+    </layout>
+  </appender>
+
+
+
+    <logger name="CommonLog">
+     <level value="ALL" />
+     <appender-ref ref="CommonLog" />
+   </logger>
+
    <logger name="OthersTrains">
      <level value="INFO" />
      <appender-ref ref="OthersTrains" />
    </logger>
 	
+    <logger name="AreaSubTrains">
+     <level value="INFO" />
+     <appender-ref ref="AreaSubTrains" />
+   </logger>
+
 </log4net>

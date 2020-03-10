@@ -2,7 +2,7 @@
 
 namespace TrainsInfo.Common.BusinessObjects
 {
-    public class ModelDataIAS_PYR_GP
+    public class ModelDataIAS_PYR_GP : ModelBase
     {
         public string TrainId { get; set; }
 
@@ -23,8 +23,6 @@ namespace TrainsInfo.Common.BusinessObjects
         public string DirectionFromStation { get; set; }
 
         public string DirectionToStation { get; set; }
-
-        public bool IsApply { get; set; }
 
         public string OperationTimeSTR
         {

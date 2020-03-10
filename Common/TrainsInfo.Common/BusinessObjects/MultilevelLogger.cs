@@ -13,6 +13,7 @@ namespace TrainsInfo.Common.BusinessObjects
         private readonly LogLevel logLevel;
         private readonly bool isInfoEnabled;
         private readonly bool isInfoOthersTrains;
+        private readonly bool isInfoAreaSubTrains;
         private readonly bool isWarnEnabled;
         private readonly bool isErrorEnabled;
         private readonly bool isDebugEnabled;
@@ -23,17 +24,17 @@ namespace TrainsInfo.Common.BusinessObjects
             logLevel = level;
             if (((int)logLevel) > 1)
             {
-                isInfoOthersTrains = isInfoEnabled = isWarnEnabled = isErrorEnabled = isDebugEnabled = true;
+                isInfoAreaSubTrains = isInfoOthersTrains = isInfoEnabled = isWarnEnabled = isErrorEnabled = isDebugEnabled = true;
             }
             else if (((int)logLevel) > 0)
             {
-                isInfoOthersTrains = isInfoEnabled = isErrorEnabled = isWarnEnabled = true;
+                isInfoAreaSubTrains = isInfoOthersTrains = isInfoEnabled = isErrorEnabled = isWarnEnabled = true;
                 isDebugEnabled = false;
             }
             else
             {
                 isErrorEnabled = true;
-                isInfoOthersTrains = isWarnEnabled = isInfoEnabled = isDebugEnabled = false;
+                isInfoAreaSubTrains = isInfoOthersTrains = isWarnEnabled = isInfoEnabled = isDebugEnabled = false;
             }
         }
 
@@ -82,6 +83,13 @@ namespace TrainsInfo.Common.BusinessObjects
             }
         }
 
+        public void AreaSubTrainsInfo(string format, params object[] args)
+        {
+            if (isInfoAreaSubTrains)
+            {
+                loggerImplementation.AreaSubTrainsInfo(format, args);
+            }
+        }
 
         public static MultilevelLogger Create(LoggerRecord record, LogLevel logLevel)
         {

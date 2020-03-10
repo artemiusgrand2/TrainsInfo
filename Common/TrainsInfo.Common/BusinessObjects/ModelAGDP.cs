@@ -2,10 +2,10 @@
 
 namespace TrainsInfo.Common.BusinessObjects
 {
-    public class ModelAGDP
+    public class ModelAGDP : ModelBase
     {
         public int TrainNumber { get; set; }
 
-        public string StationCode { get; set; }
+        public string AreaNumber { get; set; }
     }
 }

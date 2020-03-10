@@ -1,0 +1,3176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Logger>
+    <Type>log4net</Type>
+    <Settings>
+      <Setting Key="ConfigFilePath" Value="d:\Service\ServerTablo\Log4NetConfig.xml"/>
+      <Setting Key="LogLevel" Value="High"/>
+    </Settings>
+  </Logger>
+  
+  
+  <Listeners>
+ 
+   <Listener>
+      <Type>Http</Type>
+      <CommunicationProtocol>Dsccp</CommunicationProtocol>
+      <Settings>
+        <Setting Key="BindPort" Value="8888"/>
+      </Settings>
+    </Listener>
+
+  </Listeners>
+
+  <DataSources>
+
+    <DataSource>
+      <Name>CountWagonInJointSource</Name>
+      <DataParsers>
+	    <DataParser>JointAllVagon</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>File</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\OperNalVag.csv</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	  <DataSource>
+      <Name>JointFactSource</Name>
+      <DataParsers>
+	    <DataParser>AllFactTrains</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>File</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\MejGosStiki.csv</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	 <DataSource>
+      <Name>IAS_PYR_GPSource</Name>
+      <DataParsers>
+	    <DataParser>NodeOT</DataParser>
+		<DataParser>NodeRF</DataParser>
+		<DataParser>NodeTR</DataParser>
+		<DataParser>AreaGargo</DataParser>
+		<DataParser>AreaPass</DataParser>
+	  </DataParsers>
+      <RequestTimeout>60000</RequestTimeout>
+      <DataStream>
+        <Type>IAS_PYR_GP</Type>
+        <ConnectionString>Data Source=localhost\SQLEXPRESS;Initial Catalog=Iaspurgp;User ID=sa;Password=tablo2</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+	<DataSource>
+      <Name>AGDPSource</Name>
+      <DataParsers>
+	    <DataParser>AreaSub</DataParser>
+	  </DataParsers>
+      <RequestTimeout>300000</RequestTimeout>
+      <DataStream>
+        <Type>Http</Type>
+        <ConnectionString>http://10.23.0.71/Service/CurrentPositionTrains?categoryTrain=3</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+<!--	<DataSource>
+      <Name>USOGDPSource</Name>
+      <DataParsers>
+	    <DataParser>USOGDP</DataParser>
+	  </DataParsers>
+      <RequestTimeout>60000</RequestTimeout>
+      <DataStream>
+        <Type>Http</Type>
+        <ConnectionString>http://usogdp.rw/publicajax/loadDataForTablo</ConnectionString>
+      </DataStream>
+    </DataSource> -->
+	
+	<!-- разбор таблиц -->
+	
+	  <DataSource>
+      <Name>PassOpzSource</Name>
+      <DataParsers>
+	    <DataParser>PassOpz</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\PassOpz.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+	  <DataSource>
+      <Name>Vostok_ZapadSource</Name>
+      <DataParsers>
+	    <DataParser>Vostok_Zapad</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Vostok_Zapad.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+	  <DataSource>
+      <Name>Zapad_VostokSource</Name>
+      <DataParsers>
+	    <DataParser>Zapad_Vostok</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Zapad_Vostok.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	
+    <DataSource>
+      <Name>BroshPoezdSource</Name>
+      <DataParsers>
+	    <DataParser>BroshPoezd</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\BroshPoezd.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	  <DataSource>
+      <Name>GruzRabotaSource</Name>
+      <DataParsers>
+	    <DataParser>GruzRabota</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\GruzRabota.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	  <DataSource>
+      <Name>Lok_nodSource</Name>
+      <DataParsers>
+	    <DataParser>Lok_nod</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Lok_nod.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	 <DataSource>
+      <Name>Lok_ojto2Source</Name>
+      <DataParsers>
+	    <DataParser>Lok_ojto2</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Lok_ojto2.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	 <DataSource>
+      <Name>Lok_stykSource</Name>
+      <DataParsers>
+	    <DataParser>Lok_styk</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Lok_styk.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	<DataSource>
+      <Name>PeredachaSource</Name>
+      <DataParsers>
+	    <DataParser>Peredacha</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Peredacha.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	<DataSource>
+      <Name>RazvozSource</Name>
+      <DataParsers>
+	    <DataParser>Razvoz</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\Razvoz.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+	
+	<DataSource>
+      <Name>REG_TABSource</Name>
+      <DataParsers>
+	    <DataParser>REG_TAB</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileZip</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\REG_TAB.zip</ConnectionString>
+      </DataStream>
+    </DataSource>
+
+    <DataSource>
+      <Name>REG_TABPlanSource</Name>
+      <DataParsers>
+	    <DataParser>REG_TAB_PLAN</DataParser>
+	  </DataParsers>
+      <RequestTimeout>10000</RequestTimeout>
+      <DataStream>
+        <Type>FileExel</Type>
+		<Login>10.200.2.110\ktc</Login>
+		<Password>Ctk1234</Password>
+        <ConnectionString>\\10.200.2.110\ktc\РегулПор.xls</ConnectionString>
+      </DataStream>
+    </DataSource>
+
+  </DataSources>
+
+
+  <DataStorage>
+    <ConnectionString>Data Source=localhost\SQLEXPRESS;Initial Catalog=Tablo;User ID=sa;Password=tablo2</ConnectionString >
+  </DataStorage>
+
+  <Infrastructures>
+  
+       <!-- Стыки -->
+          
+      <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Стасилос</Name>
+		  <Station1>120518</Station1> <!-- Стасилос -->
+          <DataSources>
+           <!-- <DataSource>USOGDPSource</DataSource> -->
+			<DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		  <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Гудогай-стык</Name>
+		  <Station1>163034</Station1> <!-- Гудогай-стык -->
+          <DataSources>
+		  <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Бигосово-стык</Name>
+		  <Station1>161698</Station1> <!-- Бигосово-стык -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Езерище-стык</Name>
+		  <Station1>160816</Station1> <!-- Езерище-стык -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Заольша-стык</Name>
+		  <Station1>165627</Station1> <!-- Заольша-стык -->
+          <DataSources>
+		  <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Красное</Name>
+		  <Station1>171346</Station1> <!-- Красное -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Сураж</Name>
+		  <Station1>202900</Station1> <!-- Сураж -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Закопытье</Name>
+		  <Station1>150528</Station1> <!-- Закопытье -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Тереховка</Name>
+		  <Station1>150706</Station1> <!-- Тереховка -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Терюха</Name>
+		  <Station1>150301</Station1> <!-- Терюха -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Бережесть</Name>
+		  <Station1>347705</Station1> <!-- Бережесть -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Горынь</Name>
+		  <Station1>139209</Station1> <!-- Горынь -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Заболотье</Name>
+		  <Station1>354200</Station1> <!-- Заболотье -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Брест-Центр. (эксп.)</Name>
+		  <Station1>130609</Station1> <!-- Брест-Центр. (эксп.) -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Брузги (эксп.)</Name>
+		  <Station1>134807</Station1> <!-- Брузги (эксп.) -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Свислоч</Name>
+		  <Station1>135706</Station1> <!-- Свислоч -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Joint</Type>
+          <Name>Межгосударственный стыковой пункт - Брест – Северный (эксп.)</Name>
+		  <Station1>130505</Station1> <!-- Брест – Северный (эксп.) -->
+          <DataSources>
+		   <!-- <DataSource>USOGDPSource</DataSource> -->
+            <DataSource>JointFactSource</DataSource>
+			<DataSource>CountWagonInJointSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<!-- Узлы -->
+		
+	    <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Витебск</Name>
+		  <Station1>160002</Station1> <!-- Витебск -->
+		  <StationCodes>
+		     <StationCode>160002</StationCode> <!-- Витебск -->
+			 <StationCode>160303</StationCode> <!-- Чепино -->
+			 <StationCode>167105</StationCode> <!-- Медведка -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		   <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Орша</Name>
+		  <Station1>166403</Station1> <!-- Орша-Центральная -->
+		  <StationCodes>
+		     <StationCode>166403</StationCode> <!-- Орша-Центральная -->
+			 <StationCode>166507</StationCode> <!-- Орша-Западная -->
+			 <StationCode>166704</StationCode> <!-- Орша-Восточная -->
+			 <StationCode>166808</StationCode> <!-- Орша-Северная -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Кричев</Name>
+		  <Station1>158209</Station1> <!-- Кричев I -->
+		  <StationCodes>
+		     <StationCode>158209</StationCode> <!-- Кричев I -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Гомель</Name>
+		  <Station1>150000</Station1> <!-- Гомель -->
+		  <StationCodes>
+		     <StationCode>150000</StationCode> <!-- Гомель -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		 <Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Могилев</Name>
+		  <Station1>156505</Station1> <!-- Могилев II -->
+		  <StationCodes>
+		     <StationCode>156609</StationCode> <!-- Могилев I -->
+			 <StationCode>156505</StationCode> <!-- Могилев II -->
+			 <StationCode>156613</StationCode> <!-- Могилев III -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Жлобин</Name>
+		  <Station1>155841</Station1> <!-- о.п.Жлобин-Сортировочный -->
+		  <StationCodes>
+		     <StationCode>155004</StationCode> <!-- Жлобин -->
+			 <StationCode>155038</StationCode> <!-- Жлобин-Западный -->
+			 <StationCode>154270</StationCode> <!-- Жлобин-Подольский -->
+			 <StationCode>155822</StationCode> <!-- Жлобин-Северный -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Полоцк</Name>
+		  <Station1>161306</Station1> <!-- Полоцк -->
+		  <StationCodes>
+		     <StationCode>161306</StationCode> <!-- Полоцк -->
+			 <StationCode>161236</StationCode> <!-- Полоцк парк Громы -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Гродно</Name>
+		  <Station1>135208</Station1> <!-- Гродно -->
+		  <StationCodes>
+		     <StationCode>135208</StationCode> <!-- Гродно -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Волковыск</Name>
+		  <Station1>136709</Station1> <!-- Волковыск-Центральный -->
+		  <StationCodes>
+		     <StationCode>136709</StationCode> <!-- Волковыск-Центральный -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Брест</Name>
+		  <Station1>130204</Station1> <!-- Брест-Восточный -->
+		  <StationCodes>
+		     <StationCode>130204</StationCode> <!-- Брест-Восточный -->
+			 <StationCode>130308</StationCode> <!-- Брест-Полесский -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Лида</Name>
+		  <Station1>137608</Station1> <!-- Лида -->
+		  <StationCodes>
+		     <StationCode>137608</StationCode> <!-- Лида -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Барановичи</Name>
+		  <Station1>138507</Station1> <!-- Барановичи-Центральные -->
+		  <StationCodes>
+		     <StationCode>138507</StationCode> <!-- Барановичи-Центральные -->
+			 <StationCode>138901</StationCode> <!-- Барановичи-Полесские -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Лунинец</Name>
+		  <Station1>139406</Station1> <!-- Лунинец -->
+		  <StationCodes>
+		     <StationCode>139406</StationCode> <!-- Лунинец -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Молодечно</Name>
+		  <Station1>162900</Station1> <!-- Молодечно -->
+		  <StationCodes>
+		     <StationCode>162900</StationCode> <!-- Молодечно -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Минск</Name>
+		  <Station1>140009</Station1> <!-- Минск-Сортировочный -->
+		  <StationCodes>
+		     <StationCode>140009</StationCode> <!-- Минск-Сортировочный -->
+			<!-- <StationCode>140210</StationCode>-->  <!-- Минск-Пассажирский -->
+			<!-- <StationCode>140304</StationCode>--> <!-- Минск-Восточный -->
+			<!-- <StationCode>140507</StationCode> --> <!-- Минск-Южный -->
+			<!-- <StationCode>140102</StationCode> --> <!-- Минск-Северный -->
+			<!-- <StationCode>140403</StationCode> --> <!-- Степянка -->
+			<!-- <StationCode>144635</StationCode>-->  <!-- Помыслище -->
+		
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Слуцк</Name>
+		  <Station1>148602</Station1> <!-- Слуцк -->
+		  <StationCodes>
+		     <StationCode>148602</StationCode> <!-- Слуцк -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Калий III</Name>
+		  <Station1>148301</Station1> <!-- Калий III -->
+		  <StationCodes>
+		     <StationCode>148301</StationCode> <!-- Калий III -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Барбаров</Name>
+		  <Station1>151408</Station1> <!-- Барбаров -->
+		  <StationCodes>
+		     <StationCode>151408</StationCode> <!-- Барбаров -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Новополоцк</Name>
+		  <Station1>165504</Station1> <!-- Новополоцк -->
+		  <StationCodes>
+		     <StationCode>165504</StationCode> <!-- Новополоцк -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Осиповичи</Name>
+		  <Station1>146407</Station1> <!-- Осиповичи I -->
+		  <StationCodes>
+		     <StationCode>146407</StationCode> <!-- Осиповичи I -->
+			 <StationCode>146414</StationCode> <!-- Осиповичи II -->
+			 <StationCode>146433</StationCode> <!-- Осиповичи III -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<Infrastructure>
+          <Type>Node</Type>
+          <Name>Узел - Калинковичи</Name>
+		  <Station1>153808</Station1> <!-- Калинковичи -->
+		  <StationCodes>
+		     <StationCode>153808</StationCode> <!-- Калинковичи -->
+		  </StationCodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+		
+		<!-- Участки -->
+		
+			
+	<Infrastructure>
+          <Type>Area</Type>
+          <Name>Участок - Молодечно-Минск</Name>
+		  <Station1>162900</Station1> <!-- Молодечно -->
+		  <Station2>140009</Station2> <!-- Минск-Сортировочный -->
+		  <StationCodes>
+        <StationCode>142305</StationCode> <!-- Уша -->
+        <StationCode>142409</StationCode> <!-- Олехновичи -->
+        <StationCode>143401</StationCode> <!-- Дубравы -->
+        <StationCode>143505</StationCode> <!-- Радошковичи -->
+        <StationCode>143609</StationCode> <!-- Беларусь -->
+        <StationCode>143628</StationCode> <!-- п.п.Крыжовка -->
+        <StationCode>143632</StationCode> <!-- Ратомка -->
+        <StationCode>143651</StationCode> <!-- Ждановичи -->
+        <StationCode>143702</StationCode> <!-- Дегтярёвка -->
+        <StationCode>143717</StationCode> <!-- Богатырёва -->
+      </StationCodes>
+		  
+      <Areas>
+        <Area>14</Area>   
+	   </Areas>  
+		  
+		  <Nodes>
+        <Node>
+          <Station>140009</Station>
+          <StationDirection>162900</StationDirection> <!-- Минск-Сортировочный-Молодечно -->
+        </Node>
+<Node>
+          <Station>162900</Station>
+          <StationDirection>140009</StationDirection> <!-- Молодечно-Минск-Сортировочный-->
+        </Node>
+        <Node>
+          <Station>162900</Station>
+          <StationDirection>144635</StationDirection> <!-- Молодечно-Помыслище -->
+        </Node>   
+<Node>
+          <Station>144635</Station>
+          <StationDirection>162900</StationDirection> <!-- Помыслище-Молодечно -->
+        </Node>   
+		  </Nodes>
+          <DataSources>
+            <DataSource>IAS_PYR_GPSource</DataSource>
+			<DataSource>AGDPSource</DataSource>
+          </DataSources>
+        </Infrastructure>
+
+    <Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Минск-Осиповичи</Name>
+  <Station1>140009</Station1> <!-- Минск-Сортировочный -->
+  <Station2>146407</Station2> <!-- Осиповичи I -->
+  <StationCodes>
+    <StationCode>140507</StationCode> <!-- Минск-Южный -->
+    <StationCode>144809</StationCode> <!-- Колядичи -->
+    <StationCode>144832</StationCode> <!-- п.п.Асеевка -->
+    <StationCode>145002</StationCode> <!-- Михановичи -->
+    <StationCode>145303</StationCode> <!-- Руденск -->
+    <StationCode>145407</StationCode> <!-- Пуховичи -->
+    <StationCode>145454</StationCode> <!-- Талька -->
+    <StationCode>146096</StationCode> <!-- Верейцы-стык --> 
+    <StationCode>146109</StationCode> <!-- Верейцы -->
+    <StationCode>146221</StationCode> <!-- Лапичи -->
+    <StationCode>146306</StationCode> <!-- Гродзянка --> 
+  </StationCodes>
+
+        <Areas>
+        <Area>15</Area>   
+	   </Areas>
+  
+  <Nodes>
+    <Node> <Station>140009</Station> <StationDirection>146096</StationDirection> </Node> <!-- Минск-Сортировочный-Верейцы - стык --> 
+    <Node> <Station>146096</Station> <StationDirection>140009</StationDirection> </Node> <!-- Верейцы-стык-Минск-Сортировочный -->
+<Node> <Station>144635</Station> <StationDirection>146096</StationDirection> </Node> <!-- Помыслище-Верейцы - стык --> 
+<Node> <Station>146096</Station> <StationDirection>144635</StationDirection> </Node> <!-- Верейцы-стык-Помыслище- --> 
+<Node> <Station>146096</Station> <StationDirection>146407</StationDirection> </Node> <!-- Верейцы - стык-Осиповичи I --> 
+<Node> <Station>146407</Station> <StationDirection>146096</StationDirection> </Node> <!-- стык-Осиповичи I-Верейцы --> 
+<Node> <Station>146096</Station> <StationDirection>146306</StationDirection> </Node> <!-- Верейцы - стык-Гродзянка --> 
+<Node> <Station>146306</Station> <StationDirection>146096</StationDirection> </Node> <!-- стык-Гродзянка-Верейцы  -->
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+<Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Барановичи-Минск</Name>
+  <Station1>138507</Station1> <!-- Баранович-Центральные -->
+  <Station2>140009</Station2> <!-- Минск-Сортировочный -->
+  <StationCodes>
+    <StationCode>138550</StationCode> <!-- Погорельцы -->
+    <StationCode>138600</StationCode> <!-- Городея -->
+    <StationCode>138704</StationCode> <!-- Столбцы -->
+    <StationCode>138738</StationCode> <!-- Колосово -->
+    <StationCode>144014</StationCode> <!-- Негорелое - стык -->
+    <StationCode>144404</StationCode> <!-- Негорелое -->
+    <StationCode>144508</StationCode> <!-- Койданово -->
+    <StationCode>144601</StationCode> <!-- Фаниполь -->
+  </StationCodes>
+ 
+ <Areas>
+        <Area>33</Area>   
+	   </Areas>  
+	   
+  <Nodes>
+    <Node>
+      <Station>140009</Station>
+      <StationDirection>144014</StationDirection> <!-- Минск-Сортировочный-Негорелое - стык -->
+    </Node>
+    <Node>
+      <Station>144014</Station>
+      <StationDirection>140009</StationDirection> <!-- Негорелое-стык-Минск-Сортировочный -->
+    </Node>
+    <Node>
+      <Station>144014</Station>
+      <StationDirection>144635</StationDirection> <!-- Негорелое - стык-Помыслище -->
+    </Node>
+    <Node>
+      <Station>144635</Station>
+      <StationDirection>144014</StationDirection> <!-- стык-Помыслище-Негорелое -->
+    </Node>
+    <Node>
+      <Station>138507</Station>
+      <StationDirection>144014</StationDirection> <!-- Барановичи-Центральные-Негорелое-стык -->
+    </Node>
+     <Node>
+      <Station>144014</Station>
+      <StationDirection>138507</StationDirection> <!-- Негорелое-стык-Барановичи-Центральные -->
+    </Node>
+    <Node>
+      <Station>138901</Station>
+      <StationDirection>144014</StationDirection> <!-- Барановичи-Полесские - Негорелое - стык -->
+    </Node>
+     <Node>
+      <Station>144014</Station>
+      <StationDirection>138901</StationDirection> <!-- Негорелое-стык-Барановичи-Полесские  -->
+    </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+<Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Минск-Орша</Name>
+  <Station1>140009</Station1> <!-- Минск-Сортировочный  -->
+  <Station2>166403</Station2> <!-- Орша-Центральная -->
+  <StationCodes>
+    <StationCode>140704</StationCode> <!-- Озерище -->
+    <StationCode>140808</StationCode> <!-- Колодищи -->
+    <StationCode>140901</StationCode> <!-- Городище -->
+    <StationCode>141001</StationCode> <!-- Смолевичи -->
+   <!-- <StationCode>141105</StationCode> --> <!-- Шеметово -->
+    <StationCode>141209</StationCode> <!-- Красное Знамя -->
+    <StationCode>141302</StationCode> <!-- Жодино -->
+    <StationCode>141406</StationCode> <!-- Борисов -->
+    <StationCode>141500</StationCode> <!-- Новосады -->
+    <StationCode>141603</StationCode> <!-- Приямино -->
+    <StationCode>141707</StationCode> <!-- Крупки -->
+    <StationCode>141800</StationCode> <!-- Бобр -->
+    <StationCode>141938</StationCode> <!-- Славное -->
+    <StationCode>142004</StationCode> <!-- Толочин -->
+    <StationCode>142108</StationCode> <!-- Коханово -->
+   <!-- <StationCode>145106</StationCode> --> <!-- Гатово -->
+    <StationCode>145201</StationCode> --> <!-- Шабаны -->
+
+  </StationCodes>
+
+<Areas>
+        <Area>6</Area>   
+	   </Areas>  
+	   
+  <Nodes>
+    <Node>
+      <Station>140009</Station>
+      <StationDirection>141406</StationDirection> <!-- Минск-Сортировочный-Борисов -->
+    </Node>
+    <Node>
+      <Station>140403</Station>
+      <StationDirection>140009</StationDirection> <!-- Степянка-Минск-Сортировочный -->
+    </Node>
+    <Node>
+      <Station>140403</Station>
+      <StationDirection>141406</StationDirection> <!-- Степянка-Борисов -->
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>140009</StationDirection> <!-- Борисов-Минск-Сортировочный -->
+    </Node>
+    <Node>
+      <Station>140009</Station>
+      <StationDirection>140403</StationDirection> <!-- Минск-Сортировочный-Степянка -->
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>140403</StationDirection> <!-- Борисов-Степянка -->
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>166403</StationDirection> <!-- Борисов-Орша-Центральная --> 
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>166507</StationDirection> <!-- Борисов-Орша-Западная --> 
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>166704</StationDirection> <!-- Борисов-Орша-Восточная --> 
+    </Node>
+    <Node>
+      <Station>166403</Station>
+      <StationDirection>141406</StationDirection> <!-- Орша-Центральная-Борисов --> 
+    </Node>
+    <Node>
+      <Station>166507</Station>
+      <StationDirection>141406</StationDirection> <!-- Орша-Западная-Борисов --> 
+    </Node>
+    <Node>
+      <Station>166704</Station>
+      <StationDirection>141406</StationDirection> <!-- Орша-Восточная-Борисов --> 
+    </Node>
+    <Node>
+      <Station>144635</Station>
+      <StationDirection>141406</StationDirection> <!-- Помыслище-Борисов --> 
+    </Node>
+    <Node>
+      <Station>141406</Station>
+      <StationDirection>144635</StationDirection> <!-- Борисов-Помыслище --> 
+    </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+<Infrastructure>
+  <Type>Area</Type>
+  <Name>Участок - Брузги-Гродно</Name>
+  <Station1>134807</Station1> <!-- Граница с ПКП Брузги (эксп.) --> 
+  <Station2>135208</Station2> <!-- Гродно --> 
+  <StationCodes>
+    <StationCode>134703</StationCode> <!-- Лососно  --> 
+    <StationCode>134972</StationCode> <!-- Поречье --> 
+  </StationCodes>
+
+<Areas>
+        <Area>21</Area>   
+	   </Areas>  
+	   
+  <Nodes>
+    <Node>
+      <Station>134807</Station>
+      <StationDirection>135208</StationDirection> <!-- Граница с ПКП Брузги (эксп.)-Гродно --> 
+    </Node>
+    <Node>
+      <Station>135208</Station>
+      <StationDirection>134807</StationDirection> <!-- Гродно-Граница с ПКП Брузги (эксп.) --> 
+    </Node>
+    <Node>
+      <Station>134972</Station>
+      <StationDirection>135208</StationDirection> <!-- Поречье-Гродно --> 
+    </Node>
+    <Node>
+      <Station>135208</Station>
+      <StationDirection>134972</StationDirection> <!-- Гродно-Поречье --> 
+    </Node>
+    <Node>
+      <Station>134807</Station>
+      <StationDirection>134807</StationDirection> <!-- Граница с ПКП Брузги (эксп.)-Граница с ПКП Брузги (эксп.) --> 
+    </Node>
+  </Nodes>
+  <DataSources>
+    <DataSource>IAS_PYR_GPSource</DataSource>
+	<DataSource>AGDPSource</DataSource>
+  </DataSources>
+</Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Свислочь-Волковыск</Name>
+    <Station1>135706</Station1> <!-- Граница с ПКП Свислочь (эксп.) --> 
+    <Station2>136709</Station2> <!-- Волковыск-Центральный --> 
+    <StationCodes>
+      <StationCode>136200</StationCode> <!-- Берестовица --> 
+      <StationCode>136249</StationCode> <!-- Андреевичи --> 
+      <StationCode>136605</StationCode> <!-- Беняконе (эксп.) --> 
+    </StationCodes>
+
+<Areas>
+        <Area>18</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>136200</Station>
+        <StationDirection>136709</StationDirection> <!-- Берестовица-Волковыск-Центральный --> 
+      </Node>
+      <Node>
+        <Station>136709</Station>
+        <StationDirection>136200</StationDirection> <!-- Волковыск-Центральный- Берестовица --> 
+      </Node>
+      <Node>
+        <Station>135602</Station>
+        <StationDirection>136709</StationDirection> <!-- Свислочь-Волковыск-Центральный --> 
+      </Node>
+      <Node>
+        <Station>136709</Station>
+        <StationDirection>135602</StationDirection> <!-- Волковыск-Центральный-Свислочь --> 
+      </Node>
+      <Node>
+        <Station>135706</Station>
+        <StationDirection>135706</StationDirection> <!-- Граница с ПКП Свислочь (эксп.)-Граница с ПКП Свислочь (эксп.) --> 
+      </Node>
+      <Node>
+        <Station>135602</Station>
+        <StationDirection>135706</StationDirection> <!-- Свислочь-Граница с ПКП Свислочь (эксп.) --> 
+      </Node>
+      <Node>
+        <Station>135706</Station>
+        <StationDirection>135602</StationDirection> <!-- Граница с ПКП Свислочь (эксп.)-Свислочь --> 
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-сев-Брест</Name>
+    <Station1>130505</Station1> <!-- Граница с ПКП Брест-Северный (эксп.) -->
+    <Station2>130204</Station2> <!-- Брест-Восточный -->
+    <StationCodes>
+      <StationCode>130505</StationCode> <!-- Граница с ПКП Брест-Северный (эксп.) -->
+      <StationCode>130204</StationCode> <!-- Брест-Восточный -->
+    </StationCodes>
+ 
+	   <Areas>
+        <Area>86</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>130100</Station>
+        <StationDirection>130204</StationDirection> <!-- Брест-Северный-Брест-Восточный -->
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>130100</StationDirection> <!-- Брест-Восточный-Брест-Северный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-центр-Брест</Name>
+    <Station1>130609</Station1> <!-- Граница с ПКП Брест-Центральный (эксп.) -->
+    <Station2>130204</Station2> <!-- Брест-Восточный -->
+    <StationCodes>
+      <StationCode>130609</StationCode> <!-- Граница с ПКП Брест-Центральный (эксп.) -->
+      <StationCode>130204</StationCode> <!-- Брест-Восточный -->
+    </StationCodes>
+
+<Areas>
+        <Area>84</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>130007</Station>
+        <StationDirection>130204</StationDirection> <!-- Брест-Центральный-Брест-Восточный -->
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>130007</StationDirection> <!-- Брест-Восточный-Брест-Центральный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Заболотье</Name>
+    <Station1>130204</Station1> <!-- Брест-Восточный -->
+    <Station2>354200</Station2> <!-- Заболотье -->
+    <StationCodes>
+      <StationCode>130308</StationCode> <!-- Брест-Полесский -->
+      <StationCode>130837</StationCode> <!-- Брест-Южный --> 
+      <StationCode>130914</StationCode> <!-- о.п. Каменная -->
+      <StationCode>131009</StationCode> <!-- Бернады -->
+      <StationCode>132002</StationCode> <!-- Хотислав -->
+      <StationCode>132106</StationCode> <!-- Хотислав (эксп.) -->
+      <StationCode>132303</StationCode> <!-- Дубица -->
+      <StationCode>132407</StationCode> <!-- Влодава -->
+      <StationCode>132500</StationCode> <!-- Закрутин -->
+      <StationCode>132604</StationCode> <!-- Малорита -->
+    </StationCodes>
+
+<Areas>
+        <Area>84</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>354003</Station>
+        <StationDirection>354200</StationDirection> <!-- Ковель-Заболотье -->
+      </Node>
+      <Node>
+        <Station>354200</Station>
+        <StationDirection>354003</StationDirection> <!-- Заболотье-Ковель -->
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>132407</StationDirection> <!-- Брест-Восточный-Влодава -->
+      </Node>
+      <Node>
+        <Station>132407</Station>
+        <StationDirection>130204</StationDirection> <!-- Влодава-Брест-Восточный -->
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>354200</StationDirection> <!-- Брест-Восточный-Заболотье -->
+      </Node>
+      <Node>
+        <Station>354200</Station>
+        <StationDirection>130204</StationDirection> <!-- Заболотье-Брест-Восточный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Лунинец</Name>
+    <Station1>130204</Station1> <!-- Брест-Восточный -->
+    <Station2>139406</Station2> <!-- Лунинец -->
+    <StationCodes>
+      <StationCode>132708</StationCode> <!-- Кобрин -->
+      <StationCode>132801</StationCode> <!-- Городец -->
+      <StationCode>132905</StationCode> <!-- Дрогичин -->
+      <StationCode>133005</StationCode> <!-- Трудовая -->
+      <StationCode>133109</StationCode> <!-- Янов-Полесский -->
+      <StationCode>133113</StationCode> <!-- Юхновичи -->
+      <StationCode>133202</StationCode> <!-- Пинск -->
+      <StationCode>133325</StationCode> <!-- Ясельда -->
+      <StationCode>133400</StationCode> <!-- Парохонск -->
+      <StationCode>133433</StationCode> <!-- Ловча -->
+      <StationCode>139707</StationCode> <!-- Лунинец-стык -->
+    </StationCodes> 
+
+<Areas>
+        <Area>80</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>139707</StationDirection> <!-- Лунинец-Лунинец-стык -->
+      </Node>
+      <Node>
+        <Station>139707</Station>
+        <StationDirection>139406</StationDirection> <!-- Лунинец-стык-Лунинец -->
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>139707</StationDirection> <!-- Брест-Восточный-Лунинец-стык -->
+      </Node>
+      <Node>
+        <Station>139707</Station>
+        <StationDirection>130204</StationDirection> <!-- Лунинец-стык-Брест-Восточный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Барановичи</Name>
+    <Station1>130204</Station1> <!-- Брест-Восточный -->
+    <Station2>138507</Station2> <!-- Барановичи-Центральные -->
+    <StationCodes>
+      <StationCode>131207</StationCode> <!-- Жабинка -->
+      <StationCode>131245</StationCode> <!-- Тевли -->
+      <StationCode>131300</StationCode> <!-- Жабинка(эксп.) -->
+      <StationCode>133607</StationCode> <!-- Оранчицы -->
+      <StationCode>133700</StationCode> <!-- Берёза-Картузская -->
+      <StationCode>133804</StationCode> <!-- Белоозёрск -->
+      <StationCode>134008</StationCode> <!-- Бронная Гора -->
+      <StationCode>134101</StationCode> <!-- Коссово-Полесское -->
+      <StationCode>134205</StationCode> <!-- Ивацевичи -->
+      <StationCode>134309</StationCode> <!-- Доманово -->
+      <StationCode>134328</StationCode> <!-- Лесная – стык -->
+      <StationCode>134402</StationCode> <!-- Лесная  -->
+      <StationCode>134506</StationCode> <!-- Грицевец -->
+    </StationCodes>
+	
+<Areas>
+        <Area>81</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>134328</Station>
+        <StationDirection>138507</StationDirection> <!-- Лесная – стык-Барановичи-Центральные -->
+      </Node>
+      <Node>
+        <Station>138507</Station>
+        <StationDirection>134328</StationDirection> <!-- Барановичи-Центральные-Лесная – стык -->
+      </Node>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>134328</StationDirection> <!-- Брест-Восточный-Лесная – стык -->
+      </Node>
+	  <Node>
+      <Station>134328</Station>
+        <StationDirection>130204</StationDirection> <!-- Лесная – стык-Брест-Восточный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+  
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Волковыск-Барановичи</Name>
+    <Station1>136709</Station1> <!-- Волковыск-Центральный -->
+    <Station2>138507</Station2> <!-- Барановичи-Центральные -->
+    <StationCodes>
+      <StationCode>136802</StationCode> <!-- Зельва -->
+      <StationCode>136906</StationCode> <!-- Озерница -->
+      <StationCode>137006</StationCode> <!-- Слоним -->
+      <StationCode>137101</StationCode> <!-- Полонка -->
+    </StationCodes>
+	
+<Areas>
+        <Area>19</Area>   
+	   </Areas>  
+    <Nodes>
+	
+      <Node>
+        <Station>136709</Station> 
+        <StationDirection>138507</StationDirection> <!-- Волковыск-Центральный-Барановичи-Центральные -->
+      </Node>
+      <Node>
+        <Station>138507</Station> 
+        <StationDirection>136709</StationDirection> <!-- Барановичи-Центральные-Волковыск-Центральный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гродно-Мосты</Name>
+    <Station1>135208</Station1> <!-- Гродно -->
+    <Station2>136709</Station2> <!-- Волковыск-Центральный -->
+    <StationCodes>
+      <StationCode>135301</StationCode> <!-- Аульс -->
+      <StationCode>135320</StationCode> <!-- Завадичи -->
+      <StationCode>135335</StationCode> <!-- Житомля -->
+      <StationCode>135405</StationCode> <!-- Скидель -->
+      <StationCode>135424</StationCode> <!-- Черлёна -->
+    </StationCodes>
+
+<Areas>
+        <Area>38</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>135208</Station>
+        <StationDirection>137203</StationDirection> <!-- Гродно-Мосты -->
+      </Node>
+      <Node>
+        <Station>137203</Station>
+        <StationDirection>135208</StationDirection> <!-- Мосты-Гродно -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Мосты-Лида</Name>
+    <Station1>135208</Station1> <!-- Гродно -->
+    <Station2>137608</Station2> <!-- Лида -->
+    <StationCodes>
+      <StationCode>137400</StationCode> <!-- Рожанка -->
+      <StationCode>137504</StationCode> <!-- Скрибовцы -->
+    </StationCodes>
+
+<Areas>
+        <Area>38</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>137203</Station>
+        <StationDirection>137608</StationDirection> <!-- Мосты-Лида -->
+      </Node>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>137203</StationDirection> <!-- Лида-Мосты -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Стасилос-Лида</Name>
+    <Station1>120518</Station1> <!-- Стасилос -->
+    <Station2>137608</Station2> <!-- Лида -->
+    <StationCodes>
+      <StationCode>137701</StationCode> <!-- Гуды -->
+      <StationCode>137805</StationCode> <!-- Бастуны -->
+      <StationCode>137909</StationCode> <!-- Беняконе -->
+    </StationCodes>
+
+<Areas>
+        <Area>39</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>120518</Station>
+        <StationDirection>137608</StationDirection> <!-- Стасилос-Лида -->
+      </Node>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>120518</StationDirection> <!-- Лида-Стасилос -->
+      </Node>
+
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лида-Барановичи</Name>
+    <Station1>137608</Station1> <!-- Лида -->
+    <Station2>138507</Station2> <!-- Барановичи-Центральные -->
+    <StationCodes>
+      <StationCode>137612</StationCode> <!-- Минойты -->
+      <StationCode>138121</StationCode> <!-- Нёман -->
+      <StationCode>138206</StationCode> <!-- Новоельня -->
+      <StationCode>138225</StationCode> <!-- Выгода -->
+      <StationCode>138314</StationCode> <!-- Мицкевичи --> 
+      <StationCode>138403</StationCode> <!-- Мордичи -->
+      <StationCode>138422</StationCode> <!-- Домашевичи -->
+    </StationCodes>
+
+<Areas>
+        <Area>37</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>138507</StationDirection> <!-- Лида-Барановичи-Центральные -->
+      </Node>
+       <Node>
+        <Station>138507</Station>
+        <StationDirection>137608</StationDirection> <!-- Барановичи-Центральные-Лида -->
+      </Node>
+      <Node>
+        <Station>138901</Station>
+        <StationDirection>137608</StationDirection> <!-- Барановичи-Полесские-Лида -->
+      </Node>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>138901</StationDirection> <!-- Лида-Барановичи-Полесские -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Барановичи-Лунинец</Name>
+    <Station1>138507</Station1> <!-- Барановичи-Центральные -->
+    <Station2>139406</Station2> <!-- Лунинец -->
+    <StationCodes>
+      <StationCode>139502</StationCode> <!-- Люща -->
+      <StationCode>139514</StationCode> <!-- Мальковичи -->
+      <StationCode>139603</StationCode> <!-- Ганцевичи -->
+      <StationCode>139800</StationCode> <!-- Рейтанов -->
+      <StationCode>139904</StationCode> <!-- Ляховичи -->
+    </StationCodes>
+
+<Areas>
+        <Area>28</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>138507</Station>
+        <StationDirection>139406</StationDirection> <!-- Барановичи–Центральные-Лунинец -->
+      </Node>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>138507</StationDirection> <!--Лунинец-Барановичи–Центральные -->
+      </Node>
+      <Node>
+        <Station>138901</Station>
+        <StationDirection>139406</StationDirection> <!-- Барановичи-Полесские-Лунинец -->
+      </Node>
+       <Node>
+        <Station>139406</Station>
+        <StationDirection>138901</StationDirection> <!-- Лунинец-Барановичи-Полесские -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Барановичи-Слуцк</Name>
+    <Station1>138507</Station1> <!-- Барановичи-Центральные -->
+    <Station2>148602</Station2> <!-- Слуцк -->
+    <StationCodes>
+      <StationCode>138916</StationCode> <!-- Русино -->
+      <StationCode>139001</StationCode> <!-- Клецк -->
+      <StationCode>139105</StationCode> <!-- Тимковичи -->
+    </StationCodes>
+
+<Areas>
+        <Area>35</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>138507</Station>
+        <StationDirection>148706</StationDirection> <!-- Тимковичи-Барановичи-Центральные -->
+      </Node>
+       <Node>
+        <Station>148706</Station>
+        <StationDirection>138507</StationDirection> <!-- Барановичи-Центральные-Тимковичи -->
+      </Node>
+      <Node>
+        <Station>138901</Station>
+        <StationDirection>148706</StationDirection> <!-- Барановичи-Полесские-Слуцк-стык -->
+      </Node>
+      <Node>
+        <Station>148706</Station>
+        <StationDirection>138901</StationDirection> <!-- Слуцк-стык-Барановичи-Полесские -->
+      </Node>
+      <Node>
+        <Station>148602</Station>
+        <StationDirection>148706</StationDirection> <!-- Слуцк-Слуцк-стык -->
+      </Node>
+      <Node>
+        <Station>148706</Station>
+        <StationDirection>148602</StationDirection> <!-- Слуцк-стык-Слуцк- -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лунинец-Горынь</Name>
+    <Station1>139406</Station1> <!-- Лунинец -->
+    <Station2>139213</Station2> <!-- Горынь-стык -->
+    <StationCodes>
+      <StationCode>139302</StationCode> <!-- Видибор -->
+      <StationCode>139711</StationCode> <!-- Припять -->
+    </StationCodes>
+
+<Areas>
+        <Area>30</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>139209</Station>
+        <StationDirection>355504</StationDirection> <!-- Горынь-Сарны -->
+      </Node>
+      <Node>
+        <Station>355504</Station>
+        <StationDirection>139209</StationDirection> <!-- Сарны-Горынь- -->
+      </Node>
+      <Node>
+        <Station>139209</Station>
+        <StationDirection>139406</StationDirection> <!-- Горынь-Лунинец -->
+      </Node>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>139209</StationDirection> <!-- Лунинец-Горынь -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лунинец-Калинковичи</Name>
+    <Station1>139406</Station1> <!-- Лунинец -->
+    <Station2>153808</Station2> <!-- Калинковичи -->
+    <StationCodes>
+      <StationCode>151925</StationCode> <!-- Сенкевичи -->
+      <StationCode>151944</StationCode> <!-- Лахва -->
+      <StationCode>152006</StationCode> <!-- Ситница -->
+      <StationCode>152106</StationCode> <!-- Микашевичи -->
+      <StationCode>152171</StationCode> <!-- Житковичи - стык -->
+      <StationCode>153301</StationCode> <!-- Житковичи -->
+      <StationCode>153314</StationCode> <!-- рзд.Бринёво -->
+      <StationCode>153329</StationCode> <!-- Старушки -->
+      <StationCode>153507</StationCode> <!-- Копцевичи -->
+      <StationCode>153600</StationCode> <!-- Муляровка -->
+      <StationCode>153615</StationCode> <!-- рзд.Коржевка -->
+      <StationCode>153719</StationCode> <!-- Мышанка -->
+      <StationCode>153723</StationCode> <!-- Кацуры -->
+      <StationCode>153742</StationCode> <!-- рзд.Клинск -->
+      <StationCode>153761</StationCode> <!-- Птичь -->
+    </StationCodes>
+
+<Areas>
+        <Area>52</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>152171</StationDirection> <!-- Лунинец-Житковичи-стык -->
+      </Node>
+      <Node>
+        <Station>152006</Station>
+        <StationDirection>139406</StationDirection> <!-- Ситница-Лунинец -->
+      </Node>
+      <Node>
+        <Station>139406</Station>
+        <StationDirection>152006</StationDirection> <!-- Лунинец-Ситница -->
+      </Node>
+      <Node>
+        <Station>152006</Station>
+        <StationDirection>152171</StationDirection> <!-- Ситница-Житковичи-стык -->
+      </Node>
+      <Node>
+        <Station>152171</Station>
+        <StationDirection>152006</StationDirection> <!-- Житковичи-стык-Ситница -->
+      </Node>
+      <Node>
+        <Station>152171</Station>
+        <StationDirection>139406</StationDirection> <!-- Житковичи-стык-Лунинец -->
+      </Node>
+      <Node>
+        <Station>152171</Station>
+        <StationDirection>153808</StationDirection> <!-- Житковичи-стык-Калинковичи -->
+      </Node>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>152171</StationDirection> <!-- стык-Калинковичи-Житковичи -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Лида-Молодечно</Name>
+    <Station1>137608</Station1> <!-- Лида -->
+    <Station2>162900</Station2> <!-- Молодечно -->
+    <StationCodes>
+      <StationCode>138009</StationCode> <!-- Гутно -->
+      <StationCode>162309</StationCode> <!-- Гавья -->
+      <StationCode>162402</StationCode> <!-- Юратишки -->
+      <StationCode>162440</StationCode> <!-- Богданов-стык -->
+      <StationCode>162506</StationCode> <!-- Богданов -->
+      <StationCode>162607</StationCode> <!-- Воложин -->
+      <StationCode>162703</StationCode> <!-- Полочаны -->
+      <StationCode>162807</StationCode> <!-- Каледино -->
+    </StationCodes>
+
+<Areas>
+        <Area>40</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>162440</Station>
+        <StationDirection>162900</StationDirection> <!-- Богданов-Молодечно -->
+      </Node>
+       <Node>
+        <Station>162900</Station>
+        <StationDirection>162440</StationDirection> <!-- Молодечно-Богданов -->
+      </Node>
+      <Node>
+        <Station>137608</Station>
+        <StationDirection>162440</StationDirection> <!-- Лида-Богданов-стык -->
+      </Node>
+      <Node>
+        <Station>162440</Station>
+        <StationDirection>137608</StationDirection> <!-- Богданов-стык-Лида -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гудогай-Молодечно</Name>
+    <Station1>163034</Station1> <!-- Гудогай-стык -->
+    <Station2>162900</Station2> <!-- Молодечно -->
+    <StationCodes>
+      <StationCode>163104</StationCode> <!-- Ошмяны -->
+      <StationCode>163208</StationCode> <!-- Солы -->
+      <StationCode>163301</StationCode> <!-- Сморгонь -->
+      <StationCode>163405</StationCode> <!-- Залесье -->
+      <StationCode>163509</StationCode> <!-- Пруды -->
+      <StationCode>164200</StationCode> <!-- Бобровники -->
+    </StationCodes>
+
+<Areas>
+        <Area>2</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>163034</Station>
+        <StationDirection>120306</StationDirection> <!-- Гудогай-стык-Кяна -->
+      </Node>
+      <Node>
+        <Station>120306</Station>
+        <StationDirection>163034</StationDirection> <!-- -Кяна-Гудогай-стык -->
+      </Node>
+      <Node>
+        <Station>162900</Station>
+        <StationDirection>163034</StationDirection> <!-- Молодечно-Гудогай-стык -->
+      </Node>
+      <Node>
+        <Station>163034</Station>
+        <StationDirection>162900</StationDirection> <!-- Гудогай-стык-Молодечно -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Слуцк-Калий 3</Name>
+    <Station1>148602</Station1> <!-- Слуцк -->
+    <Station2>148301</Station2> <!-- Калий III -->
+    <StationCodes>
+      <StationCode>148208</StationCode> <!-- Калий I -->
+      <StationCode>148227</StationCode> <!-- Солигорск -->
+      <StationCode>148509</StationCode> <!-- Калий IV -->
+    </StationCodes>
+
+<Areas>
+        <Area>71</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>148301</Station>
+        <StationDirection>148602</StationDirection> <!-- Калий III-Слуцк -->
+      </Node>
+      <Node>
+        <Station>148602</Station>
+        <StationDirection>148301</StationDirection> <!-- Слуцк-Калий III -->
+      </Node>
+      <Node>
+        <Station>148208</Station>
+        <StationDirection>148301</StationDirection> <!-- Калий I-Калий III -->
+      </Node>
+      <Node>
+        <Station>148301</Station>
+        <StationDirection>148208</StationDirection> <!-- Калий III-Калий I -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Слуцк-Осиповичи</Name>
+    <Station1>148602</Station1> <!-- Слуцк -->
+    <Station2>146407</Station2> <!-- Осиповичи I -->
+    <StationCodes>
+      <StationCode>148617</StationCode> <!-- Новодворцы -->
+      <StationCode>148621</StationCode> <!-- Некраши -->
+      <StationCode>149003</StationCode> <!-- Уречье -->
+      <StationCode>149022</StationCode> <!-- Верхутино -->
+      <StationCode>149107</StationCode> <!-- Старые Дороги -->
+      <StationCode>149126</StationCode> <!-- Фаличи -->
+      <StationCode>149222</StationCode> <!-- Деревцы -->
+      <StationCode>149234</StationCode> <!-- Дараганово -->
+    </StationCodes>
+
+<Areas>
+        <Area>70</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>148602</StationDirection> <!-- Осиповичи I-Слуцк -->
+      </Node>
+      <Node>
+        <Station>148602</Station>
+        <StationDirection>146407</StationDirection> <!-- -Слуцк-Осиповичи I -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Молодечно-Полоцк</Name>
+    <Station1>162900</Station1> <!-- Молодечно -->
+    <Station2>161306</Station2> <!-- Полоцк -->
+    <StationCodes>
+      <StationCode>163602</StationCode> <!-- Вилейка -->
+      <StationCode>163617</StationCode> <!-- п.п.Куренец -->
+      <StationCode>163706</StationCode> <!-- Княгинин -->
+      <StationCode>163802</StationCode> <!-- Будслав -->
+      <StationCode>163890</StationCode> <!-- Парафьянов - стык -->
+      <StationCode>163903</StationCode> <!-- Парафьянов -->
+      <StationCode>164003</StationCode> <!-- Крулевщизна -->
+      <StationCode>164304</StationCode> <!-- Поставы -->
+      <StationCode>164408</StationCode> <!-- Воропаево -->
+      <StationCode>164516</StationCode> <!-- Лынтупы -->
+      <StationCode>164605</StationCode> <!-- Друя -->
+      <StationCode>164709</StationCode> <!-- Миоры -->
+      <StationCode>164802</StationCode> <!-- Шарковщизна -->
+      <StationCode>164906</StationCode> <!-- Глубокое -->
+      <StationCode>165006</StationCode> <!-- Подсвилье -->
+      <StationCode>165103</StationCode> <!-- Боровое -->
+      <StationCode>165114</StationCode> <!-- Зябки -->
+      <StationCode>165133</StationCode> <!-- рзд. Кульгаи -->
+      <StationCode>165148</StationCode> <!-- Загатье -->
+      <StationCode>165203</StationCode> <!-- Фариново -->
+      <StationCode>165307</StationCode> <!-- Ксты -->
+      <StationCode>165311</StationCode> <!-- рзд.Фомино -->
+    </StationCodes>
+
+<Areas>
+        <Area>57</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>162900</Station>
+        <StationDirection>163890</StationDirection> <!-- Молодечно-Парафьянов-стык -->
+      </Node>
+      <Node>
+        <Station>163890</Station>
+        <StationDirection>162900</StationDirection> <!-- Парафьянов-стык-Молодечно -->
+      </Node>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>164003</StationDirection> <!-- Полоцк-Крулевщизна -->
+      </Node>
+      <Node>
+        <Station>164003</Station>
+        <StationDirection>161306</StationDirection> <!-- Крулевщизна-Полоцк -->
+      </Node>
+      <Node>
+        <Station>164003</Station>
+        <StationDirection>165504</StationDirection> <!-- Крулевщизна-Новополоцк -->
+      </Node>
+      <Node>
+        <Station>165504</Station>
+        <StationDirection>164003</StationDirection> <!-- Новополоцк-Крулевщизна -->
+      </Node>
+      <Node>
+        <Station>163890</Station>
+        <StationDirection>164003</StationDirection> <!-- Парафьянов-стык-Крулевщизна -->
+      </Node>
+      <Node>
+        <Station>164003</Station>
+        <StationDirection>163890</StationDirection> <!-- Крулевщизна-Парафьянов-стык -->
+      </Node>
+      <Node>
+        <Station>164003</Station>
+        <StationDirection>164408</StationDirection> <!-- Крулевщизна-Воропаево -->
+      </Node>
+      <Node>
+        <Station>164408</Station>
+        <StationDirection>164003</StationDirection> <!-- Воропаево-Крулевщизна -->
+      </Node>
+      <Node>
+        <Station>164408</Station>
+        <StationDirection>164605</StationDirection> <!-- Воропаево-Друя -->
+      </Node>
+      <Node>
+        <Station>164605</Station>
+        <StationDirection>164408</StationDirection> <!-- Друя-Воропаево -->
+      </Node>
+      <Node>
+        <Station>129512</Station>
+        <StationDirection>164408</StationDirection> <!-- Адутишкис-Воропаево -->
+      </Node>
+      <Node>
+        <Station>164408</Station>
+        <StationDirection>129512</StationDirection> <!-- Воропаево-Адутишкис -->
+      </Node>
+      <Node>
+        <Station>129512</Station>
+        <StationDirection>164516</StationDirection> <!-- Адутишкис-Лынтупы -->
+      </Node>
+      <Node>
+        <Station>164516</Station>
+        <StationDirection>129512</StationDirection> <!-- Лынтупы-Адутишкис -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Бигосово-Полоцк</Name>
+    <Station1>161698</Station1> <!-- Бигосово–стык -->
+    <Station2>161306</Station2> <!-- Полоцк -->
+    <StationCodes>
+      <StationCode>161804</StationCode> <!-- Верхнедвинск -->
+      <StationCode>161819</StationCode> <!-- Свольно -->
+      <StationCode>161908</StationCode> <!-- Борковичи -->
+      <StationCode>162012</StationCode> <!-- Адамово -->
+      <StationCode>162116</StationCode> <!-- Баравуха -->
+      <StationCode>162211</StationCode> <!-- Ропнянская -->
+    </StationCodes>
+
+<Areas>
+        <Area>79</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>161698</StationDirection> <!-- Полоцк-Бигосово–стык -->
+      </Node>
+      <Node>
+        <Station>161698</Station>
+        <StationDirection>161306</StationDirection> <!-- Бигосово–стык-Полоцк -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Новополоцк-Полоцк</Name>
+    <Station1>165504</Station1> <!-- Новополоцк -->
+    <Station2>161306</Station2> <!-- Полоцк -->
+    <StationCodes>
+      <StationCode>165504</StationCode> <!-- Новополоцк -->
+    </StationCodes>
+
+<Areas>
+        <Area>57</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>165504</StationDirection> <!-- Полоцк-Новополоцк -->
+      </Node>
+      <Node>
+        <Station>165504</Station>
+        <StationDirection>161306</StationDirection> <!-- Новополоцк-Полоцк -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Новополоцк-Полоцк</Name>
+    <Station1>165504</Station1> <!-- Новополоцк -->
+    <Station2>161306</Station2> <!-- Полоцк -->
+    <StationCodes>
+      <StationCode>165504</StationCode> <!-- Новополоцк -->
+    </StationCodes>
+
+<Areas>
+        <Area>57</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>165504</StationDirection> <!-- Полоцк-Новополоцк -->
+      </Node>
+      <Node>
+        <Station>165504</Station>
+        <StationDirection>161306</StationDirection> <!-- Новополоцк-Полоцк -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Бережесть-Калинковичи</Name>
+    <Station1>347705</Station1> <!-- Бережесть -->
+    <Station2>153808</Station2> <!-- Калинковичи -->
+    <StationCodes>
+      <StationCode>151130</StationCode> <!-- Словечно -->
+      <StationCode>151145</StationCode> <!-- Словечно-стык -->
+      <StationCode>151200</StationCode> <!-- Граница с Юго-Зап.ж.д.:Словечно(эксп.) -->
+      <StationCode>151304</StationCode> <!-- Ельск -->
+      <StationCode>151338</StationCode> <!-- Михалки -->
+      <StationCode>151408</StationCode> <!-- Барбаров -->
+      <StationCode>151605</StationCode> <!-- Козенки -->
+      <StationCode>151709</StationCode> <!-- Мозырь -->
+      <StationCode>151802</StationCode> <!-- Пхов (эксп.) -->
+      <StationCode>153901</StationCode> <!-- Пхов (эксп.)(для работы ч/з порт) -->
+    </StationCodes>
+
+<Areas>
+        <Area>46</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>346308</Station>
+        <StationDirection>346806</StationDirection> <!-- Коростень-Овруч -->
+      </Node>
+      <Node>
+        <Station>346806</Station>
+        <StationDirection>347705</StationDirection> <!-- Овруч-Бережесть -->
+      </Node>
+      <Node>
+        <Station>346806</Station>
+        <StationDirection>346308</StationDirection> <!-- Овруч-Коростень -->
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>346806</StationDirection> <!-- Бережесть-Овруч -->
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>346308</StationDirection> <!-- Бережесть-Коростень -->
+      </Node>
+      <Node>
+        <Station>346308</Station>
+        <StationDirection>347705</StationDirection> <!-- Коростень-Бережесть -->
+      </Node>
+      <Node>
+        <Station>151408</Station>
+        <StationDirection>153808</StationDirection> <!-- Барбаров-Калинковичи -->
+      </Node>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>151408</StationDirection> <!-- Калинковичи-Барбаров -->
+      </Node>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>347705</StationDirection> <!-- Калинковичи-Бережесть -->
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>151408</StationDirection> <!-- Бережесть-Барбаров -->
+      </Node>
+      <Node>
+        <Station>347705</Station>
+        <StationDirection>153808</StationDirection> <!-- Бережесть-Калинковичи  -->
+      </Node>
+      <Node>
+        <Station>151408</Station>
+        <StationDirection>347705</StationDirection> <!-- Барбаров-Бережесть  -->
+      </Node>
+      <Node>
+        <Station>151338</Station>
+        <StationDirection>151408</StationDirection> <!-- Михалки-Барбаров  -->
+      </Node>
+      <Node>
+        <Station>151408</Station>
+        <StationDirection>151338</StationDirection> <!-- Барбаров-Михалки  -->
+      </Node>
+      <Node>
+        <Station>151338</Station>
+        <StationDirection>153808</StationDirection> <!-- Михалки-Калинковичи  -->
+      </Node>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>151338</StationDirection> <!-- Калинковичи-Михалки  -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Осиповичи-Могилев</Name>
+    <Station1>146407</Station1> <!-- Осиповичи I  -->
+    <Station2>156505</Station2> <!-- Могилёв II  -->
+    <StationCodes>
+      <StationCode>146414</StationCode> <!-- Осиповичи II  -->
+      <StationCode>157003</StationCode> <!-- Елизово  -->
+      <StationCode>157103</StationCode> <!-- Несета  -->
+      <StationCode>157207</StationCode> <!-- Воничи  -->
+      <StationCode>157300</StationCode> <!-- Друть  -->
+      <StationCode>157423</StationCode> <!-- Вендриж  -->
+      <StationCode>157508</StationCode> <!-- Голынец  -->
+    </StationCodes>
+
+<Areas>
+        <Area>65</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>156505</StationDirection> <!-- Осиповичи I-Могилёв II  -->
+      </Node>
+      <Node>
+        <Station>156505</Station>
+        <StationDirection>146407</StationDirection> <!-- Могилёв II-Осиповичи I  -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Осиповичи-Жлобин</Name>
+    <Station1>146407</Station1> <!-- Осиповичи I  -->
+    <Station2>155841</Station2> <!-- о.п.Жлобин-Сортировочный  -->
+    <StationCodes>
+      <StationCode>146433</StationCode> <!-- Осиповичи III  -->
+      <StationCode>146715</StationCode> <!-- Татарка  -->
+      <StationCode>146927</StationCode> <!-- Мирадино -->
+      <StationCode>147008</StationCode> <!-- Бобруйск -->
+      <StationCode>147205</StationCode> <!-- Рабкор -->
+      <StationCode>147402</StationCode> <!-- Ратмировичи -->
+      <StationCode>147602</StationCode> <!-- Красный Брод -->
+      <StationCode>147703</StationCode> <!-- Березина -->
+      <StationCode>147722</StationCode> <!-- Савичи -->
+      <StationCode>147807</StationCode> <!-- Телуша -->
+      <StationCode>147845</StationCode> <!-- Красный Берег-стык -->
+      <StationCode>148000</StationCode> <!-- Красный Берег -->
+    </StationCodes>
+
+<Areas>
+        <Area>63</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>148000</Station>
+        <StationDirection>155004</StationDirection> <!-- Красный Берег-Жлобин -->
+      </Node>
+      <Node>
+        <Station>155004</Station>
+        <StationDirection>148000</StationDirection> <!-- Жлобин-Красный Берег -->
+      </Node>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>148000</StationDirection> <!-- Осиповичи I-Красный Берег -->
+      </Node>
+      <Node>
+        <Station>147008</Station>
+        <StationDirection>146407</StationDirection> <!-- о.п. Киселевичи-Осиповичи I -->
+      </Node>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>147008</StationDirection> <!-- Осиповичи I-о.п. Киселевичи -->
+      </Node>
+      <Node>
+        <Station>147008</Station>
+        <StationDirection>148000</StationDirection> <!-- о.п. Киселевичи-Красный Берег -->
+      </Node>
+      <Node>
+        <Station>148000</Station>
+        <StationDirection>147008</StationDirection> <!-- Красный Берег-о.п. Киселевичи -->
+      </Node>
+      <Node>
+        <Station>148000</Station>
+        <StationDirection>146407</StationDirection> <!--  Красный Берег-Осиповичи I -->
+      </Node>
+      <Node>
+        <Station>146407</Station>
+        <StationDirection>147008</StationDirection> <!-- о.п. Осиповичи I-Бобруйск -->
+      </Node>
+      <Node>
+        <Station>147008</Station>
+        <StationDirection>146407</StationDirection> <!-- Бобруйск-о.п. Осиповичи I -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Калинковичи-Жлобин</Name>
+    <Station1>153808</Station1> <!-- Калинковичи -->
+    <Station2>155841</Station2> <!-- о.п.Жлобин-Сортировочный -->
+    <StationCodes>
+      <StationCode>154016</StationCode> <!-- Юшки -->
+      <StationCode>154105</StationCode> <!-- Горочичи -->
+      <StationCode>154124</StationCode> <!-- Холодники -->
+      <StationCode>154143</StationCode> <!-- Останковичи -->
+      <StationCode>154162</StationCode> <!-- Жердь -->
+      <StationCode>154209</StationCode> <!-- Светлогорск-на-Березине -->
+      <StationCode>154228</StationCode> <!-- Ящицы -->
+      <StationCode>154232</StationCode> <!-- Мормаль -->
+    </StationCodes>
+
+<Areas>
+        <Area>51</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>155004</StationDirection> <!-- Калинковичи-Жлобин -->
+      </Node>
+      <Node>
+        <Station>155004</Station>
+        <StationDirection>153808</StationDirection> <!-- Жлобин-Калинковичи -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Калинковичи-Гомель</Name>
+    <Station1>153808</Station1> <!-- Калинковичи -->
+    <Station2>150000</Station2> <!-- Гомель -->
+    <StationCodes>
+      <StationCode>150138</StationCode> <!-- Гомель-Северный -->
+      <StationCode>153850</StationCode> <!-- Голевицы -->
+      <StationCode>153884</StationCode> <!-- Нахов -->
+      <StationCode>154406</StationCode> <!-- Василевичи -->
+      <StationCode>154425</StationCode> <!-- Бабичи -->
+      <StationCode>154430</StationCode> <!-- Лиски -->
+      <StationCode>154459</StationCode> <!-- Демехи -->
+      <StationCode>154507</StationCode> <!-- Хойники -->
+      <StationCode>154711</StationCode> <!-- Ребуса -->
+      <StationCode>154800</StationCode> <!-- Речица -->
+      <StationCode>154815</StationCode> <!-- Сенозавод -->
+      <StationCode>154834</StationCode> <!-- Якимовка -->
+      <StationCode>154872</StationCode> <!-- Прибор -->
+      <StationCode>154904</StationCode> <!-- Центролит -->
+    </StationCodes>
+
+<Areas>
+        <Area>41</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>153808</StationDirection> <!-- Гомель-Калинковичи -->
+      </Node>
+      <Node>
+        <Station>153808</Station>
+        <StationDirection>150000</StationDirection> <!-- Калинковичи-Гомель -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Жлобин-Гомель</Name>
+    <Station1>155841</Station1> <!-- о.п. Жлобин-Сортировочный -->
+    <Station2>150000</Station2> <!-- Гомель -->
+    <StationCodes>
+      <StationCode>155112</StationCode> <!-- Салтановка -->
+      <StationCode>155201</StationCode> <!-- Буда-Кошелёвская -->
+      <StationCode>155305</StationCode> <!-- Уза -->
+      <StationCode>155409</StationCode> <!-- Лазурная -->
+      <StationCode>155502</StationCode> <!-- Костюковка -->
+      <StationCode>155714</StationCode> <!-- Сож -->
+    </StationCodes>
+
+<Areas>
+        <Area>47</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>155004</StationDirection> <!-- Гомель-Жлобин -->
+      </Node>
+      <Node>
+        <Station>155004</Station>
+        <StationDirection>150000</StationDirection> <!-- Жлобин-Гомель -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Жлобин-Могилев</Name>
+    <Station1>155841</Station1> <!-- о.п. Жлобин-Сортировочный -->
+    <Station2>156505</Station2> <!-- Могилёв II -->
+    <StationCodes>
+      <StationCode>155803</StationCode> <!-- Сверково -->
+      <StationCode>155818</StationCode> <!-- рзд.Лукское -->
+      <StationCode>155907</StationCode> <!-- Рогачёв -->
+      <StationCode>155911</StationCode> <!-- Старосельский -->
+      <StationCode>155930</StationCode> <!-- Рогачев – стык -->
+      <StationCode>156011</StationCode> <!-- Лудчицы -->
+      <StationCode>156030</StationCode> <!-- Тощица -->
+      <StationCode>156100</StationCode> <!-- Быхов -->
+      <StationCode>156134</StationCode> <!-- Барсуки -->
+      <StationCode>156242</StationCode> <!-- Дашковка -->
+      <StationCode>156308</StationCode> <!-- Чернозёмовка -->
+      <StationCode>156401</StationCode> <!-- Буйничи -->
+    </StationCodes>
+
+<Areas>
+        <Area>62</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>155004</Station>
+        <StationDirection>155907</StationDirection> <!-- Жлобин-Рогачёв -->
+      </Node>
+      <Node>
+        <Station>155907</Station>
+        <StationDirection>155004</StationDirection> <!-- Рогачёв-Жлобин -->
+      </Node>
+      <Node>
+        <Station>155907</Station>
+        <StationDirection>156505</StationDirection> <!-- Рогачёв-Могилёв II -->
+      </Node>
+      <Node>
+        <Station>156505</Station>
+        <StationDirection>155907</StationDirection> <!-- Могилёв II-Рогачёв -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Могилев</Name>
+    <Station1>166403</Station1> <!-- Орша-Центральная -->
+    <Station2>156505</Station2> <!-- Могилёв II -->
+    <StationCodes>
+      <StationCode>156543</StationCode> <!-- Лотва -->
+      <StationCode>156702</StationCode> <!-- Рыжковичи -->
+      <StationCode>156806</StationCode> <!-- Шклов -->
+      <StationCode>156908</StationCode> <!-- Копысь -->
+      <StationCode>156914</StationCode> <!-- Прокшино -->
+      <StationCode>166600</StationCode> <!-- Червено -->
+      <StationCode>166628</StationCode> <!-- Червено – стык -->
+    </StationCodes>
+
+<Areas>
+        <Area>61</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>166628</StationDirection> <!-- Орша-Центральная-Червено – стык -->
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>166628</StationDirection> <!-- Орша-Западная-Червено – стык -->
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>166403</StationDirection> <!-- Червено – стык–Орша-Центральная -->
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>166507</StationDirection> <!-- Червено – стык–Орша-Западная -->
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>166704</StationDirection> <!-- Червено – стык–Орша-Восточная -->
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>166628</StationDirection> <!-- Орша-Восточная-Червено – стык -->
+      </Node>
+      <Node>
+        <Station>156505</Station>
+        <StationDirection>166628</StationDirection> <!-- Могилёв II–Червено–стык -->
+      </Node>
+      <Node>
+        <Station>166628</Station>
+        <StationDirection>156505</StationDirection> <!-- Червено–стык-Могилёв II -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Полоцк-Витебск</Name>
+    <Station1>161306</Station1> <!-- Полоцк -->
+    <Station2>160002</Station2> <!-- Витебск -->
+    <StationCodes>
+      <StationCode>160021</StationCode> <!-- Княжица -->
+      <StationCode>160040</StationCode> <!-- Старое Село -->
+      <StationCode>160055</StationCode> <!-- Язвино -->
+      <StationCode>160712</StationCode> <!-- Росляки -->
+      <StationCode>160731</StationCode> <!-- Грибачи -->
+      <StationCode>160905</StationCode> <!-- Шумилино -->
+      <StationCode>160910</StationCode> <!-- Ловша -->
+      <StationCode>161109</StationCode> <!-- Оболь -->
+      <StationCode>161113</StationCode> <!-- рзд. Глушанино -->
+      <StationCode>161128</StationCode> <!-- Горяны -->
+      <StationCode>161202</StationCode> <!-- Граница с Окт.ж.д.:Алёща(эксп.) -->
+      <StationCode>161221</StationCode> <!-- Сосница -->
+    </StationCodes>
+
+<Areas>
+        <Area>78</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>161306</StationDirection> <!-- Витебск-Полоцк -->
+      </Node>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>160002</StationDirection> <!-- Полоцк-Витебск -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Езерище-Витебск</Name>
+    <Station1>160816</Station1> <!-- Езерище - стык -->
+    <Station2>160002</Station2> <!-- Витебск -->
+    <StationCodes>
+      <StationCode>160303</StationCode> <!-- Чепино -->
+      <StationCode>160322</StationCode> <!-- Лосвида -->
+      <StationCode>160337</StationCode> <!-- Залучье -->
+      <StationCode>160407</StationCode> <!-- Лужесно -->
+      <StationCode>160604</StationCode> <!-- Городок -->
+      <StationCode>160708</StationCode> <!-- Прудок -->
+      <StationCode>166210</StationCode> <!-- Бычиха -->
+    </StationCodes>
+
+<Areas>
+        <Area>54</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>067104</Station>
+        <StationDirection>160816</StationDirection> <!-- Невель 2-Езерище-стык -->
+      </Node>
+      <Node>
+        <Station>160816</Station>
+        <StationDirection>067104</StationDirection> <!-- Езерище-стык-Невель 2 -->
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>160816</StationDirection> <!-- Витебск-Езерище-стык -->
+      </Node>
+      <Node>
+        <Station>160816</Station>
+        <StationDirection>160002</StationDirection> <!-- Езерище-стык-Витебск -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Витебск</Name>
+    <Station1>166403</Station1> <!-- Орша-Центральная -->
+    <Station2>160002</Station2> <!-- Витебск -->
+    <StationCodes>
+      <StationCode>166723</StationCode> <!-- Можеевка -->
+      <StationCode>166742</StationCode> <!-- Можеевка-стык -->
+      <StationCode>166761</StationCode> <!-- Стайки -->
+      <StationCode>167001</StationCode> <!-- Богушевская -->
+      <StationCode>167054</StationCode> <!-- Замосточье -->
+      <StationCode>167105</StationCode> <!-- Медведка -->
+    </StationCodes>
+
+<Areas>
+        <Area>55</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>166742</StationDirection> <!-- Орша-Центральная-Можеевка-стык -->
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>166742</StationDirection> <!-- Орша-Западная-Можеевка-стык -->
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>166742</StationDirection> <!-- Орша-Восточная-Можеевка-стык -->
+      </Node>
+      <Node>
+        <Station>166742</Station>
+        <StationDirection>166507</StationDirection> <!-- Можеевка-стык-Орша-Западная -->
+      </Node>
+      <Node>
+        <Station>166742</Station>
+        <StationDirection>166403</StationDirection> <!-- Можеевка-стык-Орша-Центральная  -->
+      </Node>
+      <Node>
+        <Station>166742</Station>
+        <StationDirection>166704</StationDirection> <!-- Можеевка-стык-Орша-Восточная -->
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>166742</StationDirection> <!-- Витебск-Можеевка-стык  -->
+      </Node>
+      <Node>
+        <Station>166742</Station>
+        <StationDirection>160002</StationDirection> <!-- Можеевка-стык-Витебск -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Красное</Name>
+    <Station1>166403</Station1> <!-- Орша-Центральная  -->
+    <Station2>171346</Station2> <!-- Красное -->
+    <StationCodes>
+      <StationCode>166418</StationCode> <!-- п.п.Городнянский -->
+      <StationCode>166422</StationCode> <!-- Хлусово -->
+      <StationCode>168907</StationCode> <!-- Хлюстино -->
+      <StationCode>169007</StationCode> <!-- Осиновка -->
+      <StationCode>169100</StationCode> <!-- Граница с Моск.ж.д:Осиновка (эксп.) -->
+    </StationCodes>
+
+<Areas>
+        <Area>16</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>170004</Station>
+        <StationDirection>166403</StationDirection> <!-- Смоленск-Сортировочный-Орша-Центральная -->
+      </Node>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>170004</StationDirection> <!-- Орша-Центральная-Смоленск-Сортировочный -->
+      </Node>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>171346</StationDirection> <!-- Орша-Центральная-Красное -->
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>171346</StationDirection> <!-- Орша-Западная-Красное -->
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>171346</StationDirection> <!-- Орша-Восточная-Красное -->
+      </Node>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>166403</StationDirection> <!-- Красное-Орша-Центральная -->
+      </Node>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>166507</StationDirection> <!-- Красное-Орша-Западная -->
+      </Node>
+      <Node>
+        <Station>171346</Station>
+        <StationDirection>166704</StationDirection> <!-- Красное-Орша-Восточная -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Кричев</Name>
+    <Station1>166403</Station1> <!-- Орша-Центральная -->
+    <Station2>158209</Station2> <!-- Кричев I -->
+    <StationCodes>
+      <StationCode>158303</StationCode> <!-- Ходосы -->
+      <StationCode>158407</StationCode> <!-- Тёмный Лес -->
+      <StationCode>158500</StationCode> <!-- Погодино -->
+      <StationCode>158604</StationCode> <!-- Граница с Моск.ж.д:Шестеровка(эксп.) -->
+      <StationCode>158708</StationCode> <!-- Румино -->
+    </StationCodes> 
+
+<Areas>
+        <Area>66</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>158209</Station> 
+        <StationDirection>166719</StationDirection> <!-- Кричев I-Орша-Западная–стык -->
+      </Node>
+      <Node>
+        <Station>166719</Station> 
+        <StationDirection>158209</StationDirection> <!-- Орша-Западная–стык-Кричев I -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Могилев-Кричев</Name>
+    <Station1>156505</Station1> <!-- Могилёв II -->
+    <Station2>158209</Station2> <!-- Кричев I -->
+    <StationCodes>
+      <StationCode>157705</StationCode> <!-- Луполово -->
+      <StationCode>157809</StationCode> <!-- Заднепровская -->
+      <StationCode>157885</StationCode> <!-- Реста -->
+      <StationCode>158002</StationCode> <!-- Чаусы -->
+      <StationCode>158106</StationCode> <!-- Веремейки -->
+      <StationCode>158110</StationCode> <!-- Осовец -->
+    </StationCodes>
+
+<Areas>
+        <Area>69</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>156505</Station>
+        <StationDirection>158209</StationDirection> <!-- Могилёв II-Кричев I -->
+      </Node>
+      <Node>
+        <Station>158209</Station>
+        <StationDirection>156505</StationDirection> <!-- Кричев I-Могилёв II -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Терюха</Name>
+    <Station1>150000</Station1> <!-- Гомель -->
+    <Station2>150301</Station2> <!-- Терюха -->
+    <StationCodes>
+      <StationCode>150208</StationCode> <!-- Новобелицкая -->
+      <StationCode>150265</StationCode> <!-- Уть -->
+    </StationCodes>
+
+<Areas>
+        <Area>17</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150301</Station>
+        <StationDirection>325000</StationDirection> <!-- Терюха-Чернигов -->
+      </Node>
+      <Node>
+        <Station>325000</Station>
+        <StationDirection>150301</StationDirection> <!-- Чернигов-Терюха -->
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150301</StationDirection> <!-- Гомель-Терюха -->
+      </Node>
+      <Node>
+        <Station>150301</Station>
+        <StationDirection>150000</StationDirection> <!-- Терюха-Гомель -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Тереховка</Name>
+    <Station1>150000</Station1> <!-- Гомель-Терюха -->
+    <Station2>150706</Station2> <!-- Тереховка -->
+    <StationCodes>
+      <StationCode>150208</StationCode> <!-- Новобелицкая -->
+      <StationCode>150265</StationCode> <!-- Уть -->
+    </StationCodes>
+<Areas>
+        <Area>49_2</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150706</Station>
+        <StationDirection>326906</StationDirection> <!-- Тереховка-Щорс -->
+      </Node>
+      <Node>
+        <Station>326906</Station>
+        <StationDirection>150706</StationDirection> <!-- Щорс-Тереховка -->
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150706</StationDirection> <!-- Гомель-Тереховка -->
+      </Node>
+      <Node>
+        <Station>150706</Station>
+        <StationDirection>150000</StationDirection> <!-- Гомель-Тереховка -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Тереховка</Name>
+    <Station1>150000</Station1> <!-- Гомель -->
+    <Station2>150706</Station2> <!-- Тереховка -->
+    <StationCodes>
+      <StationCode>150674</StationCode> <!-- Зябровка -->
+      <StationCode>150778</StationCode> <!-- п.п. 151 км -->
+      <StationCode>150903</StationCode> <!-- Круговец -->
+      <StationCode>155771</StationCode> <!-- Ипуть -->
+    </StationCodes>
+
+<Areas>
+        <Area>49_2</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150706</Station>
+        <StationDirection>326906</StationDirection> <!-- Тереховка-Щорс -->
+      </Node>
+      <Node>
+        <Station>326906</Station>
+        <StationDirection>150706</StationDirection> <!-- Щорс-Тереховка -->
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150706</StationDirection> <!-- Гомель-Тереховка -->
+      </Node>
+      <Node>
+        <Station>150706</Station>
+        <StationDirection>150000</StationDirection> <!-- Тереховка-Гомель -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Гомель-Закопытье</Name>
+    <Station1>150000</Station1> <!-- Гомель -->
+    <Station2>150528</Station2> <!-- Закопытье - стык -->
+    <StationCodes>
+      <StationCode>150212</StationCode> <!-- Берёзки -->
+      <StationCode>150227</StationCode> <!-- Ларищево -->
+      <StationCode>150509</StationCode> <!-- Добруш -->
+    </StationCodes>
+
+<Areas>
+        <Area>44</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>150528</Station>
+        <StationDirection>202008</StationDirection> <!-- Закопытье-стык-Унеча -->
+      </Node>
+      <Node>
+        <Station>202008</Station>
+        <StationDirection>150528</StationDirection> <!-- стык-Унеча-Закопытье -->
+      </Node>
+      <Node>
+        <Station>150000</Station>
+        <StationDirection>150528</StationDirection> <!-- Гомель-Закопытье-стык -->
+      </Node>
+      <Node>
+        <Station>150528</Station>
+        <StationDirection>150000</StationDirection> <!-- Закопытье-стык-Гомель -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Кричев-Сураж</Name>
+    <Station1>158209</Station1> <!-- Кричев I -->
+    <Station2>202900</Station2> <!-- Сураж -->
+    <StationCodes>
+      <StationCode>158820</StationCode> <!-- Кричев II -->
+      <StationCode>158905</StationCode> <!-- Шестеровка -->
+      <StationCode>159005</StationCode> <!-- Белынковичи -->
+      <StationCode>159109</StationCode> <!-- Коммунары -->
+      <StationCode>159113</StationCode> <!-- Волосковня -->
+      <StationCode>159202</StationCode> <!-- Климовичи -->
+      <StationCode>159306</StationCode> <!-- Граница с Моск.ж.д:Белынковичи(эксп.) -->
+      <StationCode>159404</StationCode> <!-- Предзаводская -->
+      <StationCode>159503</StationCode> <!-- Михеевичи -->
+    </StationCodes>
+
+
+
+     <Areas>
+      <Area>67</Area>
+    
+    </Areas>
+
+    <Nodes>
+      <Node>
+        <Station>202008</Station>
+        <StationDirection>202900</StationDirection> <!-- Унеча-Ипуть -->
+      </Node>
+      <Node>
+        <Station>202900</Station>
+        <StationDirection>202008</StationDirection> <!-- Ипуть-Унеча -->
+      </Node>
+      <Node>
+        <Station>158905</Station>
+        <StationDirection>177408</StationDirection> <!-- Шестеровка-Рославль 1 -->
+      </Node>
+      <Node>
+        <Station>177408</Station>
+        <StationDirection>158905</StationDirection> <!-- Рославль 1-Шестеровка -->
+      </Node>
+      <Node>
+        <Station>158209</Station>
+        <StationDirection>158905</StationDirection> <!-- Кричев I-Шестеровка -->
+      </Node>
+      <Node>
+        <Station>158905</Station>
+        <StationDirection>158209</StationDirection> <!-- Шестеровка-Кричев I -->
+      </Node>
+      <Node>
+        <Station>158209</Station>
+        <StationDirection>202900</StationDirection> <!-- Кричев I-Ипуть -->
+      </Node>
+      <Node>
+        <Station>202900</Station>
+        <StationDirection>158209</StationDirection> <!-- Ипуть-Кричев I -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Витебск-Заольша</Name>
+    <Station1>160002</Station1> <!-- Витебск -->
+    <Station2>165627</Station2> <!-- Заольша - стык -->
+    <StationCodes>
+      <StationCode>165701</StationCode> <!-- Лиозно -->
+      <StationCode>165735</StationCode> <!-- Крынки -->
+      <StationCode>165754</StationCode> <!-- Заболотинка -->
+      <StationCode>165909</StationCode> <!-- Придвинская -->
+      <StationCode>166009</StationCode> <!-- Витьба -->
+      <StationCode>166102</StationCode> <!-- Журжево -->
+    </StationCodes>
+
+<Areas>
+        <Area>77</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>165627</Station>
+        <StationDirection>170004</StationDirection> <!-- Заольша-стык-Смоленск-Сортировочный -->
+      </Node>
+      <Node>
+        <Station>170004</Station>
+        <StationDirection>165627</StationDirection> <!-- Смоленск-Сортировочный-Заольша-стык- -->
+      </Node>
+      <Node>
+        <Station>170108</Station>
+        <StationDirection>165627</StationDirection> <!-- Смоленск-Заольша-стык -->
+      </Node>
+      <Node>
+        <Station>165627</Station>
+        <StationDirection>170108</StationDirection> <!-- Заольша-стык-Смоленск -->
+      </Node>
+      <Node>
+        <Station>165627</Station>
+        <StationDirection>171628</StationDirection> <!-- Заольша-стык-Ракитная -->
+      </Node>
+      <Node>
+        <Station>171628</Station>
+        <StationDirection>165627</StationDirection> <!-- Ракитная-Заольша-стык- -->
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>165909</StationDirection> <!-- Витебск-Придвинская -->
+      </Node>
+      <Node>
+        <Station>165909</Station>
+        <StationDirection>160002</StationDirection> <!-- Придвинская-Витебск -->
+      </Node>
+      <Node>
+        <Station>160002</Station>
+        <StationDirection>165627</StationDirection> <!-- Витебск-Заольша-стык -->
+      </Node>
+      <Node>
+        <Station>165627</Station>
+        <StationDirection>160002</StationDirection> <!-- Заольша-стык-Витебск -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Брест-Высоко-Литовск</Name>
+    <Station1>130204</Station1> <!-- Брест-Восточный -->
+    <Station2>131705</Station2> <!-- Высоко-Литовск -->
+    <StationCodes>
+      <StationCode>130401</StationCode> <!-- Мотыкалы -->
+      <StationCode>131705</StationCode> <!-- Высоко-Литовск -->
+      <StationCode>131809</StationCode> <!-- Граница с ПКП Высоко-Литовск(эксп.) -->
+      <StationCode>132204</StationCode> <!-- Лыщицы -->
+    </StationCodes>
+
+<Areas>
+        <Area>86</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>130204</Station>
+        <StationDirection>131705</StationDirection> <!-- Брест-Восточный-Высоко-Литовск -->
+      </Node>
+       <Node>
+        <Station>131705</Station>
+        <StationDirection>130204</StationDirection> <!-- Высоко-Литовск-Брест-Восточный -->
+      </Node>
+      <Node>
+        <Station>130100</Station>
+        <StationDirection>131705</StationDirection> <!-- Брест-Северный -Высоко-Литовск -->
+      </Node>
+       <Node>
+        <Station>131705</Station>
+        <StationDirection>130100</StationDirection> <!-- Высоко-Литовск-Брест-Северный  -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Полоцк-Алеща</Name>
+    <Station1>161306</Station1> <!-- Полоцк -->
+    <Station2>161202</Station2> <!-- Граница с Окт. ж. д.: Алёща (эксп.)  -->
+    <StationCodes>
+      <StationCode>161255</StationCode> <!-- рзд. Полота  -->
+      <StationCode>161518</StationCode> <!-- Дретунь  -->
+      <StationCode>161607</StationCode> <!-- Алёща  -->
+    </StationCodes>
+
+<Areas>
+        <Area>60</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>161306</Station>
+        <StationDirection>161607</StationDirection> <!-- Полоцк-Алёща  -->
+      </Node> 
+       <Node>
+        <Station>161607</Station>
+        <StationDirection>161306</StationDirection> <!-- Алёща-Полоцк-  -->
+      </Node> 
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Орша-Центральная-Лепель</Name>
+    <Station1>166403</Station1> <!-- Орша-Центральная -->
+    <Station2>168108</Station2> <!-- Лепель -->
+    <StationCodes>
+      <StationCode>168108</StationCode> <!-- Лепель -->
+      <StationCode>168201</StationCode> <!-- Заслоново -->
+      <StationCode>168305</StationCode> <!-- Чашники -->
+      <StationCode>168409</StationCode> <!-- Новолукомль -->
+      <StationCode>168606</StationCode> <!-- Бурбин -->
+      <StationCode>168633</StationCode> <!-- Лемница -->
+      <StationCode>168700</StationCode> <!-- Смольяны -->
+    </StationCodes>
+
+<Areas>
+        <Area>10</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>166403</Station>
+        <StationDirection>168108</StationDirection> <!-- Орша-Центральная-Лепель -->
+      </Node>
+      <Node>
+        <Station>166507</Station>
+        <StationDirection>168108</StationDirection> <!-- Орша-Западная-Лепель -->
+      </Node>
+      <Node>
+        <Station>166704</Station>
+        <StationDirection>168108</StationDirection> <!-- Орша-Восточная-Лепель -->
+      </Node>
+      <Node>
+        <Station>168108</Station>
+        <StationDirection>166403</StationDirection> <!-- Лепель-Орша-Центральная -->
+      </Node>
+      <Node>
+        <Station>168108</Station>
+        <StationDirection>166507</StationDirection> <!-- Лепель-Орша-Западная -->
+      </Node>
+      <Node>
+        <Station>168108</Station>
+        <StationDirection>166704</StationDirection> <!-- Лепель-Орша-Восточная -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+
+  <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Волковыск-Мосты</Name>
+    <Station1>136709</Station1> <!-- Волковыск-Центральный -->
+    <Station2>137203</Station2> <!-- Мосты -->
+    <StationCodes>
+      <StationCode>137307</StationCode> <!-- Рось -->
+    </StationCodes>
+
+<Areas>
+        <Area>26</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+      <Node>
+        <Station>136709</Station>
+        <StationDirection>137203</StationDirection> <!-- Волковыск-Центральный-Мосты -->
+      </Node>
+      <Node>
+        <Station>137203</Station>
+        <StationDirection>136709</StationDirection> <!-- Мосты-Волковыск-Центральный -->
+      </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+	
+		 <Infrastructure>
+    <Type>Area</Type>
+    <Name>Участок - Барбаров-Калинковичи</Name>
+    <Station1>151408</Station1> <!-- Барбаров -->
+    <Station2>153808</Station2> <!-- Калинковичи -->
+    <StationCodes>
+      <StationCode>151408</StationCode>
+    </StationCodes>
+
+<Areas>
+        <Area>46</Area>   
+	   </Areas>  
+	   
+    <Nodes>
+     <Node>
+       <Station>151408</Station>
+       <StationDirection>153808</StationDirection> <!-- Барбаров-Калинковичи -->
+     </Node>
+     <Node>
+       <Station>153808</Station>
+       <StationDirection>151408</StationDirection> <!-- Калинковичи-Барбаров -->
+     </Node>
+     <Node>
+      <Station>347705</Station>
+      <StationDirection>151408</StationDirection> <!-- Бережесть-Барбаров -->
+     </Node>
+     <Node>
+       <Station>151408</Station>
+       <StationDirection>347705</StationDirection> <!-- Барбаров-Бережесть -->
+     </Node>
+     <Node>
+       <Station>151338</Station>
+       <StationDirection>151408</StationDirection> <!-- Михалки-Барбаров -->
+     </Node>
+      <Node>
+       <Station>151408</Station>
+       <StationDirection>151338</StationDirection> <!-- Барбаров-Михалки -->
+     </Node>
+    </Nodes>
+    <DataSources>
+      <DataSource>IAS_PYR_GPSource</DataSource>
+	  <DataSource>AGDPSource</DataSource>
+    </DataSources>
+  </Infrastructure>
+  
+    </Infrastructures>
+</Configuration>

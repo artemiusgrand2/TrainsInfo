@@ -17,11 +17,12 @@ namespace TrainsInfo.DataParser.NodeRF
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {
-            var table = data as IList<ModelDataIAS_PYR_GP>;
+            var table = data as IList<ModelBase>;
             var result = new List<RowValue>();
             if (table != null)
             {
-                var tableWithFilter = table.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode == x.Index3 && x.TrainNumber != 9999).ToList();
+                var tableIAS_PYR_GP = table.Select(x => x as ModelDataIAS_PYR_GP).ToList();
+                var tableWithFilter = tableIAS_PYR_GP.Where(x => codesOperation.Contains(x.OperationCode) && x.StationCode == x.Index3 && x.TrainNumber != 9999).ToList();
                 foreach (var node in infrastructures.Where(x => x.Type == TypeInfrastructure.node).ToList())
                 {
                     var events = tableWithFilter.Where(x => (node as Node).ListStations.Contains(x.StationCode));
