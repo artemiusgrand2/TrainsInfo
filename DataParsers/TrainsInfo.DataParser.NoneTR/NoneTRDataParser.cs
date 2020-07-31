@@ -13,7 +13,7 @@ namespace TrainsInfo.DataParser.NodeTR
     public class NodeTRDataParser : IDataParser
     {
         private readonly string TRTrain = "TR";
-        private readonly IList<string> codesOperation = new List<string> { "P0001", "P0101", "P0201", "P0009" };
+        private readonly IList<string> codesOperation = new List<string> { "P0001", "P0101", "P0201", "P0009", "P0074" };
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {

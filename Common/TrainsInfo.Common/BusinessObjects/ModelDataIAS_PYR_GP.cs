@@ -10,8 +10,6 @@ namespace TrainsInfo.Common.BusinessObjects
 
         public string StationCode { get; set; }
 
-        public string OperationCode { get; set; }
-
         public DateTime OperationTime { get; set; }
 
         public string Index1 { get; set; }

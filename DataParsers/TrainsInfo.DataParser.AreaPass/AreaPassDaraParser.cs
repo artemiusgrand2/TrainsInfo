@@ -15,8 +15,9 @@ namespace TrainsInfo.DataParser.AreaPass
         private readonly string NC_PSTrain = "NC_PS";
         private readonly string C_PSTrain = "C_PS";
 
-        private readonly IList<string> codesOperationNode = new List<string> {  "C0001", "C0003", "C1020", "C1010", "C0102", "C0013", "C0011" };
+        private readonly IList<string> codesOperationNode = new List<string> {  "C0001", "C0002", "C0003",  "C1010", "C0102", "C0013", "C0011" };
         private readonly IList<string> codesOperationArea = new List<string> { "C0002", "C0042", "C1010", "C0003", "C0043", "C0033" };
+
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {

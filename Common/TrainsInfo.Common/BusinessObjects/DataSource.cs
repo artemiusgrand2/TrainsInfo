@@ -15,6 +15,7 @@ namespace TrainsInfo.Common.BusinessObjects
         private readonly IDataStream dataStream;
         private readonly IList<IDataParser> dataParsers;
         private readonly Thread parsingThread;
+        private readonly IList<string> notShowOperationCodes = new List<string>() { "P0004", "P1020", "P0022", "P0023", "C0064" };
         private readonly uint requestTimeout = 0;
         private bool isStop;
         private readonly string nameSource;
@@ -131,7 +132,7 @@ namespace TrainsInfo.Common.BusinessObjects
             var table = data as IList<ModelBase>;
             if (table != null)
             {
-                var notApplyTrains = table.Where(x => !x.IsApply);
+                var notApplyTrains = table.Where(x => !x.IsApply && (string.IsNullOrEmpty(x.OperationCode) || (!notShowOperationCodes.Contains(x.OperationCode))));
                 writeLog("------------------------------------------------------------------------------------------------", null);
                 writeLog("", null);
                 writeLog("Новая иттерация получения данных с источника - {0}, перечень неспользуемых поездов (всего - {1}, неспользуемых - {2})", nameSource, table.Count, notApplyTrains.Count());

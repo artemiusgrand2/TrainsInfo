@@ -13,7 +13,7 @@ namespace TrainsInfo.DataParser.NodeRF
     public class NodeRFDataParser : IDataParser
     {
         private readonly string RFTrain = "RF";
-        private readonly IList<string> codesOperation = new List<string> { "P0001", "P0011", "P0201", "P0101" };
+        private readonly IList<string> codesOperation = new List<string> { "P0001", "P0011", "P0201", "P0101",  "P0074" };
 
         public IList<RowValue> Parse(object data, IList<InfrastructureBase> infrastructures)
         {

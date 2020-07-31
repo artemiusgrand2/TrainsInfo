@@ -17,7 +17,7 @@ namespace TrainsInfo.DataParser.AreaGargo
 
         private readonly IList<string> codesOperation1 = new List<string> { "P0002", "P0003", "P0102", "P0042", "P0033", "P0043", "P0031", "P0103", "P1010", "P0013", "P0011" };
 
-        private readonly IList<string> codesOperation2 = new List<string> { "P0001" };
+        private readonly IList<string> codesOperation2 = new List<string> { "P0001", "P0074" };
 
         private readonly IList<string> codesOperation3 = new List<string> { "P0005", "P0009" };
 
