@@ -1,5 +1,0 @@
-D:\Distributiv\TrainsInfo\Ex\Ex\bin\Debug\Ex.exe
-D:\Distributiv\TrainsInfo\Ex\Ex\bin\Debug\Ex.pdb
-D:\Distributiv\TrainsInfo\Ex\Ex\obj\Debug\Ex.csprojResolveAssemblyReference.cache
-D:\Distributiv\TrainsInfo\Ex\Ex\obj\Debug\Ex.exe
-D:\Distributiv\TrainsInfo\Ex\Ex\obj\Debug\Ex.pdb

@@ -1,5 +1,0 @@
-D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.NoneRF.dll
-D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.NoneRF.pdb
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneRF\obj\Debug\TrainsInfo.DataParser.NoneRF.dll
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneRF\obj\Debug\TrainsInfo.DataParser.NoneRF.pdb
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.NoneRF\obj\Debug\TrainsInfo.DataParser.NoneRF.csprojResolveAssemblyReference.cache

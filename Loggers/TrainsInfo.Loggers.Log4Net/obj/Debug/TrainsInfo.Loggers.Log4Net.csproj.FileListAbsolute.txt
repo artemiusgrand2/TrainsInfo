@@ -1,5 +1,0 @@
-D:\Distributiv\TrainsInfo\Output\TrainsInfo.Loggers.Log4Net.dll
-D:\Distributiv\TrainsInfo\Output\TrainsInfo.Loggers.Log4Net.pdb
-D:\Distributiv\TrainsInfo\Loggers\TrainsInfo.Loggers.Log4Net\obj\Debug\TrainsInfo.Loggers.Log4Net.csprojResolveAssemblyReference.cache
-D:\Distributiv\TrainsInfo\Loggers\TrainsInfo.Loggers.Log4Net\obj\Debug\TrainsInfo.Loggers.Log4Net.dll
-D:\Distributiv\TrainsInfo\Loggers\TrainsInfo.Loggers.Log4Net\obj\Debug\TrainsInfo.Loggers.Log4Net.pdb

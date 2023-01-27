@@ -1,5 +1,0 @@
-D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.AreaPass.dll
-D:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.AreaPass.pdb
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AreaPass\obj\Debug\TrainsInfo.DataParser.AreaPass.dll
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AreaPass\obj\Debug\TrainsInfo.DataParser.AreaPass.pdb
-D:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.AreaPass\obj\Debug\TrainsInfo.DataParser.AreaPass.csprojResolveAssemblyReference.cache

@@ -1,5 +1,0 @@
-d:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.JointAllVagon.dll
-d:\Distributiv\TrainsInfo\Output\TrainsInfo.DataParser.JointAllVagon.pdb
-d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.JointAllVagon\obj\Debug\TrainsInfo.DataParser.JointAllVagon.dll
-d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.JointAllVagon\obj\Debug\TrainsInfo.DataParser.JointAllVagon.pdb
-d:\Distributiv\TrainsInfo\DataParsers\TrainsInfo.DataParser.JointAllVagon\obj\Debug\TrainsInfo.DataParser.JointAllVagon.csprojResolveAssemblyReference.cache
